@@ -1,4 +1,7 @@
 import React from "react";
 import "../../styles/home.scss";
+import LogIn from "../Component/LogIn.js";
 
-export const Home = () => <div className="text-center mt-5">Hola desde develop soy moha</div>;
+export const Home = () => {
+	return <LogIn />;
+};

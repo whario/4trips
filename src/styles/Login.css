@@ -1,0 +1,69 @@
+body{
+     background: linear-gradient(rgba(46, 143, 214, 1),#EFEEF4);
+}
+.logInCircle{
+    position: relative;
+    top: 80px;
+    margin: auto;
+    background: linear-gradient(#2e8fd6, #EFEEF4);
+    height: 500px;
+    width: 500px;
+    border-radius: 50%
+}
+h1{
+    margin-left: 10px;
+}
+.firstName{
+    position: relative;
+    display: inline-block;
+    font-size: 22px;
+    border-radius: 7px;
+    box-shadow: -17px 4px 18px lightblue;
+    border-color: oldlace;
+
+}
+.lastName{
+    position: relative;
+    border-radius: 7px;
+    box-shadow: -17px 4px 18px lightblue;
+    font-size: 22px;
+    display: block;
+    border-color: oldlace;
+    margin-top: 50px;
+
+}
+.myCol{
+    position: relative;
+    left: 170px;
+    top: 44px;
+    font-family: auto;
+    color: skyblue;
+}
+.myForm{
+    position: relative;
+    right: 117px;
+    top: 164px;
+}
+.SignUpLink{
+    position: relative;
+    left: 130px;
+    display: flex;
+    top: 55px;
+}
+.logInButton{
+    background: linear-gradient(rgba(46, 143, 214, 1),#EFEEF4);
+    position: relative;
+    left: 76px;
+    top: 21px;
+    border-radius: 10px;
+    width: 105px;
+    height: 40px;
+    border: blue;
+}
+.logInButton:hover {background-color: #2e8fd6}
+
+.logInButton:active {
+  background-color: #ffffff;
+  box-shadow: 0 5px rgb(135, 187, 247);
+  transform: translateY(4px);
+}
