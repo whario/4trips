@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/home.scss";
-import LogIn from "../Component/LogIn.js";
+import NavBar from "../Component/Navbar.js";
 
 export const Home = () => {
-	return <LogIn />;
+	return <NavBar />;
 };
