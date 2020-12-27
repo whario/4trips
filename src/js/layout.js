@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./store/appContext";
 
 import { Home } from "./views/home";
-
+import SignUp from "../js/Component/SignUp.js";
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -17,6 +17,7 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
+					<Route exact path="/signUp" component={SignUp} />
 
 					<Route>
 						<h1>Not found!</h1>
