@@ -1,5 +1,5 @@
 body{
-     background:linear-gradient(#2e8fd6, #EFEEF4);
+background-color: #E5E5E5;
 }
 .logInCircle{
     position: relative;
@@ -69,4 +69,7 @@ h1{
 }
 .red{
     color:red;
+}
+.footer{
+background:linear-gradient(#2e8fd6, rgb(255, 255, 255));
 }
