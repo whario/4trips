@@ -17,8 +17,6 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/signUp" component={SignUp} />
-
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
