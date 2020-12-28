@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "../../styles/Login.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -18,8 +18,9 @@ export default function LogIn() {
 						placeholder=" E-mail"
 						type="email"
 						name="email"
-						ref={register({ required: true })}
+						ref={register({ required: true, message: "Email required" })}
 					/>
+					{errors.email && <p>{errors.email.message}</p>}
 					<input
 						className="lastName"
 						placeholder="password"
@@ -27,6 +28,8 @@ export default function LogIn() {
 						name="password"
 						ref={register({ required: true })}
 					/>
+					{errors.password && <span>pasword required</span>}
+					<br />
 					<button type="submit" className="logInButton">
 						Log In
 					</button>
