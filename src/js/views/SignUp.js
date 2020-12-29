@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/SignUp.css";
+import Navbar from "../Component/Navbar.js";
 const SignUp = () => {
 	const [datos, setDatos] = useState({
 		userName: "",
@@ -43,6 +44,7 @@ const SignUp = () => {
 
 	return (
 		<div>
+			<Navbar />
 			<form className=" myForm m-5" onSubmit={handleSubmit}>
 				<div className="form-row ">
 					{submited && valied ? <h3>Done!</h3> : null}
