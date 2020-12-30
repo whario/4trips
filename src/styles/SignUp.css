@@ -9,3 +9,14 @@ body{
 span{
     color: red;
 }
+.inputForm{
+    width:400px;
+    margin: auto;
+}
+.myForm {
+    width: 700px;
+    margin: auto;
+    margin-top: 200px;
+    position: relative;
+    
+}
