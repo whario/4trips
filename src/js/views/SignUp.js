@@ -13,30 +13,10 @@ const SignUp = () => {
 	});
 	const [submited, setSubmited] = useState(false);
 	const [valied, setValied] = useState(false);
-	const handleUserNameChange = e => {
-		setDatos({
-			...datos,
-			userName: e.target.value
-		});
+	const handelChange = e => {
+		setDatos({ ...datos, [e.targer.name]: e.targer.value });
 	};
-	const handleEmailChange = e => {
-		setDatos({
-			...datos,
-			email: e.target.value
-		});
-	};
-	const handlePasswordeChange = e => {
-		setDatos({
-			...datos,
-			password: e.target.value
-		});
-	};
-	const handleReapeatPasswordChange = e => {
-		setDatos({
-			...datos,
-			repeatPassword: e.target.value
-		});
-	};
+
 	const handleSubmit = event => {
 		event.preventDefault();
 		if (datos.userName && datos.email && datos.password && datos.repeatPassword) {
@@ -48,30 +28,31 @@ const SignUp = () => {
 	return (
 		<div>
 			<Navbar />
-			<form className="myForm m-5 offset-md-4 col-md-4.offset-md-4 " onSubmit={handleSubmit}>
+			<form
+				className="myForm m-5 col-xs-12 col-md "
+				onChange={handelChange}
+				onSubmit={handleSubmit}>
 				<div className="form-row ">
 					{submited && valied ? <h3>Done!</h3> : null}
 					<div className="col-md-6 mb-3">
-						<label value="validationServer01">First name</label>
+						<label value="validationServer01">Nomber de usuario</label>
 						<input
 							name="userName"
 							value={datos.userName}
 							type="text"
 							className="form-control"
 							id="validationServer01"
-							onChange={handleUserNameChange}
 						/>
-						{submited && !datos.userName ? <span>Write your user name</span> : null}
-						<label value="validationServer01">E-mail</label>
+						{submited && !datos.userName ? <span>Escribe su nombre de usuario por favor</span> : null}
+						<label value="validationServer01">Correo electronico</label>
 						<input
-							onChange={handleEmailChange}
 							name="email"
 							placeholder="email"
 							type="email"
 							className="form-control"
 							value={datos.email}
 						/>
-						{submited && !datos.email ? <span>Write your Email</span> : null}
+						{submited && !datos.email ? <span>Escribe su correo electronico por favor</span> : null}
 						<label value="validationServer01">Password</label>
 						<input
 							name="password"
@@ -79,20 +60,18 @@ const SignUp = () => {
 							type="password"
 							className="form-control"
 							value={datos.password}
-							onChange={handlePasswordeChange}
 						/>
-						{submited && !datos.password ? <span>Write your Password</span> : null}
-						<label value="validationServer01">Confirm password</label>
+						{submited && !datos.password ? <span>Escribe su contraseña por favor</span> : null}
+						<label value="validationServer01">Confirmacion de contraseña</label>
 						<input
 							name="repeatPassword"
 							placeholder="Confirm password"
 							type="password"
 							className="form-control"
 							value={datos.repeatPassword}
-							onChange={handleReapeatPasswordChange}
 						/>
 						{submited && datos.repeatPassword != datos.password ? (
-							<span>Password do not match! </span>
+							<span>Confirma su contraseña bien porfavor </span>
 						) : null}
 					</div>
 				</div>
