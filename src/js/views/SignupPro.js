@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/SignUp.css";
+import "../../styles/SignUpPro.css";
 ///Componentes
 import Navbar from "../Component/Navbar.js";
 import Footer from "../Component/Footer.js";
 
-const SignUp = () => {
+const SignUpPro = () => {
 	const [datos, setDatos] = useState({
 		userName: "",
 		email: "",
@@ -50,7 +50,9 @@ const SignUp = () => {
 			<Navbar />
 			<form className="myForm m-5 offset-md-4 col-md-4.offset-md-4 " onSubmit={handleSubmit}>
 				<div className="form-row ">
-					{submited && valied ? <h3>Done!</h3> : null}
+					{submited && valied ? <div className="alert alert-success" role="alert">
+                    This is a success alert—check it out!
+                    </div> : null}
 					<div className="col-md-6 mb-3">
 						<label value="validationServer01">First name</label>
 						<input
@@ -104,4 +106,4 @@ const SignUp = () => {
 		</div>
 	);
 };
-export default SignUp;
+export default SignUpPro;
