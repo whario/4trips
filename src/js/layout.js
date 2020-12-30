@@ -17,14 +17,6 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-
-					<Route>
-						<h1>Not found!</h1>
-					</Route>
-				</Switch>
-			</BrowserRouter>
-		</div>
 	);
-};
 
 export default injectContext(Layout);
