@@ -81,6 +81,7 @@ const SignUpPro = () => {
 						{submited && datos.repeatPassword != datos.password ? (
 							<span>Confirma su contraseña bien por favor </span>
 						) : null}
+
 						<label value="validationServer01">Numero de telefono </label>
 						<input
 							name="phoneNumber"
@@ -89,7 +90,7 @@ const SignUpPro = () => {
 							className="form-control"
 							value={datos.phoneNumber}
 						/>
-						{submited && datos.phoneNumber ? <span>Escribe su numero de tefelono por favor </span> : null}
+						{submited && !datos.phoneNumber ? <span>Escribe su numero de tefelono por favor </span> : null}
 
 						<input
 							name="url"
@@ -106,7 +107,7 @@ const SignUpPro = () => {
 							className="form-control"
 							value={datos.dierction}
 						/>
-						{submited && datos.direction ? <span>Escribe su direccion por favor </span> : null}
+						{submited && !datos.direction ? <span>Escribe su direccion por favor </span> : null}
 
 						<input
 							name="location"
@@ -115,7 +116,7 @@ const SignUpPro = () => {
 							className="form-control"
 							value={datos.location}
 						/>
-						{submited && datos.location ? <span>Escribe su localidad por favor</span> : null}
+						{submited && !datos.location ? <span>Escribe su localidad por favor</span> : null}
 
 						<input name="cif" placeholder="CIF" type="text" className="form-control" value={datos.cif} />
 						{submited && datos.cif ? <span>Password do not match! </span> : null}
@@ -127,7 +128,7 @@ const SignUpPro = () => {
 							className="form-control"
 							value={datos.razonSocial}
 						/>
-						{submited && datos.razonSocial ? <span>Password do not match! </span> : null}
+						{submited && !datos.razonSocial ? <span>Password do not match! </span> : null}
 					</div>
 				</div>
 				<button className="btn btn-primary" type="submit" value="sign up">
