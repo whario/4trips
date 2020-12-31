@@ -1,0 +1,9 @@
+span{
+    color: red;
+}
+
+.container-fluid{
+   
+    border-left: 5px solid #1C6EA4;
+    border-radius: 0px 40px 0px 40px;
+}
