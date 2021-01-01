@@ -100,6 +100,7 @@ const File = () => {
 							{submited && !datos.phoneNumber ? (
 								<span>Escribe su numero de tefelono por favor </span>
 							) : null}
+							<br />
 							<label value="validationServer01">enlace de su pagina we (Si existe)</label>
 							<input
 								name="url"
@@ -108,6 +109,7 @@ const File = () => {
 								className="form-control"
 								value={datos.url}
 							/>
+							<br />
 							<label value="validationServer01">Direccion</label>
 							<input
 								name="direction"
