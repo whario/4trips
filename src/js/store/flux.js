@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userInfoCollected: []
 		},
 		actions: {
-			SignUp: datos => {
+			regisetred: datos => {
 				setStore({ userInfoCollected: datos });
 			}
 		}

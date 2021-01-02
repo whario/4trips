@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/SignUp.css";
 import bootstrap from "react-bootstrap";
+import context from "react-bootstrap/esm/AccordionContext";
 ///Componentes
 
 const SignUp = () => {
@@ -27,12 +28,13 @@ const SignUp = () => {
 			setValied(true);
 		}
 		setSubmited(true);
+		actions.regisetred(datos);
 	};
-	console.log(useContext());
+	console.log(datos);
 	return (
 		<div className="container-fluid">
-			<div className="row justify-content-center">
-				<div className="offset-sm-2 col-sm-8 offset-sm-2  col-sm-6 col-md-3">
+			<div className=" justify-content-center">
+				<div className="offset-sm-2 col-sm-8 offset-sm-2 col-sm-6 col-md-6">
 					<form
 						className="form-container myForm justify-content-center"
 						onChange={handelChange}
