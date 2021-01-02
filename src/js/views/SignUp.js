@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/SignUp.css";
 import bootstrap from "react-bootstrap";
 ///Componentes
 
 const SignUp = () => {
+	const [store, actions] = useContext(Context);
 	const [datos, setDatos] = useState({
 		userName: "",
 		email: "",
@@ -26,7 +28,7 @@ const SignUp = () => {
 		}
 		setSubmited(true);
 	};
-
+	console.log(useContext());
 	return (
 		<div className="container-fluid">
 			<div className="row justify-content-center">

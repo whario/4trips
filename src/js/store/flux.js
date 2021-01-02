@@ -1,8 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {},
+		store: {
+			userInfoCollected: []
+		},
 		actions: {
-			// Use getActions to call a function within a fuction
+			SignUp: datos => {
+				setStore({ userInfoCollected: datos });
+			}
 		}
 	};
 };
