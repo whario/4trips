@@ -6,7 +6,7 @@ import context from "react-bootstrap/esm/AccordionContext";
 ///Componentes
 
 const SignUp = () => {
-	const [store, actions] = useContext(Context);
+	const { store, actions } = useContext(Context);
 	const [datos, setDatos] = useState({
 		userName: "",
 		email: "",
