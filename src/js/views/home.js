@@ -1,4 +1,11 @@
 import React from "react";
 import "../../styles/home.scss";
+import SignUp from "./SignUp";
 
-export const Home = () => <div className="text-center mt-5">Hola</div>;
+export const Home = () => {
+	return (
+		<div>
+			<SignUp />
+		</div>
+	);
+};
