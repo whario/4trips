@@ -3,7 +3,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./store/appContext";
 
 import { Home } from "./views/home";
+
 import SignUpPro from "./views/SignUpPro";
+
+import { AddTrip } from "./views/AddTrip.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -18,7 +22,11 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
+
 					<Route exact path="/registroprofecional" component={SignUpPro} />
+
+					<Route exact path="/addTrip" component={AddTrip} />
+
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
@@ -26,6 +34,6 @@ const Layout = () => {
 			</BrowserRouter>
 		</div>
 	);
-};
 
+    }
 export default injectContext(Layout);
