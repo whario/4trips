@@ -16,7 +16,7 @@ export const AddTrip = () => {
 		last_day: "",
 		description: ""
 	});
-	const [submited, setSubmited] = useState(false);
+	const [submited, setSubmited] = useState(false); //para los campos obligatorios y mensajes de error
 
 	const needs = () => {
 		//uso esta función para añadir o borrar elementos del array needs_trip
@@ -56,23 +56,26 @@ export const AddTrip = () => {
 				<div className="col-md-6 offset-md-3">
 					<div className="addTrip">
 						<form onChange={handleChange} onSubmit={handleSubmit}>
+							<div className="row">
+								<p className="servicios">¿Qué servicio o servicios buscas?</p>
+							</div>
 							<div className="d-flex justify-content-center">
-								<div className="form-check form-check-inline m-1">
+								<div className="form-check form-check-inline m-0">
 									<img src={logoAloj} title="alojamiento" />
 									<input value="sleep" type="checkbox" className="form-check-input" name="sleep" />
 									<label className="form-check-label" />
 								</div>
-								<div className="form-check form-check-inline m-1">
+								<div className="form-check form-check-inline m-0">
 									<img src={logoComida} title="comer" />
 									<input value="eat" type="checkbox" className="form-check-input" name="eat" />
 									<label className="form-check-label" />
 								</div>
-								<div className="form-check form-check-inline m-1">
+								<div className="form-check form-check-inline m-0">
 									<img src={logoBbq} title="jardín/barbacoa" />
 									<input value="bbq" type="checkbox" className="form-check-input" name="bbq" />
 									<label className="form-check-label" />
 								</div>
-								<div className="form-check form-check-inline m-1">
+								<div className="form-check form-check-inline m-0">
 									<img src={logoMultia} title="multiaventura" />
 									<input
 										value="adventure"
@@ -82,7 +85,7 @@ export const AddTrip = () => {
 									/>
 									<label className="form-check-label" />
 								</div>
-								<div className="form-check form-check-inline m-1">
+								<div className="form-check form-check-inline m-0">
 									<img src={logoPiscina} title="piscina/jacuzzi" />
 									<input value="relax" type="checkbox" className="form-check-input" name="relax" />
 									<label className="form-check-label" />
@@ -91,7 +94,7 @@ export const AddTrip = () => {
 							{submited && trip.needs_trip.length == 0 ? (
 								<span>Marca al menos una opción por favor</span>
 							) : null}
-							<div className="form-group m-5">
+							<div className="form-group m-3">
 								<label>Destino/s</label>
 								<input
 									value={trip.destination}
@@ -102,7 +105,7 @@ export const AddTrip = () => {
 								/>
 								{submited && !trip.destination ? <span>Escribe un destino por favor</span> : null}
 							</div>
-							<div className="form-group m-5">
+							<div className="form-group m-3">
 								<label>Fecha de entrada</label>
 								<input
 									value={trip.first_day}
@@ -115,7 +118,7 @@ export const AddTrip = () => {
 									<span>Escribe una decha de entrada por favor</span>
 								) : null}
 							</div>
-							<div className="form-group m-5">
+							<div className="form-group m-3">
 								<label>Fecha de salida</label>
 								<input
 									value={trip.last_day}
@@ -126,7 +129,7 @@ export const AddTrip = () => {
 								/>
 								{submited && !trip.last_day ? <span>Escribe una fecha de salida por favor</span> : null}
 							</div>
-							<div className="form-group m-5">
+							<div className="form-group m-3">
 								<label>Descripción</label>
 								<textarea
 									value={trip.description}
@@ -138,6 +141,9 @@ export const AddTrip = () => {
 								{submited && !trip.description ? (
 									<span>Escribe una descripción de lo que estás buscando por favor</span>
 								) : null}
+							</div>
+							<div className="row">
+								<p className="obligatorios">Todos los campos son obligatorios</p>
 							</div>
 							<button type="submit" className="btn btn-primary center">
 								publicar viaje
