@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./store/appContext";
 
 import { Home } from "./views/home";
-import File from "./views/fil2";
+import SignUpPro from "./views/SignUpPro";
 
 //create your first component
 const Layout = () => {
@@ -18,7 +18,7 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/fil" component={File} />
+					<Route exact path="/registroprofecional" component={SignUpPro} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>

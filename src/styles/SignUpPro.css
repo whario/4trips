@@ -4,37 +4,28 @@
     border-bottom: 5px solid #1C6EA4;
     border-radius: 0px 40px 0px 40px;
     box-shadow: 0px 0px 10px 0px black;
-    width: 500px;
     position: absolute;
-    top: 15vh;
-    right: -1vh;
-    height: 800px;
+    width: 100%;
 }
-.form-group{
-    display: flex;
-}
+
+
 span{
     color: red;
     position: relative;
     left: 10%;
 }
 .form-control{
-    width: 80%;
+   width: 80%;
     position: relative;
     margin: auto;
 }
 .btn{
     position: relative;
     top:10%;
-    width:70%;
     margin: auto;
+    width: 70%;
 }
-.P{
-   position: relative;
-    width: 40%;
-    margin: auto;
-    bottom: 281%;;
-}
+
 .alert-success{
     margin: 0;
     height: 6%;
@@ -42,4 +33,5 @@ span{
 }
 label{
     color: black;
+    margin: 1%;
 }
