@@ -1,4 +1,11 @@
 import React from "react";
+<<<<<<< HEAD
+=======
 import "../../styles/home.scss";
 
-export const Home = () => <div className="text-center mt-5">Hola desde develop soy moha</div>;
+>>>>>>> 23d14666d60ac4f608a43bd7fb816fdbf5fbb92e
+import NavBar from "../Component/Navbar.js";
+
+export const Home = () => {
+	return <NavBar />;
+};
