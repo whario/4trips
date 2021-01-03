@@ -5,7 +5,7 @@ import SignUp from "./SignUp";
 export const Home = () => {
 	return (
 		<div>
-			<SignUp />
+		
 		</div>
 	);
 };
