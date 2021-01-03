@@ -1,8 +1,13 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {},
+		store: {
+			tripList: []
+		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			addTrip: trip => {
+				setStore({ tripList: trip });
+			}
 		}
 	};
 };
