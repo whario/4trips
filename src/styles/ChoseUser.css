@@ -1,0 +1,33 @@
+.viajero{
+    background-image: url("../img/viajero-icon.png");
+    background-repeat: none;
+    background-size: cover;
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: top, left, right, bottom ease-in-out 10000ms;
+    background-color:#00C1FD ;
+}
+.pro{
+    background-image: url("../img/pro.png");
+    background-repeat: none;
+    background-size: cover;
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+
+    background-color:#00C1FD ;
+
+}
+.pro:hover {box-shadow: 1px 1px 1px 1px gray; border: 0px; background-color: #00C1FD;
+  transform: translateY(4px)}
+
+.viajero:hover {box-shadow: 1px 1px 1px 1px gray; border: 0px; background-color: #00C1FD;
+  transform: translateY(4px);
+}
+.pro:active {background-color: #00C1FD;
+  transform: translateY(7px);
+}
+.viajero:active {background-color: #00C1FD;
+  transform: translateY(7px);
+}

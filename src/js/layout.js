@@ -9,6 +9,7 @@ import SignUp from "./views/SignUp";
 import SignUpPro from "./views/SignUpPro";
 
 import { AddTrip } from "./views/AddTrip.jsx";
+import ChoseUser from "./views/ChoseUser.jsx";
 
 //create your first component
 const Layout = () => {
@@ -29,7 +30,7 @@ const Layout = () => {
 					<Route exact path="/registroprofecional" component={SignUpPro} />
 
 					<Route exact path="/addTrip" component={AddTrip} />
-
+					<Route exact path="/eligetopdeusuario" component={ChoseUser} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
