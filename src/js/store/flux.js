@@ -1,13 +1,18 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			tripList: []
+                tripList: [],
+			    userInfoCollected: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			addTrip: trip => {
+			regisetred: datos => {
+				setStore({ userInfoCollected: datos });
+            },
+            addTrip: trip => {
 				setStore({ tripList: trip });
-			}
+
+		}	
+			
 		}
 	};
 };
