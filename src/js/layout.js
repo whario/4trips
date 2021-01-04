@@ -8,9 +8,7 @@ import SignUp from "./views/SignUp";
 
 import SignUpPro from "./views/SignUpPro";
 
-
 import { AddTrip } from "./views/AddTrip.jsx";
-
 
 //create your first component
 const Layout = () => {
@@ -26,11 +24,9 @@ const Layout = () => {
 						<Home />
 					</Route>
 
-
-          <Route exact path="/registroviajero" component={SignUp}/>
+					<Route exact path="/registroviajero" component={SignUp} />
 
 					<Route exact path="/registroprofecional" component={SignUpPro} />
-
 
 					<Route exact path="/addTrip" component={AddTrip} />
 
@@ -41,6 +37,5 @@ const Layout = () => {
 			</BrowserRouter>
 		</div>
 	);
-
-    }
+};
 export default injectContext(Layout);

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "../../styles/SignUpPro.css";
 
 const SignUpPro = () => {
