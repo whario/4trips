@@ -17,6 +17,9 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
+				</Switch>
+			</BrowserRouter>
+		</div>
 	);
-
+};
 export default injectContext(Layout);
