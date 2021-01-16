@@ -53,6 +53,8 @@ const SignUp = () => {
 									className="form-control"
 									id="validationServer01"
 								/>
+								<input type="file"  name='img'/>
+                                
 								{submited && !datos.userName ? (
 									<span>Escribe su nombre de usuario por favor</span>
 								) : null}
