@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/Login.css";
+import logo4Trips from "../../img/logo_4Trips.png";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function LogIn() {
@@ -8,15 +9,16 @@ export default function LogIn() {
 			<div className="navbar" />
 			<div className="row justify-content-center">
 				<div className="col-12 col-md-6 ">
-					<form className="myFormLogIn">
+					<form className="myFormLogIn justify-content-center">
+						<img className="logo4Trip" src={logo4Trips} />
 						<h3 className="h3"> Inicia sesion</h3>
 						<label className="label1"> Correo electronico</label>
-						<input className="form-control mt-5 " type="email" placeholder="Correo electronico" />
+						<input className="form-control  " type="email" placeholder="Correo electronico" />
 						<br />
 						<label className="label2">Contraseña</label>
 						<input className="form-control" type="password" placeholder="Contraseña" />
 						<br />
-						<button type="button" className="btn btn-primary">
+						<button type="button" className="btn btn-primary btn-block">
 							Iniciar sesion
 						</button>
 					</form>
