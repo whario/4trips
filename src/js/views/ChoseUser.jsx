@@ -14,12 +14,14 @@ const ChoseUser = props => {
 	};
 	return (
 		<div className="container">
-			<div className="row justify-content-center">
-				<div className="col-3">
-					<div className="viajero" onClick={handelOnViajero} />
-				</div>
-				<div className="col-3">
-					<div className="pro" onClick={handelOnPro} />
+			<div className="row justify-content-center ">
+				<div>
+					<div className="col-sm-10 col-md-4 col-la-5">
+						<div className="viajero" onClick={handelOnViajero} />
+					</div>
+					<div className="col-sm-10 col-md-4 col-la-5">
+						<div className="pro" onClick={handelOnPro} />
+					</div>
 				</div>
 			</div>
 		</div>
