@@ -1,37 +1,60 @@
-.myForm{
-    border-left: 5px solid #1C6EA4;
-    border-bottom:5px solid #1C6EA4 ;
-    border-radius: 0px 40px 0px 40px;
-    box-shadow: 0px 0px 10px 0px black;
-    width:80%;
-    
-    
+
+.avatar{
+     right: 1px;
+    position: relative;
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    background: white;
+    top: 9px;
+
 }
-span{
+.hoveron{
     color: red;
-    position: relative;
-    left: 10%;
 }
-.form-control{
-    width: 80%;
-    position: relative;
-    margin: auto;
-}
-.btn{
-    position: relative;
-    top:10%;
-    width:70%;
-    margin: auto;
-    bottom: 10px;
+.errormsg{
+    color: red;
 }
 .P{
-   position: relative;
-    width: 40%;
-    margin: auto;
-    bottom: 281%;;
+  text-align: center;
 }
-.alert-success{
-    margin: 0;
-    height: 6%;
-    border-radius: 0px 40px 0px 0px;
+.avatar-container {
+      position: relative;
+    width: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+
+}
+.avatar-container:hover .overlay {
+  opacity: 1;
+}
+.uploadedimg{
+    width: 200px;
+    height: 200px;
+}
+.hidenButton{
+    position: relative;
+    bottom: 50px;
+    left: 133px;
+    opacity: 0;
+    z-index: 10;
+}
+
+.hidenButton:hover .overlay {
+  opacity: 1;
 }

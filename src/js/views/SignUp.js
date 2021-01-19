@@ -6,103 +6,141 @@ import context from "react-bootstrap/esm/AccordionContext";
 ///Componentes
 
 const SignUp = () => {
-	const { store, actions } = useContext(Context);
-	const [datos, setDatos] = useState({
-		userName: "",
-		email: "",
-		password: "",
-		repeatPassword: ""
-	});
+    const { store, actions } = useContext(Context);
+    const [datos, setDatos] = useState({
+        userName: "",
+        email: "",
+        password: "",
+        repeatPassword: "",
+        img: ""
+    });
 
-	const [submited, setSubmited] = useState(false);
+    const [submited, setSubmited] = useState(false);
 
-	const [valied, setValied] = useState(false);
+    const [valied, setValied] = useState(false);
 
-	const handelChange = e => {
-		setDatos({ ...datos, [e.target.name]: e.target.value });
-	};
+    const [view, setView] = useState("");
 
-	const handleSubmit = event => {
-		event.preventDefault();
-		if (datos.userName && datos.email && datos.password == datos.repeatPassword) {
-			setValied(true);
-		}
-		setSubmited(true);
-		actions.regisetred(datos);
-	};
-	console.log(datos);
-	return (
-		<div className="container ">
-			<div className="row  justify-content-center">
-				<div className="col-sm-12 col-md-10 col-la-8">
-					<form className="myForm m-5 " onChange={handelChange} onSubmit={handleSubmit}>
-						{submited && valied && datos.password == datos.repeatPassword ? (
-							<div className="alert alert-success" role="alert">
-								<p className="P">Registrado con éxito</p>
-							</div>
-						) : null}
-						<br />
-						<div className="row">
-							<div className="col-12">
-								<label value="validationServer01">Nomber de usuario</label>
-								<input
-									name="userName"
-									placeholder="Usuario"
-									value={datos.userName}
-									type="text"
-									className="form-control"
-									id="validationServer01"
-								/>
-								<input type="file"  name='img'/>
-                                
-								{submited && !datos.userName ? (
-									<span>Escribe su nombre de usuario por favor</span>
-								) : null}
-								<br />
+    const handleChange = e => {
+        console.log("handels=ch");
+        if (e.target.name == "img") {
+            console.log("entrando img");
+            const reader = new FileReader();
+            reader.onload = event => {
+                console.log(reader.readyState);
+                if (reader.readyState === 2) {
+                    console.log(reader.result);
+                    setDatos({ ...datos, img: reader.result });
+                }
+            };
+            if (e.target.files[0] != undefined) {
+                reader.readAsDataURL(e.target.files[0]);
+            }
+            console.log(e.target.files[0]);
+        } else {
+            setDatos({ ...datos, [e.target.name]: e.target.value });
+        }
+    };
 
-								<label value="validationServer01">Correo electronico</label>
-								<input
-									name="email"
-									placeholder="Correo electronico"
-									type="email"
-									className="form-control"
-									value={datos.email}
-								/>
-								{submited && !datos.email ? <span>Escribe su correo electronico por favor</span> : null}
-								<br />
-								<label value="validationServer01">Contraseña</label>
+    const handleSubmit = event => {
+        event.preventDefault();
+        if (datos.userName && datos.email && datos.password == datos.repeatPassword) {
+            setValied(true);
+        }
+        setSubmited(true);
+        actions.regisetred(datos);
+    };
 
-								<input
-									name="password"
-									placeholder="Contraseña"
-									type="password"
-									className="form-control"
-									value={datos.password}
-								/>
-								{submited && !datos.password ? <span>Escribe su contraseña por favor</span> : null}
-								<br />
-								<label value="validationServer01">Confirmacion de contraseña</label>
+    console.log(datos);
+    return (
+        <div className="container ">
+            <div className="row justify-content-center">
+                <br />
+                <div className="col-sm-12 col-md-10 col-la-8">
+                    <form className="myForm m-5 " onChange={handleChange} onSubmit={handleSubmit}>
+                        {submited && valied && datos.password == datos.repeatPassword ? (
+                            <div className="alert alert-success" role="alert">
+                                <p className="P">Registrado con éxito</p>
+                            </div>
+                        ) : null}
+                        <br />
+                        <div className="avatar-container">
+                            {datos.img ? (
+                                <img className="avatar" src={datos.img} />
+                            ) : (
+                                <img
+                                    src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+                                    className="avatar"
+                                />
+                            )}
 
-								<input
-									name="repeatPassword"
-									placeholder="Repite contraseña"
-									type="password"
-									className="form-control"
-									value={datos.repeatPassword}
-								/>
-								{submited && datos.repeatPassword != datos.password ? (
-									<span>Confirma su contraseña bien porfavor </span>
-								) : null}
-							</div>
-						</div>
-						<br />
-						<button className="btn btn-primary btn-block" type="submit" value="sign up">
-							Register
-						</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	);
+                            <div className="overlay"> sube una foto </div>
+                        </div>
+                        <input type="file" name="img" className="hidenButton" />
+                        <div className="row">
+                            <div className="col-12">
+                                <label value="validationServer01">Nomber de usuario</label>
+                                <input
+                                    name="userName"
+                                    placeholder="Usuario"
+                                    value={datos.userName}
+                                    type="text"
+                                    className="form-control"
+                                    id="validationServer01"
+                                />
+                                {submited && !datos.userName ? (
+                                    <span className="errormsg">Escribe su nombre de usuario por favor</span>
+                                ) : null}
+                                <br />
+
+                                <label value="validationServer01">Correo electronico</label>
+                                <input
+                                    name="email"
+                                    placeholder="Correo electronico"
+                                    type="email"
+                                    className="form-control"
+                                    value={datos.email}
+                                />
+                                {submited && !datos.email ? (
+                                    <span className="errormsg">Escribe su correo electronico por favor</span>
+                                ) : null}
+                                <br />
+                                <label value="validationServer01">Contraseña</label>
+
+                                <input
+                                    name="password"
+                                    placeholder="Contraseña"
+                                    type="password"
+                                    className="form-control"
+                                    value={datos.password}
+                                />
+                                {submited && !datos.password ? (
+                                    <span className="errormsg">Escribe su contraseña por favor</span>
+                                ) : null}
+                                <br />
+                                <label value="validationServer01">Confirmacion de contraseña</label>
+
+                                <input
+                                    name="repeatPassword"
+                                    placeholder="Repite contraseña"
+                                    type="password"
+                                    className="form-control"
+                                    value={datos.repeatPassword}
+                                />
+                                {submited && datos.repeatPassword != datos.password ? (
+                                    <span className="errormsg">Confirma su contraseña bien porfavor </span>
+                                ) : null}
+                            </div>
+                        </div>
+                        <br />
+                        <button className="btn btn-primary btn-block" type="submit" value="sign up">
+                            Register
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 };
 export default SignUp;
+
