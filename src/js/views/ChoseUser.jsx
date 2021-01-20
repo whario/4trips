@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/ChoseUser.css";
-import SignUp from "../views/SignUp.js";
+import pro from "../../img/pro.png";
+import viajero from "../../img/viajero.png";
 
 import PropTypes from "prop-types";
 const ChoseUser = props => {
