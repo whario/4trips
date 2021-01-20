@@ -1,4 +1,5 @@
-
+body{
+    background-color: gainsboro;}
 .avatar{
      right: 1px;
     position: relative;
@@ -57,4 +58,10 @@
 
 .hidenButton:hover .overlay {
   opacity: 1;
+}
+.btn{
+    width: 50%;
+}
+.form{
+    margin: auto;
 }

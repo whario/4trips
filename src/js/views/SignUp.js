@@ -78,7 +78,7 @@ const SignUp = () => {
 						</div>
 						<input type="file" name="img" className="hidenButton" />
 						<div className="row">
-							<div className="col-12">
+							<div className="col-sm-12 col-md-10 col-la-8 form">
 								<label value="validationServer01">Nomber de usuario</label>
 								<input
 									name="userName"
@@ -133,8 +133,8 @@ const SignUp = () => {
 							</div>
 						</div>
 						<br />
-						<button className="btn btn-primary btn-block" type="submit" value="sign up">
-							Register
+						<button className="btn btn-primary " type="submit" value="sign up">
+							Registrar
 						</button>
 					</form>
 				</div>
