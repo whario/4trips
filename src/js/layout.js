@@ -5,9 +5,7 @@ import injectContext from "./store/appContext";
 import { Home } from "./views/home";
 
 import SignUp from "./views/SignUp";
-
 import SignUpPro from "./views/SignUpPro";
-
 import { AddTrip } from "./views/AddTrip.jsx";
 
 //create your first component
@@ -24,7 +22,7 @@ const Layout = () => {
 						<Home />
 					</Route>
 					<Route exact path="/registroviajero" component={SignUp} />
-					<Route exact path="/registroprofecional" component={SignUpPro} />
+					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />
 					<Route>
 						<h1>Not found!</h1>
