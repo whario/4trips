@@ -21,14 +21,13 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />
-
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
+
 				</Switch>
 			</BrowserRouter>
 		</div>
