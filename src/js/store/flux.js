@@ -9,7 +9,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userInfoCollected: datos });
 			},
 			addTrip: trip => {
-				setStore({ tripList: trip });
+				const tripListCopy = getStore().tripList;
+				setStore({ tripList: [...tripListCopy, trip] });
+			},
+			loadingTrips: data => {
+				setStore({ tripList: data });
 			}
 		}
 	};

@@ -6,6 +6,7 @@ import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/addTrip.scss";
+import { Link } from "react-router-dom";
 
 export const AddTrip = () => {
 	const { store, actions } = useContext(Context);
@@ -16,7 +17,9 @@ export const AddTrip = () => {
 		last_day: "",
 		description: ""
 	});
-	const [submited, setSubmited] = useState(false); //para los campos obligatorios y mensajes de error
+	const [submited, setSubmited] = useState(false); //para evitar mandar formularios vacíos
+	const [valied, setValied] = useState(true); //para mostrar mensajes de error en campos vacíos
+	const [succesfull, setSuccesfull] = useState(false); //para mostrar mensaje de éxito al enviar
 
 	const needs = () => {
 		//uso esta función para añadir o borrar elementos del array needs_trip
@@ -46,9 +49,25 @@ export const AddTrip = () => {
 	};
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log("ejecutando submit");
-		actions.addTrip(trip);
-		setSubmited(true);
+		if (
+			trip.needs_trip.length != 0 &&
+			trip.destination != "" &&
+			trip.first_day != "" &&
+			trip.last_day != "" &&
+			trip.description != ""
+		) {
+			console.log("ejecutando submit");
+			let div = document.querySelector("#loading");
+			div.classList.remove("oculto");
+			div.classList.add("spinner-border");
+			actions.addTrip(trip);
+			setSubmited(true);
+			setSuccesfull(true);
+			//window.location.reload("/"); Descomentar cuando tengamos el backend conectado ya que ahí podrá refresh
+		} else {
+			setSubmited(false);
+			setValied(false);
+		}
 	};
 	return (
 		<div className="container">
@@ -56,6 +75,11 @@ export const AddTrip = () => {
 				<div className="col-md-6 offset-md-3">
 					<div className="addTrip">
 						<form onChange={handleChange} onSubmit={handleSubmit}>
+							{succesfull == true ? (
+								<div className="alert alert-success" role="alert">
+									<p className="P">Publicando viaje con éxito</p>
+								</div>
+							) : null}
 							<div className="row">
 								<p className="servicios">¿Qué servicio o servicios buscas?</p>
 							</div>
@@ -91,8 +115,8 @@ export const AddTrip = () => {
 									<label className="form-check-label" />
 								</div>
 							</div>
-							{submited && trip.needs_trip.length == 0 ? (
-								<span>Marca al menos una opción por favor</span>
+							{valied == false && trip.needs_trip.length == 0 ? (
+								<span>Marca al menos una opción</span>
 							) : null}
 							<div className="form-group m-3">
 								<label>Destino/s</label>
@@ -103,7 +127,7 @@ export const AddTrip = () => {
 									placeholder="Destino/s"
 									name="destination"
 								/>
-								{submited && !trip.destination ? <span>Escribe un destino por favor</span> : null}
+								{valied == false && !trip.destination ? <span>Escribe al menos un destino</span> : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Fecha de entrada</label>
@@ -114,9 +138,7 @@ export const AddTrip = () => {
 									placeholder="Fecha de entrada"
 									name="first_day"
 								/>
-								{submited && !trip.first_day ? (
-									<span>Escribe una decha de entrada por favor</span>
-								) : null}
+								{valied == false && !trip.first_day ? <span>Escribe una fecha de entrada</span> : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Fecha de salida</label>
@@ -127,7 +149,7 @@ export const AddTrip = () => {
 									placeholder="Fecha de salida"
 									name="last_day"
 								/>
-								{submited && !trip.last_day ? <span>Escribe una fecha de salida por favor</span> : null}
+								{valied == false && !trip.last_day ? <span>Escribe una fecha de salida</span> : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Descripción</label>
@@ -138,16 +160,18 @@ export const AddTrip = () => {
 									placeholder="Describe tu viaje. ¿Qué quieres hacer, cuántas personas...?"
 									name="description"
 								/>
-								{submited && !trip.description ? (
-									<span>Escribe una descripción de lo que estás buscando por favor</span>
+								{valied == false && !trip.description ? (
+									<span>Escribe una descripción de lo que estás buscando</span>
 								) : null}
-							</div>
-							<div className="row">
-								<p className="obligatorios">Todos los campos son obligatorios</p>
 							</div>
 							<button type="submit" className="btn btn-primary center">
 								publicar viaje
+								<span> </span>
+								<div className="oculto" id="loading" />
 							</button>
+							<Link className="mt-3 w-100 text-center" to="/">
+								volver a home
+							</Link>
 						</form>
 					</div>
 				</div>
