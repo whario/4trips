@@ -1,13 +1,14 @@
 body{
     background-color: gainsboro;}
 .avatar{
-     right: 1px;
+    right: 1px;
     position: relative;
     border-radius: 50%;
     width: 100%;
     height: auto;
     background: white;
     top: 9px;
+    height: 200px;
 
 }
 .hoveron{
