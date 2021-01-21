@@ -11,9 +11,6 @@ box-shadow: 0px 0px 10px 0px black;
     margin: auto;
     display: block;
 }
-span{
-    color: red;
-}
 .servicios{
     margin-left: 6%;
     margin-bottom: 2%;
@@ -22,4 +19,7 @@ span{
     color: gray;
     font-size: small;
     margin-left: 6%;
+}
+.oculto{
+    display: none;
 }
