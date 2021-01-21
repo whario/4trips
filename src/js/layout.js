@@ -4,6 +4,10 @@ import injectContext from "./store/appContext";
 
 import { Home } from "./views/home";
 
+import SignUp from "./views/SignUp";
+import SignUpPro from "./views/SignUpPro";
+import { AddTrip } from "./views/AddTrip.jsx";
+
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -17,6 +21,13 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
+					<Route exact path="/registroviajero" component={SignUp} />
+					<Route exact path="/registroPro" component={SignUpPro} />
+					<Route exact path="/addTrip" component={AddTrip} />
+					<Route>
+						<h1>Not found!</h1>
+					</Route>
+
 				</Switch>
 			</BrowserRouter>
 		</div>
