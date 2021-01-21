@@ -15,7 +15,7 @@ export const Trips = () => {
 		<div className="container">
 			<div className="row">
 				<div className="col-md-3 offset-md-9">
-					<Link className="btn btn-primary" to="/addTrip">
+					<Link className="btn btn-primary btnPublicarViaje" to="/addTrip">
 						Publicar viaje
 					</Link>
 				</div>
