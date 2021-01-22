@@ -14,6 +14,9 @@ export const Trips = () => {
 	return (
 		<div className="container">
 			<div className="row">
+				<div className="col">
+					<div className="espaciador" />
+				</div>
 				<div className="col-md-3 offset-md-9">
 					<Link className="btn btn-primary publicar" to="/addTrip">
 						Publicar viaje
@@ -34,8 +37,8 @@ export const Trips = () => {
 						<TripCard key={index} trip={trip} />
 					))}
 				</div>
-				<div className="row">
-					<div className="d-grid gap-2 col-md-2 mx-auto">
+				<div className="rowrow justify-content-center">
+					<div className="col-md-3 offset-md-6">
 						<Link className="btn btn-secondary btn-sm" to="">
 							Ver mas viajes
 						</Link>
