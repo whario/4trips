@@ -6,7 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			addTrip: trip => {
-				setStore({ tripList: trip });
+				const tripListCopy = getStore().tripList;
+				setStore({ tripList: [...tripListCopy, trip] });
 			}
 		}
 	};
