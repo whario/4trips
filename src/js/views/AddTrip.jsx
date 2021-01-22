@@ -115,9 +115,11 @@ export const AddTrip = () => {
 									<label className="form-check-label" />
 								</div>
 							</div>
-							{valied == false && trip.needs_trip.length == 0 ? (
-								<span className="error">Marca al menos una opción</span>
-							) : null}
+							<div className="form-group m-3">
+								{valied == false && trip.needs_trip.length == 0 ? (
+									<span className="error">Marca al menos una opción</span>
+								) : null}
+							</div>
 							<div className="form-group m-3">
 								<label>Destino/s</label>
 								<input
