@@ -7,7 +7,7 @@ const Navbar = () => {
 			{" "}
 			<nav className="navbar navbar">
 				<img src={logotipo} className="logo" />
-				<form className="form-inline">
+				<form className="form-inline search-btn">
 					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
 					<button className="btn  my-2 my-sm-0 btnRegistroLogin" type="submit">
 						{" "}

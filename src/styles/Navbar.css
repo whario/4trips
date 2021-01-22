@@ -10,3 +10,6 @@
  .logo{
     width: 15%;
 }
+.search-btn{
+    flex-wrap: nowrap ;
+}
