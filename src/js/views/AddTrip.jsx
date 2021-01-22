@@ -115,9 +115,11 @@ export const AddTrip = () => {
 									<label className="form-check-label" />
 								</div>
 							</div>
-							{valied == false && trip.needs_trip.length == 0 ? (
-								<span>Marca al menos una opción</span>
-							) : null}
+							<div className="form-group m-3">
+								{valied == false && trip.needs_trip.length == 0 ? (
+									<span className="error">Marca al menos una opción</span>
+								) : null}
+							</div>
 							<div className="form-group m-3">
 								<label>Destino/s</label>
 								<input
@@ -127,7 +129,9 @@ export const AddTrip = () => {
 									placeholder="Destino/s"
 									name="destination"
 								/>
-								{valied == false && !trip.destination ? <span>Escribe al menos un destino</span> : null}
+								{valied == false && !trip.destination ? (
+									<span className="error">Escribe al menos un destino</span>
+								) : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Fecha de entrada</label>
@@ -138,7 +142,9 @@ export const AddTrip = () => {
 									placeholder="Fecha de entrada"
 									name="first_day"
 								/>
-								{valied == false && !trip.first_day ? <span>Escribe una fecha de entrada</span> : null}
+								{valied == false && !trip.first_day ? (
+									<span className="error">Escribe una fecha de entrada</span>
+								) : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Fecha de salida</label>
@@ -149,7 +155,9 @@ export const AddTrip = () => {
 									placeholder="Fecha de salida"
 									name="last_day"
 								/>
-								{valied == false && !trip.last_day ? <span>Escribe una fecha de salida</span> : null}
+								{valied == false && !trip.last_day ? (
+									<span className="error">Escribe una fecha de salida</span>
+								) : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Descripción</label>
@@ -161,10 +169,13 @@ export const AddTrip = () => {
 									name="description"
 								/>
 								{valied == false && !trip.description ? (
-									<span>Escribe una descripción de lo que estás buscando</span>
+									<span className="error">Escribe una descripción de lo que estás buscando</span>
 								) : null}
 							</div>
-							<button type="submit" className="btn btn-primary center">
+							<div className="row">
+								<div className="obligatorios">Todos los campos son obligatorios</div>
+							</div>
+							<button type="submit" className="btn btn-primary center publicar">
 								publicar viaje
 								<span> </span>
 								<div className="oculto" id="loading" />

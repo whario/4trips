@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { TripCard } from "../Component/TripCard.jsx";
-import "../../styles/index.scss";
+import "../../styles/trips.scss";
 
 import { checkPropTypes } from "prop-types";
 
@@ -14,8 +14,11 @@ export const Trips = () => {
 	return (
 		<div className="container">
 			<div className="row">
+				<div className="col">
+					<div className="espaciador" />
+				</div>
 				<div className="col-md-3 offset-md-9">
-					<Link className="btn btn-primary" to="/addTrip">
+					<Link className="btn btn-primary publicar" to="/addTrip">
 						Publicar viaje
 					</Link>
 				</div>
@@ -34,8 +37,8 @@ export const Trips = () => {
 						<TripCard key={index} trip={trip} />
 					))}
 				</div>
-				<div className="row">
-					<div className="d-grid gap-2 col-md-2 mx-auto">
+				<div className="row justify-content-center">
+					<div className="col-md-3 col-sm-12 masviajes">
 						<Link className="btn btn-secondary btn-sm" to="">
 							Ver mas viajes
 						</Link>

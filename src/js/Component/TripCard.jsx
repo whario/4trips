@@ -6,7 +6,7 @@ import logoMultia from "../../img/actividadesicon.png";
 import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
-import "../../styles/index.scss";
+import "../../styles/trips.scss";
 
 export const TripCard = props => {
 	const { store, actions } = useContext(Context);
