@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { TripCard } from "../Component/TripCard.jsx";
-import "../../styles/index.scss";
+import "../../styles/trips.scss";
 
 import { checkPropTypes } from "prop-types";
 

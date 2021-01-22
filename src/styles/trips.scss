@@ -1,0 +1,53 @@
+.needs{
+    width: 45px;
+    height: 45px;
+}
+.espaciador{
+    height: 20px;
+}
+.ultimos{
+    padding: 3%;
+    width: 100%;
+    color: rgb(0, 145, 187);
+    font-weight: bold;
+}
+.blue{
+    background-color: rgb(0, 145, 187);
+    color: white;
+    font-weight: bold;
+    z-index: 1;
+}
+.numero{
+    background-color: white;
+    color: rgb(0, 145, 187);
+    font-weight: bolder;
+    text-align: center;
+    border-radius: 100%;
+    z-index: 100;
+    float: right;
+    width: 13%;
+}
+.props{
+    color: rgb(0, 145, 187);
+    font-weight: bolder;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+.description{
+    font-weight: normal;
+    margin: 0%;
+}
+.card-footer{
+    display: flex;
+    justify-content: space-around;
+}
+.avatar{
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 1.25rem;
+    width: 100%;
+    display: flex;
+}
+.card-title{
+    margin-left: 40%;
+}
