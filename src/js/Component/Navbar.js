@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/Navbar.css";
 import logotipo from "../../img/logoTIpo.png";
+import { Link } from "react-router-dom";
 const Navbar = () => {
 	return (
 		<div>
@@ -9,14 +10,14 @@ const Navbar = () => {
 				<img src={logotipo} className="logo" />
 				<form className="form-inline search-btn">
 					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-					<button className="btn  my-2 my-sm-0 btnRegistroLogin" type="submit">
+					<Link to="/registroviajero" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
 						Registre{" "}
-					</button>
-					<button className="btn  my-2 my-sm-0 btnRegistroLogin" type="submit">
+					</Link>
+					<Link to="/registroPro" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
 						Log in{" "}
-					</button>
+					</Link>
 				</form>
 			</nav>
 			<div className="white" />
