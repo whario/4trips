@@ -9,11 +9,11 @@ const Navbar = () => {
 				<img src={logotipo} className="logo" />
 				<form className="form-inline">
 					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-					<button className="btn  my-2 my-sm-0" type="submit">
+					<button className="btn  my-2 my-sm-0 btnRegistroLogin" type="submit">
 						{" "}
 						Registre{" "}
 					</button>
-					<button className="btn  my-2 my-sm-0" type="submit">
+					<button className="btn  my-2 my-sm-0 btnRegistroLogin" type="submit">
 						{" "}
 						Log in{" "}
 					</button>
