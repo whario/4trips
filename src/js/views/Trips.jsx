@@ -37,8 +37,8 @@ export const Trips = () => {
 						<TripCard key={index} trip={trip} />
 					))}
 				</div>
-				<div className="rowrow justify-content-center">
-					<div className="col-md-3 offset-md-6">
+				<div className="row justify-content-center">
+					<div className="col-md-3 col-sm-12 masviajes">
 						<Link className="btn btn-secondary btn-sm" to="">
 							Ver mas viajes
 						</Link>
