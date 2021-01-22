@@ -172,7 +172,10 @@ export const AddTrip = () => {
 									<span className="error">Escribe una descripción de lo que estás buscando</span>
 								) : null}
 							</div>
-							<button type="submit" className="btn btn-primary center">
+							<div className="row">
+								<div className="obligatorios">Todos los campos son obligatorios</div>
+							</div>
+							<button type="submit" className="btn btn-primary center publicar">
 								publicar viaje
 								<span> </span>
 								<div className="oculto" id="loading" />
