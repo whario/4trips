@@ -5,8 +5,8 @@
     width:200px;
     height: 200px;
     border-radius: 50%;
-    transition: top, left, right, bottom ease-in-out 10000ms;
-    background-color:#00C1FD ;
+    margin-top: 10%;
+    
 }
 .pro{
     background-image: url("../img/pro.png");
@@ -15,9 +15,7 @@
     width:200px;
     height: 200px;
     border-radius: 50%;
-
-    background-color:#00C1FD ;
-
+    margin-top: 10%;
 }
 .pro:hover {box-shadow: 1px 1px 1px 1px gray; border: 0px; background-color: #00C1FD;
   transform: translateY(4px)}
@@ -30,4 +28,7 @@
 }
 .viajero:active {background-color: #00C1FD;
   transform: translateY(7px);
+}
+.div-container{
+    margin-top: 10%;
 }

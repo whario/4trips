@@ -1,15 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./store/appContext";
-
 import { Home } from "./views/home";
-
 import SignUp from "./views/SignUp";
-
 import SignUpPro from "./views/SignUpPro";
-
 import { AddTrip } from "./views/AddTrip.jsx";
 import ChoseUser from "./views/ChoseUser.jsx";
+import Navbar from "./Component/Navbar.js";
+import Footer from "./Component/Footer.jsx";
 
 //create your first component
 const Layout = () => {
@@ -20,21 +18,21 @@ const Layout = () => {
 	return (
 		<div className="d-flex flex-column">
 			<BrowserRouter basename={basename}>
+				<Navbar />
 				<Switch>
 					<Route exact path="/">
 						<Home />
 					</Route>
 
 					<Route exact path="/registroviajero" component={SignUp} />
-
-					<Route exact path="/registroprofecional" component={SignUpPro} />
-
+					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />
 					<Route exact path="/eligetopdeusuario" component={ChoseUser} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
 				</Switch>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	);

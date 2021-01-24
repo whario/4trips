@@ -14,8 +14,25 @@ const SignUpPro = () => {
 		cif: "",
 		razonSocial: ""
 	});
-	const handelChange = e => {
-		setDatos({ ...datos, [e.target.name]: e.target.value });
+	const handleChange = e => {
+		console.log("handels=ch");
+		if (e.target.name == "img") {
+			console.log("entrando img");
+			const reader = new FileReader();
+			reader.onload = event => {
+				console.log(reader.readyState);
+				if (reader.readyState === 2) {
+					console.log(reader.result);
+					setDatos({ ...datos, img: reader.result });
+				}
+			};
+			if (e.target.files[0] != undefined) {
+				reader.readAsDataURL(e.target.files[0]);
+			}
+			console.log(e.target.files[0]);
+		} else {
+			setDatos({ ...datos, [e.target.name]: e.target.value });
+		}
 	};
 	const [submited, setSubmited] = useState(false);
 	const [valied, setValied] = useState(false);
@@ -32,12 +49,25 @@ const SignUpPro = () => {
 		<div className="container myContainer">
 			<div className="row  justify-content-center">
 				<div className="col-sm-12 col-md-10 col-la-8 ">
-					<form className="myForm m-5" onChange={handelChange} onSubmit={handleSubmit}>
+					<form className="myForm m-5" onChange={handleChange} onSubmit={handleSubmit}>
 						{submited && valied ? (
 							<div className="alert alert-success" role="alert">
 								This is a success alert—check it out!
 							</div>
 						) : null}
+						<div className="avatar-container">
+							{datos.img ? (
+								<img className="avatar" src={datos.img} />
+							) : (
+								<img
+									src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+									className="avatar"
+								/>
+							)}
+
+							<div className="overlay"> sube una foto </div>
+						</div>
+						<input type="file" name="img" className="hidenButton" />
 						<div className="row">
 							<div className="col-12">
 								<label value="validationServer01">Nombre de usuario</label>
