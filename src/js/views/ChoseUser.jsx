@@ -11,7 +11,7 @@ const ChoseUser = props => {
 	};
 	const handelOnPro = event => {
 		event.preventDefault();
-		props.history.push("/registroprofecional");
+		props.history.push("/registroPro");
 	};
 	return (
 		<div className="container">
