@@ -8,7 +8,7 @@ import context from "react-bootstrap/esm/AccordionContext";
 const SignUp = () => {
 	const { store, actions } = useContext(Context);
 	const [datos, setDatos] = useState({
-		userName: "",
+		username: "",
 		email: "",
 		password: "",
 		repeatPassword: "",
@@ -44,11 +44,11 @@ const SignUp = () => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.userName && datos.email && datos.password == datos.repeatPassword) {
+		if (datos.username && datos.email && datos.password == datos.repeatPassword) {
 			setValied(true);
 		}
 		setSubmited(true);
-		actions.regisetred(datos);
+		actions.registered(datos);
 	};
 
 	console.log(datos);
@@ -81,14 +81,14 @@ const SignUp = () => {
 							<div className="col-sm-12 col-md-10 col-la-8 form">
 								<label value="validationServer01">Nomber de usuario</label>
 								<input
-									name="userName"
+									name="username"
 									placeholder="Usuario"
-									value={datos.userName}
+									value={datos.username}
 									type="text"
 									className="form-control"
 									id="validationServer01"
 								/>
-								{submited && !datos.userName ? (
+								{submited && !datos.username ? (
 									<span className="errormsg">Escribe su nombre de usuario por favor</span>
 								) : null}
 								<br />
