@@ -11,13 +11,17 @@ export default function LogIn() {
 
 	const [validate, setValidate] = useState(false);
 
+	const handleChange = e => {
+		setState({ ...state, [e.target.name]: e.target.value });
+	};
+
 	const handleSubmit = event => {
 		event.preventDefault();
 		if (state.email && state.password != "") {
 			setValidate(true);
 		}
 	};
-
+	console.log(state.email);
 	return (
 		<div className="container">
 			<div className="navbar" />
@@ -28,7 +32,7 @@ export default function LogIn() {
 						<h3 className="h3"> Inicia sesion</h3>
 						<label className="label1"> Correo electronico</label>
 						<input className="form-control  " type="email" placeholder="Correo electronico" name="email" />
-						{sstate.email == "" && validate == false ? <span>ROJO</span> : null}
+						{state.email == "" && validate == false ? <span>ROJO</span> : null}
 						<br />
 						<label className="label2">Contraseña</label>
 						<input className="form-control" type="password" placeholder="Contraseña" name="password" />
