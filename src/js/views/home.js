@@ -1,7 +1,10 @@
 import React from "react";
-import "../../styles/home.scss";
-import Footer from "../Component/Footer.js";
+import { Trips } from "./Trips.jsx";
 
 export const Home = () => {
-	return <Footer />;
+	return (
+		<div>
+			<Trips />
+		</div>
+	);
 };
