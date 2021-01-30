@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     height: 40px;
-    background:linear-gradient( rgb(255, 255, 255),#2e8fd6,);
+    background:#2e8fd6,;
     bottom: 0px;
 }
 .enlaces{
@@ -13,4 +13,6 @@
 }
 .paddingLeft{
     padding-left: 10px;
+        color: white;
+
 }
