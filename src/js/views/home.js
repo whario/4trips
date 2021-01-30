@@ -1,7 +1,12 @@
 import React from "react";
-import "../../styles/home.scss";
+
 import LogIn from "../views/LogIn.js";
+import { Trips } from "./Trips.jsx";
 
 export const Home = () => {
-	return <LogIn />;
+	return (
+		<div>
+			<Trips />
+		</div>
+	);
 };

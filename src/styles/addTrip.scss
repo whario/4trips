@@ -1,0 +1,31 @@
+.addTrip{
+padding: 3%;    
+margin-top: 8%;
+border-left: 5px solid #1C6EA4;
+border-bottom:5px solid #1C6EA4 ;
+border-radius: 0px 40px 0px 40px;
+box-shadow: 0px 0px 10px 0px black;
+}
+.publicar{
+    background-color: #1C6EA4;
+    border-color: #1C6EA4;
+    position: relative;
+    margin: auto;
+    display: block;
+}
+.servicios{
+    margin-left: 6%;
+    margin-bottom: 2%;
+}
+.obligatorios{
+    color: gray;
+    font-size: small;
+    margin-left: 6%;
+    padding-bottom: 2%;
+}
+.oculto{
+    display: none;
+}
+.error{
+    color: red;
+}
