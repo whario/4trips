@@ -49,7 +49,7 @@ const SignUp = () => {
 		}
 		setSubmited(true);
 		actions.regisetred(datos);
-		window.location.reload("/perfil/Traveler");
+		window.location.reload("/iniciar/sesion");
 	};
 
 	console.log(datos);
@@ -67,7 +67,7 @@ const SignUp = () => {
 						<br />
 						<div className="avatar-container">
 							{datos.img ? (
-								<img className="avatar" src={datos.img} />
+								<img className="avatar-traveler" src={datos.img} />
 							) : (
 								<img
 									src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
@@ -80,7 +80,9 @@ const SignUp = () => {
 						<input type="file" name="img" className="hidenButton" />
 						<div className="row">
 							<div className="col-sm-12 col-md-10 col-la-8 form">
-								<label value="validationServer01">Nomber de usuario</label>
+								<label className="label" value="validationServer01">
+									Nomber de usuario
+								</label>
 								<input
 									name="userName"
 									placeholder="Usuario"
@@ -94,7 +96,9 @@ const SignUp = () => {
 								) : null}
 								<br />
 
-								<label value="validationServer01">Correo electronico</label>
+								<label className="label" value="validationServer01">
+									Correo electronico
+								</label>
 								<input
 									name="email"
 									placeholder="Correo electronico"
@@ -106,7 +110,9 @@ const SignUp = () => {
 									<span className="errormsg">Escribe su correo electronico por favor</span>
 								) : null}
 								<br />
-								<label value="validationServer01">Contraseña</label>
+								<label className="label" value="validationServer01">
+									Contraseña
+								</label>
 
 								<input
 									name="password"
@@ -119,7 +125,9 @@ const SignUp = () => {
 									<span className="errormsg">Escribe su contraseña por favor</span>
 								) : null}
 								<br />
-								<label value="validationServer01">Confirmacion de contraseña</label>
+								<label className="label" value="validationServer01">
+									Confirmacion de contraseña
+								</label>
 
 								<input
 									name="repeatPassword"
@@ -134,7 +142,7 @@ const SignUp = () => {
 							</div>
 						</div>
 						<br />
-						<button className="btn btn-primary " type="submit" value="sign up">
+						<button className="btn btn-primary btn-regiter-traveler " type="submit" value="sign up">
 							Registrar
 						</button>
 					</form>
