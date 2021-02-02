@@ -49,6 +49,7 @@ const SignUp = () => {
 		}
 		setSubmited(true);
 		actions.regisetred(datos);
+		window.location.reload("/perfil/Traveler");
 	};
 
 	console.log(datos);

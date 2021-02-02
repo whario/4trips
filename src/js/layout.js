@@ -23,7 +23,7 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/perfil/pro" component={PerfilPro} />
+					<Route exact path="/perfil/Traveler" component={PerfilPro} />
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />
