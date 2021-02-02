@@ -6,9 +6,10 @@ import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/addTrip.scss";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export const AddTrip = () => {
+export const AddTrip = props => {
 	const { store, actions } = useContext(Context);
 	const [trip, setTrip] = useState({
 		needs_trip: [],
@@ -60,10 +61,11 @@ export const AddTrip = () => {
 			let div = document.querySelector("#loading");
 			div.classList.remove("oculto");
 			div.classList.add("spinner-border");
-			actions.addTrip(trip);
-			setSubmited(true);
-			setSuccesfull(true);
-			//window.location.reload("/"); Descomentar cuando tengamos el backend conectado ya que ahí podrá refresh
+			if (actions.addTrip(trip)) {
+				setSubmited(true);
+				setSuccesfull(true);
+				props.history.push("/");
+			} else return; //crear otro divisor con mensaje de error
 		} else {
 			setSubmited(false);
 			setValied(false);
@@ -79,7 +81,9 @@ export const AddTrip = () => {
 								<div className="alert alert-success" role="alert">
 									<p className="P">Publicando viaje con éxito</p>
 								</div>
-							) : null}
+							) : (
+								""
+							)}
 							<div className="row">
 								<p className="servicios">¿Qué servicio o servicios buscas?</p>
 							</div>
@@ -189,4 +193,8 @@ export const AddTrip = () => {
 			</div>
 		</div>
 	);
+};
+
+AddTrip.propTypes = {
+	history: PropTypes.object
 };
