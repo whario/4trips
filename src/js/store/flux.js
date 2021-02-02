@@ -2,11 +2,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			tripList: [],
-			userInfoCollected: []
+			userInfoCollected: [],
+			profile: []
 		},
 		actions: {
-			regisetred: datos => {
-				setStore({ userInfoCollected: datos });
+			profile: datos => {
+				const profileCopy = getStore().profile;
+				setStore({ profile: datos });
 			},
 			addTrip: trip => {
 				const tripListCopy = getStore().tripList;

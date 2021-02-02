@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/SignUpPro.css";
-
+import { Context } from "../store/appContext";
 const SignUpPro = () => {
+	const { store, actions } = useContext(Context);
+
 	const [datos, setDatos] = useState({
 		userName: "",
 		email: "",
@@ -41,6 +43,7 @@ const SignUpPro = () => {
 		event.preventDefault();
 		if (datos.userName && datos.email && datos.password == datos.repeatPassword) {
 			setValied(true);
+			actions.profile(datos);
 		}
 		setSubmited(true);
 	};
