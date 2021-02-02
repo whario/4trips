@@ -7,6 +7,7 @@ import SignUpPro from "./views/SignUpPro";
 import { AddTrip } from "./views/AddTrip.jsx";
 import Navbar from "./Component/Navbar.js";
 import Footer from "./Component/Footer.jsx";
+import LogIn from "./views/LogIn";
 
 //create your first component
 const Layout = () => {
@@ -26,6 +27,7 @@ const Layout = () => {
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />
+					<Route exact path="/iniciar/sesion" component={LogIn} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
