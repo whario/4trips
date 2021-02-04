@@ -10,7 +10,12 @@ export const Trips = () => {
 	const { store, actions } = useContext(Context);
 
 	console.log("LOADING", store.tripList);
-
+	useEffect(
+		() => {
+			console.log(store.tripList.length, "en useffect");
+		},
+		[store.tripList] //espero a que haya cambios en la variable tripList con useEffect para hacer el mapeado
+	);
 	return (
 		<div className="container">
 			<div className="row">
@@ -33,9 +38,9 @@ export const Trips = () => {
 			</div>
 			<div className="container">
 				<div className="row">
-					{store.tripList.map((trip, index) => (
-						<TripCard key={index} trip={trip} />
-					))}
+					{store.tripList.length > 0
+						? store.tripList.map((trip, index) => <TripCard key={index} trip={trip} />)
+						: "no hay datos"}
 				</div>
 				<div className="row justify-content-center">
 					<div className="col-md-3 col-sm-12 masviajes">
