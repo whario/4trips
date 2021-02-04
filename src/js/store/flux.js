@@ -6,16 +6,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: []
 		},
 		actions: {
-			registered: async user => {
+			registered: (user, props) => {
 				const url = "https://3000-d6620844-473e-4005-a216-c78a8882d46d.ws-eu03.gitpod.io";
-				const res = await fetch(url + "/user/register/pro", {
+				fetch(url + "/user/register/pro", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: {
 						"Content-Type": "application/json"
 					}
-				});
-				console.log(await res);
+				})
+					.then(data => {
+						setTimeout(() => {
+							props.history.push("/iniciar/sesion");
+						});
+					}, 1000)
+					.catch(err => {
+						console.log(err);
+					});
 			},
 			addTrip: trip => {
 				const tripListCopy = getStore().tripList;

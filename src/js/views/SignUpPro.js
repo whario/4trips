@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
 import "../../styles/SignUpPro.css";
 import { Context } from "../store/appContext";
-const SignUpPro = () => {
+import PropTypes from "prop-types";
+
+const SignUpPro = props => {
 	const { store, actions } = useContext(Context);
 
 	const [datos, setDatos] = useState({
@@ -43,7 +45,7 @@ const SignUpPro = () => {
 		event.preventDefault();
 		if (datos.user_name && datos.email && datos.password == datos.repeatPassword) {
 			setValied(true);
-			actions.registered(datos);
+			actions.registered(datos, props);
 		}
 		setSubmited(true);
 	};
@@ -189,4 +191,8 @@ const SignUpPro = () => {
 		</div>
 	);
 };
+SignUpPro.propTypes = {
+	history: PropTypes.object
+};
+
 export default SignUpPro;
