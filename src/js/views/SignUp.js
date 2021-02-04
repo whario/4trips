@@ -8,7 +8,7 @@ import context from "react-bootstrap/esm/AccordionContext";
 const SignUp = () => {
 	const { store, actions } = useContext(Context);
 	const [datos, setDatos] = useState({
-		userName: "",
+		username: "",
 		email: "",
 		password: "",
 		repeatPassword: "",
@@ -48,8 +48,6 @@ const SignUp = () => {
 			setValied(true);
 		}
 		setSubmited(true);
-		actions.regisetred(datos);
-		window.location.reload("/iniciar/sesion");
 	};
 
 	console.log(datos);
