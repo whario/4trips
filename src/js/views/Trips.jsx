@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { TripCard } from "../Component/TripCard.jsx";
@@ -8,6 +8,7 @@ import { checkPropTypes } from "prop-types";
 
 export const Trips = () => {
 	const { store, actions } = useContext(Context);
+	const [page, setPage] = useState(1);
 
 	console.log("LOADING", store.tripList);
 	useEffect(
@@ -16,6 +17,12 @@ export const Trips = () => {
 		},
 		[store.tripList] //espero a que haya cambios en la variable tripList con useEffect para hacer el mapeado
 	);
+	const changePage = () => {
+		let newPage = page + 1;
+		console.log(newPage);
+		setPage(newPage);
+		actions.loadingTrips(page);
+	};
 	return (
 		<div className="container">
 			<div className="row">
@@ -42,12 +49,12 @@ export const Trips = () => {
 						? store.tripList.map((trip, index) => <TripCard key={index} trip={trip} />)
 						: "no hay datos"}
 				</div>
-				<div className="row justify-content-center">
-					<div className="col-md-3 col-sm-12 masviajes">
-						<Link className="btn btn-secondary btn-sm" to="">
-							Ver mas viajes
-						</Link>
-					</div>
+			</div>
+			<div className="row justify-content-center">
+				<div className="col-md-3 col-sm-12 masviajes">
+					<button className="btn btn-secondary btn-sm" onClick={changePage}>
+						Ver mas viajes
+					</button>
 				</div>
 			</div>
 		</div>

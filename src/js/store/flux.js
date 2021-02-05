@@ -28,10 +28,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				else return false;
 				console.log(response.status);
 			},
-			loadingTrips: data => {
-				fetch(URL + "viajes")
+			loadingTrips: page => {
+				const store = getStore();
+				console.log(store);
+				fetch(URL + "viajes" + "/" + page)
 					.then(res => res.json())
-					.then(data => setStore({ tripList: data.data }))
+					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
 					.catch(error => console.log(error));
 			}
 		}
