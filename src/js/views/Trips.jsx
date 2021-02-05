@@ -21,7 +21,7 @@ export const Trips = () => {
 		let newPage = page + 1;
 		console.log(newPage);
 		setPage(newPage);
-		actions.loadingTrips(page);
+		actions.loadingTrips(newPage);
 	};
 	return (
 		<div className="container">
@@ -50,11 +50,14 @@ export const Trips = () => {
 						: "no hay datos"}
 				</div>
 			</div>
-			<div className="row justify-content-center">
-				<div className="col-md-3 col-sm-12 masviajes">
-					<button className="btn btn-secondary btn-sm" onClick={changePage}>
-						Ver mas viajes
-					</button>
+			<div className="container" />
+			<div className="container">
+				<div className="row justify-content-center">
+					<div className="col-md-3 col-sm-12 masviajes">
+						<button className="btn btn-secondary btn-sm" onClick={changePage}>
+							Ver mas viajes
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

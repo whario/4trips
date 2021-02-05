@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadingTrips: page => {
 				const store = getStore();
-				console.log(store);
+				console.log(page, "pagina");
 				fetch(URL + "viajes" + "/" + page)
 					.then(res => res.json())
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
