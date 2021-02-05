@@ -47,14 +47,13 @@ export const Trips = () => {
 				<div className="row">
 					{store.tripList.length > 0
 						? store.tripList.map((trip, index) => <TripCard key={index} trip={trip} />)
-						: "no hay datos"}
+						: "cargando viajes..."}
 				</div>
 			</div>
-			<div className="container" />
 			<div className="container">
 				<div className="row justify-content-center">
 					<div className="col-md-3 col-sm-12 masviajes">
-						<button className="btn btn-secondary btn-sm" onClick={changePage}>
+						<button className="btn btn-secondary btn-sm showmore" onClick={changePage}>
 							Ver mas viajes
 						</button>
 					</div>
