@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/SignUpPro.css";
+import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 
-const SignUpPro = () => {
+const SignUpPro = props => {
+	const { store, actions } = useContext(Context);
+
 	const [datos, setDatos] = useState({
-		userName: "",
+		user_name: "",
 		email: "",
 		password: "",
 		repeatPassword: "",
-		phoneNumber: "",
+		phone: "",
 		url: "",
 		direction: "",
 		location: "",
-		cif: "",
-		razonSocial: ""
+		vat_number: "",
+		social_reason: ""
 	});
 	const handleChange = e => {
 		console.log("handels=ch");
@@ -39,8 +43,9 @@ const SignUpPro = () => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.userName && datos.email && datos.password == datos.repeatPassword) {
+		if (datos.user_name && datos.email && datos.password == datos.repeatPassword) {
 			setValied(true);
+			actions.registered(datos, props);
 		}
 		setSubmited(true);
 	};
@@ -72,14 +77,14 @@ const SignUpPro = () => {
 							<div className="col-12">
 								<label value="validationServer01">Nombre de usuario</label>
 								<input
-									name="userName"
-									value={datos.userName}
+									name="user_name"
+									value={datos.user_name}
 									type="text"
 									className="form-control"
 									id="validationServer01"
 									placeholder="Nombre de usuario"
 								/>
-								{submited && !datos.userName ? (
+								{submited && !datos.user_name ? (
 									<span>Escribe su nombre de usuario por favor</span>
 								) : null}
 								<br />
@@ -117,13 +122,13 @@ const SignUpPro = () => {
 								<br />
 								<label value="validationServer01">Numero de telefono </label>
 								<input
-									name="phoneNumber"
+									name="phone"
 									placeholder="numero de telefono"
 									type="tel"
 									className="form-control"
-									value={datos.phoneNumber}
+									value={datos.phone}
 								/>
-								{submited && !datos.phoneNumber ? (
+								{submited && !datos.phone ? (
 									<span>Escribe su numero de tefelono por favor </span>
 								) : null}
 								<br />
@@ -158,21 +163,21 @@ const SignUpPro = () => {
 								<br />
 								<label value="validationServer01">CIF de empresa (opcional)</label>
 								<input
-									name="cif"
-									placeholder="CIF"
+									name="vat_number"
+									placeholder="vat_number"
 									type="text"
 									className="form-control"
-									value={datos.cif}
+									value={datos.vat_number}
 								/>
 
 								<label value="validationServer01">Razon social (opcional)</label>
 
 								<input
-									name="razonSocial"
+									name="social_reason"
 									placeholder="Razon social"
 									type="text"
 									className="form-control"
-									value={datos.razonSocial}
+									value={datos.social_reason}
 								/>
 							</div>
 						</div>
@@ -186,4 +191,8 @@ const SignUpPro = () => {
 		</div>
 	);
 };
+SignUpPro.propTypes = {
+	history: PropTypes.object
+};
+
 export default SignUpPro;
