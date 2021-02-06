@@ -7,14 +7,14 @@ const Navbar = () => {
 		<div>
 			{" "}
 			<nav className="navbar navbar">
-				<img src={logotipo} className="logo" />
+				<img src={logotipo} className="logo" href="/" />
 				<form className="form-inline search-btn">
 					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-					<Link to="/registroviajero" className="btn  my-2 my-sm-0 btnRegistroLogin">
+					<Link to="/elige/tipo/deusuario" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
 						Registre{" "}
 					</Link>
-					<Link to="/registroPro" className="btn  my-2 my-sm-0 btnRegistroLogin">
+					<Link to="/iniciar/sesion" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
 						Log in{" "}
 					</Link>
