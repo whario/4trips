@@ -1,14 +1,11 @@
 body{
     background-color: gainsboro;}
-.avatar{
-    right: 1px;
-    position: relative;
+    
+.avatar-traveler{
     border-radius: 50%;
     width: 100%;
-    height: auto;
-    background: white;
-    top: 9px;
-    height: 200px;
+    height: 220px;
+    padding: 0;
 
 }
 .hoveron{
@@ -60,9 +57,15 @@ body{
 .hidenButton:hover .overlay {
   opacity: 1;
 }
-.btn{
+.btn-regiter-traveler {
     width: 50%;
+    position: relative;
+    left: 24%;
 }
 .form{
     margin: auto;
+}
+.label{
+    position: relative;
+    left: 8%;
 }
