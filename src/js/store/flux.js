@@ -10,6 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userInfoCollected: datos });
 			},
 			addTrip: async trip => {
+				const token =
+					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQHRyYXZlbGVyLmNvbSIsInJvbCI6IlRyYXZlbGVyIiwiaWQiOjMsImV4cCI6MTYxMjYxMDEzNn0.yP-RaA7z8wcdt60_VAOrSjF_LyhcDUyDquvNb1NpwK4";
 				let newNeedsTrip = ""; //convierto el array needs_trip en string para que lo pueda recoger el backend
 				for (let i = 0; i < trip.needs_trip.length; i++) {
 					newNeedsTrip += trip.needs_trip[i] + ",";
@@ -19,8 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "POST",
 					body: JSON.stringify(trip),
 					headers: {
-						Authorization:
-							"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQHRyYXZlbGVyLmNvbSIsInJvbCI6IlRyYXZlbGVyIiwiaWQiOjMsImV4cCI6MTYxMjQ2NjI4OX0.3S0Iizx3QheepxYGog0YlVrg8gmAJSymSTqQY7yCUWw",
+						Authorization: "Bearer " + token, //tengo que hacer espacio despues de Bearer para que pueda funcionar el split
 						"Content-Type": "application/json"
 					}
 				});
