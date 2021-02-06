@@ -10,7 +10,6 @@ import "../../styles/trips.scss";
 
 export const TripCard = props => {
 	const { store, actions } = useContext(Context);
-	console.log(props, "props");
 	const logos = {
 		//creo un nuevo objeto cuyas keys coinciden con los valores del array que me devuelve props.trip.needs_trip, de modo que cuando hago un mapeo en linea 48 y coincide me devuelve el valor de la key del objeto que es la imagen
 		sleep: logoAloj,
@@ -18,6 +17,10 @@ export const TripCard = props => {
 		bbq: logoBbq,
 		adventure: logoMultia,
 		relax: logoPiscina
+	};
+	const formatDay = day => {
+		let newFormatDay = new Date(day);
+		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
 	return (
 		<div className="col-md-4 col-sm-1">
@@ -37,9 +40,9 @@ export const TripCard = props => {
 						<li className="list-group-item">
 							<div className="row">
 								Desde:
-								<div className="props">{props.trip.first_day}</div>
+								<div className="props">{formatDay(props.trip.first_day)}</div>
 								Hasta:
-								<div className="props">{props.trip.last_day}</div>
+								<div className="props">{formatDay(props.trip.last_day)}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
