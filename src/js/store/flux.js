@@ -3,11 +3,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			tripList: [],
-			userInfoCollected: []
+			userInfoCollected: [],
+			profile: []
 		},
 		actions: {
-			regisetred: datos => {
-				setStore({ userInfoCollected: datos });
+			registered: (user, props) => {
+				fetch(URL + "/user/register/pro", {
+					method: "POST",
+					body: JSON.stringify(user),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(data => {
+						setTimeout(() => {
+							props.history.push("/iniciar/sesion");
+						});
+					}, 1000)
+					.catch(err => {
+						console.log(err);
+					});
 			},
 			addTrip: async trip => {
 				const token =
@@ -27,7 +42,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				if (response.status == 200) return true;
 				else return false;
-				console.log(response.status);
 			},
 			loadingTrips: page => {
 				const store = getStore();
