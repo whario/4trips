@@ -8,8 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			registered: (user, props) => {
-				const url = "https://3000-d6620844-473e-4005-a216-c78a8882d46d.ws-eu03.gitpod.io";
-				fetch(url + "/user/register/pro", {
+				fetch(URL + "/user/register/pro", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: {
@@ -26,6 +25,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			addTrip: async trip => {
+				const token =
+					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQHRyYXZlbGVyLmNvbSIsInJvbCI6IlRyYXZlbGVyIiwiaWQiOjMsImV4cCI6MTYxMjYxMDEzNn0.yP-RaA7z8wcdt60_VAOrSjF_LyhcDUyDquvNb1NpwK4";
 				let newNeedsTrip = ""; //convierto el array needs_trip en string para que lo pueda recoger el backend
 				for (let i = 0; i < trip.needs_trip.length; i++) {
 					newNeedsTrip += trip.needs_trip[i] + ",";
@@ -35,14 +36,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "POST",
 					body: JSON.stringify(trip),
 					headers: {
-						Authorization:
-							"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQHRyYXZlbGVyLmNvbSIsInJvbCI6IlRyYXZlbGVyIiwiaWQiOjMsImV4cCI6MTYxMjQ2NjI4OX0.3S0Iizx3QheepxYGog0YlVrg8gmAJSymSTqQY7yCUWw",
+						Authorization: "Bearer " + token, //tengo que hacer espacio despues de Bearer para que pueda funcionar el split
 						"Content-Type": "application/json"
 					}
 				});
 				if (response.status == 200) return true;
 				else return false;
-				console.log(response.status);
 			},
 			loadingTrips: page => {
 				const store = getStore();
