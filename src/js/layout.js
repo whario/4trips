@@ -27,7 +27,7 @@ const Layout = () => {
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />
-					<Route exact path="/eligetopdeusuario" component={ChoseUser} />
+					<Route exact path="/elige/tipo/deusuario" component={ChoseUser} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
