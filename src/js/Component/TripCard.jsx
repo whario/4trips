@@ -6,13 +6,11 @@ import logoMultia from "../../img/actividadesicon.png";
 import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
-import "../../styles/index.scss";
+import "../../styles/trips.scss";
 
 export const TripCard = props => {
 	const { store, actions } = useContext(Context);
-	console.log(props.trip, "props.trip");
 	console.log(props, "props");
-	console.log(props.trip.needs_trip, "props.trip.needs_trip");
 	const logos = {
 		//creo un nuevo objeto cuyas keys coinciden con los valores del array que me devuelve props.trip.needs_trip, de modo que cuando hago un mapeo en linea 48 y coincide me devuelve el valor de la key del objeto que es la imagen
 		sleep: logoAloj,

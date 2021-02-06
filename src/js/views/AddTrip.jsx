@@ -6,9 +6,11 @@ import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/addTrip.scss";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export const AddTrip = () => {
+export const AddTrip = props => {
+	//usos porps para acceder a history y poder hacer el redireccionamiento
 	const { store, actions } = useContext(Context);
 	const [trip, setTrip] = useState({
 		needs_trip: [],
@@ -19,7 +21,7 @@ export const AddTrip = () => {
 	});
 	const [submited, setSubmited] = useState(false); //para evitar mandar formularios vacíos
 	const [valied, setValied] = useState(true); //para mostrar mensajes de error en campos vacíos
-	const [succesfull, setSuccesfull] = useState(false); //para mostrar mensaje de éxito al enviar
+	const [succesfull, setSuccesfull] = useState(true); //para mostrar mensaje de éxito al enviar
 
 	const needs = () => {
 		//uso esta función para añadir o borrar elementos del array needs_trip
@@ -58,13 +60,19 @@ export const AddTrip = () => {
 		) {
 			console.log("ejecutando submit");
 			let div = document.querySelector("#loading");
-			div.classList.remove("oculto");
-			div.classList.add("spinner-border");
-			actions.addTrip(trip);
-			setSubmited(true);
-			setSuccesfull(true);
-			//window.location.reload("/"); Descomentar cuando tengamos el backend conectado ya que ahí podrá refresh
+			if (actions.addTrip(trip)) {
+				setSubmited(true);
+				setSuccesfull(true);
+				div.classList.remove("oculto");
+				div.classList.add("spinner-border");
+				props.history.push("/");
+			} else {
+				setSuccesfull(false);
+				div.classList.remove("oculto");
+				div.classList.add("alert alert-danger");
+			}
 		} else {
+			setSuccesfull(false);
 			setSubmited(false);
 			setValied(false);
 		}
@@ -75,34 +83,41 @@ export const AddTrip = () => {
 				<div className="col-md-6 offset-md-3">
 					<div className="addTrip">
 						<form onChange={handleChange} onSubmit={handleSubmit}>
-							{succesfull == true ? (
-								<div className="alert alert-success" role="alert">
-									<p className="P">Publicando viaje con éxito</p>
+							{succesfull == false ? (
+								<div className="alert alert-danger" role="alert">
+									<p className="P">El viaje no se ha podido publicar</p>
 								</div>
-							) : null}
+							) : (
+								""
+							)}
 							<div className="row">
 								<p className="servicios">¿Qué servicio o servicios buscas?</p>
 							</div>
 							<div className="d-flex justify-content-center">
 								<div className="form-check form-check-inline m-0">
 									<img src={logoAloj} title="alojamiento" />
-									<input value="sleep" type="checkbox" className="form-check-input" name="sleep" />
+									<input
+										defaultValue="sleep"
+										type="checkbox"
+										className="form-check-input"
+										name="sleep"
+									/>
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoComida} title="comer" />
-									<input value="eat" type="checkbox" className="form-check-input" name="eat" />
+									<input defaultValue="eat" type="checkbox" className="form-check-input" name="eat" />
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoBbq} title="jardín/barbacoa" />
-									<input value="bbq" type="checkbox" className="form-check-input" name="bbq" />
+									<input defaultValue="bbq" type="checkbox" className="form-check-input" name="bbq" />
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoMultia} title="multiaventura" />
 									<input
-										value="adventure"
+										defaultValue="adventure"
 										type="checkbox"
 										className="form-check-input"
 										name="adventure"
@@ -111,71 +126,88 @@ export const AddTrip = () => {
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoPiscina} title="piscina/jacuzzi" />
-									<input value="relax" type="checkbox" className="form-check-input" name="relax" />
+									<input
+										defaultValue="relax"
+										type="checkbox"
+										className="form-check-input"
+										name="relax"
+									/>
 									<label className="form-check-label" />
 								</div>
 							</div>
-							{valied == false && trip.needs_trip.length == 0 ? (
-								<span>Marca al menos una opción</span>
-							) : null}
+							<div className="form-group m-3">
+								{valied == false && trip.needs_trip.length == 0 ? (
+									<span className="error">Marca al menos una opción</span>
+								) : null}
+							</div>
 							<div className="form-group m-3">
 								<label>Destino/s</label>
 								<input
-									value={trip.destination}
+									defaultValue={trip.destination}
 									type="text"
 									className="form-control"
 									placeholder="Destino/s"
 									name="destination"
 								/>
-								{valied == false && !trip.destination ? <span>Escribe al menos un destino</span> : null}
+								{valied == false && !trip.destination ? (
+									<span className="error">Escribe al menos un destino</span>
+								) : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Fecha de entrada</label>
 								<input
-									value={trip.first_day}
+									defaultValue={trip.first_day}
 									type="date"
 									className="form-control"
 									placeholder="Fecha de entrada"
 									name="first_day"
 								/>
-								{valied == false && !trip.first_day ? <span>Escribe una fecha de entrada</span> : null}
+								{valied == false && !trip.first_day ? (
+									<span className="error">Escribe una fecha de entrada</span>
+								) : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Fecha de salida</label>
 								<input
-									value={trip.last_day}
+									defaultValue={trip.last_day}
 									type="date"
 									className="form-control"
 									placeholder="Fecha de salida"
 									name="last_day"
 								/>
-								{valied == false && !trip.last_day ? <span>Escribe una fecha de salida</span> : null}
+								{valied == false && !trip.last_day ? (
+									<span className="error">Escribe una fecha de salida</span>
+								) : null}
 							</div>
 							<div className="form-group m-3">
 								<label>Descripción</label>
 								<textarea
-									value={trip.description}
+									defaultValue={trip.description}
 									type="text"
 									className="form-control"
 									placeholder="Describe tu viaje. ¿Qué quieres hacer, cuántas personas...?"
 									name="description"
 								/>
 								{valied == false && !trip.description ? (
-									<span>Escribe una descripción de lo que estás buscando</span>
+									<span className="error">Escribe una descripción de lo que estás buscando</span>
 								) : null}
 							</div>
-							<button type="submit" className="btn btn-primary center">
+							<div className="row">
+								<div className="obligatorios">Todos los campos son obligatorios</div>
+							</div>
+							<button type="submit" className="btn btn-primary center publicar">
 								publicar viaje
 								<span> </span>
 								<div className="oculto" id="loading" />
 							</button>
-							<Link className="mt-3 w-100 text-center" to="/">
-								volver a home
-							</Link>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	);
+};
+
+AddTrip.propTypes = {
+	history: PropTypes.object //empleo props history para hacrer el redireccionamiento a home tras añadir u trip
 };

@@ -12,10 +12,6 @@ const Footer = () => {
 						</a>
 						<a className="paddingLeft" href="">
 							{" "}
-							Cómo funciona 4Trips{" "}
-						</a>
-						<a className="paddingLeft" href="">
-							{" "}
 							Politica de privacidad{" "}
 						</a>
 					</div>
