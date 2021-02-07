@@ -83,7 +83,7 @@ const SignUp = () => {
 								</label>
 								<input
 									name="userName"
-									placeholder="Usuario"
+									placeholder="Nombre de usuario"
 									value={datos.userName}
 									type="text"
 									className="form-control"
@@ -99,7 +99,7 @@ const SignUp = () => {
 								</label>
 								<input
 									name="email"
-									placeholder="Correo electronico"
+									placeholder="Email"
 									type="email"
 									className="form-control"
 									value={datos.email}
@@ -129,7 +129,7 @@ const SignUp = () => {
 
 								<input
 									name="repeatPassword"
-									placeholder="Repite contraseña"
+									placeholder="Repite tu contraseña"
 									type="password"
 									className="form-control"
 									value={datos.repeatPassword}

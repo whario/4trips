@@ -99,7 +99,7 @@ const SignUpPro = props => {
 								<label value="validationServer01">Contraseña</label>
 								<input
 									name="password"
-									placeholder="Password"
+									placeholder="Contraseña"
 									type="password"
 									className="form-control"
 									value={datos.password}
@@ -109,7 +109,7 @@ const SignUpPro = props => {
 								<label value="validationServer01">Repite tu contraseña </label>
 								<input
 									name="repeatPassword"
-									placeholder="Confirm password"
+									placeholder="Repite tu contraseña"
 									type="password"
 									className="form-control"
 									value={datos.repeatPassword}
@@ -121,7 +121,7 @@ const SignUpPro = props => {
 								<label value="validationServer01">Número de telefono </label>
 								<input
 									name="phone"
-									placeholder="numero de telefono"
+									placeholder="número de telefono"
 									type="tel"
 									className="form-control"
 									value={datos.phone}
@@ -140,7 +140,7 @@ const SignUpPro = props => {
 								<label value="validationServer01">Dirección</label>
 								<input
 									name="direction"
-									placeholder="Direccion"
+									placeholder="Dirección"
 									type="text"
 									className="form-control"
 									value={datos.dierction}
@@ -157,10 +157,10 @@ const SignUpPro = props => {
 								/>
 								{submited && !datos.location ? <span>Introduce una localidad</span> : null}
 								<br />
-								<label value="validationServer01">CIF de empresa (opcional)</label>
+								<label value="validationServer01">CIF(opcional)</label>
 								<input
 									name="vat_number"
-									placeholder="vat_number"
+									placeholder="CIF"
 									type="text"
 									className="form-control"
 									value={datos.vat_number}
@@ -170,7 +170,7 @@ const SignUpPro = props => {
 
 								<input
 									name="social_reason"
-									placeholder="Razon social"
+									placeholder="Razón social"
 									type="text"
 									className="form-control"
 									value={datos.social_reason}
