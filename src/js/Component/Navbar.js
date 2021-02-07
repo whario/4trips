@@ -11,14 +11,19 @@ const Navbar = () => {
 					<img src={logotipo} className="logo" />
 				</Link>
 				<form className="form-inline search-btn">
-					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+					<input
+						className="form-control mr-sm-2"
+						type="search"
+						placeholder="Buscar viajes"
+						aria-label="Search"
+					/>
 					<Link to="/elige/tipo/deusuario" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
-						Registre{" "}
+						Registro{" "}
 					</Link>
 					<Link to="/iniciar/sesion" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
-						Log in{" "}
+						Login{" "}
 					</Link>
 				</form>
 			</nav>
