@@ -22,7 +22,7 @@ const Navbar = () => {
 							{" "}
 							Registro{" "}
 						</Link>
-						<Link to="/iniciar/sesion" className="btn  my-2 my-sm-0 btnRegistroLogin">
+						<Link to="/login" className="btn  my-2 my-sm-0 btnRegistroLogin">
 							{" "}
 							Login{" "}
 						</Link>
