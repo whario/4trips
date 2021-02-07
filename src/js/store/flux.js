@@ -7,8 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: []
 		},
 		actions: {
-			registered: (user, props) => {
-				fetch(URL + "/user/register/pro", {
+			register: (user, props) => {
+				const url = "https://3000-d6620844-473e-4005-a216-c78a8882d46d.ws-eu03.gitpod.io";
+				fetch(url + "/user/register/pro", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: {

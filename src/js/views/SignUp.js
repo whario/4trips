@@ -124,7 +124,7 @@ const SignUp = () => {
 								) : null}
 								<br />
 								<label className="label" value="validationServer01">
-									Confirmacion de contraseña
+									Repite tu contraseña
 								</label>
 
 								<input

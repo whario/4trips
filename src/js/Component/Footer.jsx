@@ -12,7 +12,7 @@ const Footer = () => {
 						</a>
 						<a className="paddingLeft" href="">
 							{" "}
-							Politica de privacidad{" "}
+							Política de privacidad{" "}
 						</a>
 					</div>
 				</div>

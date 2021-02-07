@@ -45,7 +45,7 @@ const SignUpPro = props => {
 		event.preventDefault();
 		if (datos.user_name && datos.email && datos.password == datos.repeatPassword) {
 			setValied(true);
-			actions.registered(datos, props);
+			actions.register(datos, props);
 		}
 		setSubmited(true);
 	};
@@ -84,9 +84,7 @@ const SignUpPro = props => {
 									id="validationServer01"
 									placeholder="Nombre de usuario"
 								/>
-								{submited && !datos.user_name ? (
-									<span>Escoge un nombre de usuario</span>
-								) : null}
+								{submited && !datos.user_name ? <span>Escoge un nombre de usuario</span> : null}
 								<br />
 								<label value="validationServer01">Correo electronico</label>
 								<input
@@ -108,7 +106,7 @@ const SignUpPro = props => {
 								/>
 								{submited && !datos.password ? <span>Introduce una contraseña</span> : null}
 								<br />
-								<label value="validationServer01">Confirma tu contraseña </label>
+								<label value="validationServer01">Repite tu contraseña </label>
 								<input
 									name="repeatPassword"
 									placeholder="Confirm password"
@@ -128,9 +126,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.phone}
 								/>
-								{submited && !datos.phone ? (
-									<span>Introduce un teléfono de contacto</span>
-								) : null}
+								{submited && !datos.phone ? <span>Introduce un teléfono de contacto</span> : null}
 								<br />
 								<label value="validationServer01">URL de tu página web</label>
 								<input
