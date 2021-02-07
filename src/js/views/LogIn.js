@@ -42,8 +42,7 @@ export default function LogIn() {
 						className="myFormLogIn justify-content-center"
 						onSubmit={handleSubmit}
 						onChange={handleChange}>
-						<img className="logo4Trip" src={logo4Trips} />
-						<h3 className="h3"> Inicia sesion</h3>
+						<h3 className="title"> Inicia sesion</h3>
 						<label className="label1"> Email</label>
 						<input className="form-control  " type="email" placeholder="Email" name="email" />
 						{error.email != "" ? <span className="msg-error-login"> {error.email} </span> : null}
@@ -52,9 +51,15 @@ export default function LogIn() {
 						<input className="form-control" type="password" placeholder="Contraseña" name="password" />
 						{error.password != "" ? <span className="msg-error-login"> {error.password} </span> : null}
 						<br />
-						<p>
-							No tienes cuenta. Crea gratis una <Link to="/elige/tipo/deusuario">aquí</Link>
-						</p>
+						<div className="container">
+							<div className="row justify-content-center">
+								<div className="newaccount">
+									<p>
+										No tienes cuenta. Crea gratis una <Link to="/elige/tipo/deusuario">aquí</Link>
+									</p>
+								</div>
+							</div>
+						</div>
 						<button type="submit" className="btn btn-primary btn-block btn-login">
 							Iniciar sesion
 						</button>
