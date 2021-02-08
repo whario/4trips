@@ -8,8 +8,8 @@ import { AddTrip } from "./views/AddTrip.jsx";
 import ChoseUser from "./views/ChoseUser.jsx";
 import Navbar from "./Component/Navbar.js";
 import Footer from "./Component/Footer.jsx";
-import { PerfilPro } from "./Component/PerfilPro.jsx";
 import LogIn from "./views/LogIn";
+import { TravelerProfil } from "./Component/TravelerProfil.jsx";
 
 //create your first component
 const Layout = () => {
@@ -25,7 +25,7 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/perfil/Traveler" component={PerfilPro} />
+					<Route exact path="/perfil/Traveler" component={TravelerProfil} />
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />

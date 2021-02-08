@@ -48,9 +48,9 @@ const SignUp = props => {
 			setValied(true);
 		}
 		setSubmited(true);
-		actions.registeredTraveler(datos, props);
+		actions.regusteredTraveler(datos, props);
 	};
-
+	//const input = document.getElementById('file');
 	console.log(datos);
 	return (
 		<div className="container ">
@@ -76,7 +76,7 @@ const SignUp = props => {
 
 							<div className="overlay"> sube una foto </div>
 						</div>
-						<input type="file" name="img" className="hidenButton" />
+						<input type="file" name="img" className="hidenButton" id="file" />
 						<div className="row">
 							<div className="col-sm-12 col-md-10 col-la-8 form">
 								<label className="label" value="validationServer01">
