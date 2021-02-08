@@ -1,0 +1,70 @@
+.needs{
+    width: 45px;
+    height: 45px;
+}
+.espaciador{
+    height: 20px;
+}
+.ultimos{
+    padding: 3%;
+    width: 100%;
+    color: #1C6EA4;
+    font-weight: bold;
+}
+.blue{
+    background-color: #1C6EA4;
+    color: white;
+    font-weight: bold;
+}
+.numero{
+    background-color: white;
+    color: #1C6EA4;
+    font-weight: bolder;
+    text-align: center;
+    border-radius: 100%;
+    z-index: 100;
+    float: right;
+    width: 13%;
+}
+.props{
+    color: #1C6EA4;
+    font-weight: bolder;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+.description{
+    font-weight: normal;
+    margin: 0%;
+}
+.card-footer{
+    display: flex;
+    justify-content: space-around;
+}
+.avatar{
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 1.25rem;
+    width: 100%;
+    display: flex;
+}
+.card-title{
+    margin-left: 40%;
+}
+.publicar{
+    background-color: #1C6EA4;
+    border-color: #1C6EA4;
+    position: relative;
+    margin-top: 5%;
+    display: block;
+}
+.masviajes{
+    text-align: center;
+    margin-top: 2%;
+}
+.showmore{
+    position: relative;
+    bottom: 20px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+
+}

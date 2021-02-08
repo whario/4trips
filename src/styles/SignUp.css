@@ -1,14 +1,11 @@
 body{
     background-color: gainsboro;}
-.avatar{
-     right: 1px;
-    position: relative;
+    
+.avatar-traveler{
     border-radius: 50%;
     width: 100%;
-    height: auto;
-    background: white;
-    top: 9px;
-
+    height: 220px;
+    padding: 0;
 }
 .hoveron{
     color: red;
@@ -20,26 +17,25 @@ body{
   text-align: center;
 }
 .avatar-container {
-      position: relative;
+    position: relative;
     width: 250px;
     border-radius: 50%;
     overflow: hidden;
     margin: auto;
 }
-.overlay {
-  position: absolute; 
-  bottom: 0; 
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1; 
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
-
+.overlay{
+    position: absolute; 
+    bottom: 0; 
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1; 
+    width: 100%;
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
 }
 .avatar-container:hover .overlay {
   opacity: 1;
@@ -57,11 +53,17 @@ body{
 }
 
 .hidenButton:hover .overlay {
-  opacity: 1;
+    opacity: 1;
 }
-.btn{
+.btn-regiter-traveler{
     width: 50%;
+    position: relative;
+    left: 24%;
 }
 .form{
     margin: auto;
+}
+.label{
+    position: relative;
+    left: 8%;
 }
