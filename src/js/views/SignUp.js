@@ -5,7 +5,7 @@ import bootstrap from "react-bootstrap";
 import context from "react-bootstrap/esm/AccordionContext";
 ///Componentes
 
-const SignUp = () => {
+const SignUp = props => {
 	const { store, actions } = useContext(Context);
 	const [datos, setDatos] = useState({
 		username: "",
@@ -48,6 +48,7 @@ const SignUp = () => {
 			setValied(true);
 		}
 		setSubmited(true);
+		actions.registeredTraveler(datos, props);
 	};
 
 	console.log(datos);
