@@ -48,7 +48,7 @@ const SignUp = props => {
 			setValied(true);
 		}
 		setSubmited(true);
-		actions.regusteredTraveler(datos, props);
+		actions.registeredTraveler(datos, props);
 	};
 	//const input = document.getElementById('file');
 	console.log(datos);

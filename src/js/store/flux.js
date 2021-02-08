@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profilTraveler: traveler => {
 				console.log("cualequecosa");
 				const token =
-					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsMkBlbWFpbC5jb20iLCJyb2wiOiJUcmF2ZWxlciIsImlkIjoxOCwiZXhwIjoxNjEyODA5OTA0fQ._112JkxJ3k4k-2VZgx-iQHcjwWtKo2oHeN9kliF8DTE";
+					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsMjFAZW1haWwuY29tIiwicm9sIjoiVHJhdmVsZXIiLCJpZCI6MjAsImV4cCI6MTYxMjgyMDczM30.0U2eQ3KExXUpXbK0fN_GEjoo2PduGcVSa1knT_n5O74";
 				//localStorage.getItem("token");
 				const store = getStore();
 				fetch(URL + "traveler", {

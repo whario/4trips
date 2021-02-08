@@ -9,5 +9,10 @@ export const TravelerProfil = () => {
 		console.log("texto2");
 		actions.profilTraveler();
 	}, []);
-	return <div>{store.travelerInfoCollected.username}</div>;
+	return (
+		<div>
+			<h1>{store.travelerInfoCollected.username}</h1>
+			<h1>{store.travelerInfoCollected.email} </h1>
+		</div>
+	);
 };
