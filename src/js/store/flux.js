@@ -7,8 +7,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: []
 		},
 		actions: {
+			login: async body => {
+				try {
+					fetch(URL + "login", {
+						method: "POST",
+						body: JSON.stringify(body), //este es el body que paso al passwor para validar el login
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+					console.log(res);
+				} catch (err) {
+					console.log(err);
+				}
+			},
 			register: (user, props) => {
-				fetch(URL + "/user/register/pro", {
+				fetch(URL + "user/register/pro", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: {

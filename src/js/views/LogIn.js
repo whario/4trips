@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/Login.css";
 import logo4Trips from "../../img/logo_4Trips.png";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export default function LogIn() {
+	const { store, actions } = useContext(Context);
 	const [state, setState] = useState({
 		email: "",
 		password: ""
@@ -17,7 +19,7 @@ export default function LogIn() {
 		password: ""
 	});
 
-	const handleChange = e => {
+	const handelChange = e => {
 		setState({ ...state, [e.target.name]: e.target.value });
 		if (state.email != "") {
 			setError({ ...error, email: "" });
@@ -26,12 +28,12 @@ export default function LogIn() {
 		}
 	};
 
-	const handleSubmit = event => {
+	const handelSubmit = event => {
 		event.preventDefault();
 		console.log(state.email, "state.email");
 		if (state.email == "" && state.password == "") {
 			setError({ ...error, email: "Introduce tu email", password: "Introduce tu contraseña" });
-		}
+		} else actions.login(state);
 	};
 
 	return (
@@ -40,8 +42,8 @@ export default function LogIn() {
 				<div className="col-12 col-md-6 ">
 					<form
 						className="myFormLogIn justify-content-center"
-						onSubmit={handleSubmit}
-						onChange={handleChange}>
+						onSubmit={handelSubmit}
+						onChange={handelChange}>
 						<h3 className="title"> Inicia sesion</h3>
 						<label className="label1"> Email</label>
 						<input className="form-control  " type="email" placeholder="Email" name="email" />
