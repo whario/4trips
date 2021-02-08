@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			login: async body => {
 				try {
-					fetch(URL + "login", {
+					const res = await fetch(URL + "login", {
 						method: "POST",
 						body: JSON.stringify(body), //este es el body que paso al passwor para validar el login
 						headers: {
