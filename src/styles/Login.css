@@ -46,4 +46,7 @@ body{
     text-align: center;
     margin-bottom: 2%;
 }
+.oculto{
+    display: none;
+}
         

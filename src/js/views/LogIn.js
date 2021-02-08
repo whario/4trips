@@ -4,8 +4,9 @@ import logo4Trips from "../../img/logo_4Trips.png";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 
-export default function LogIn() {
+export default function LogIn(props) {
 	const { store, actions } = useContext(Context);
 	const [state, setState] = useState({
 		email: "",
@@ -30,10 +31,16 @@ export default function LogIn() {
 
 	const handelSubmit = event => {
 		event.preventDefault();
+		let div = document.querySelector("#loading");
 		console.log(state.email, "state.email");
 		if (state.email == "" && state.password == "") {
 			setError({ ...error, email: "Introduce tu email", password: "Introduce tu contraseña" });
-		} else actions.login(state);
+		} else {
+			actions.login(state);
+			div.classList.remove("oculto");
+			div.classList.add("spinner-border");
+			props.history.push("/");
+		}
 	};
 
 	return (
@@ -64,6 +71,8 @@ export default function LogIn() {
 						</div>
 						<button type="submit" className="btn btn-primary btn-block btn-login">
 							Iniciar sesion
+							<span />
+							<div className="oculto" id="loading" />
 						</button>
 					</form>
 				</div>
@@ -71,3 +80,7 @@ export default function LogIn() {
 		</div>
 	);
 }
+
+LogIn.propTypes = {
+	history: PropTypes.object
+};
