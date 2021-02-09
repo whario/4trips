@@ -15,8 +15,10 @@ export const TravelerProfil = () => {
 			<div className="img-container">
 				<img className="avatar-traveler" src={store.travelerInfoCollected.avatar} />
 			</div>
-			<h1 className="username-traveler">{store.travelerInfoCollected.username}</h1>
-			<h1>{store.travelerInfoCollected.email}</h1>
+			<div className="traveler-data">
+				<h1 className="username-traveler">{store.travelerInfoCollected.username}</h1>
+				<h1>{store.travelerInfoCollected.email}</h1>
+			</div>
 		</div>
 	);
 };

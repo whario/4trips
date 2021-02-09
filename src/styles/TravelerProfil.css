@@ -1,3 +1,11 @@
 .avatar-traveler{
     border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+.traveler-data{
+    text-align: center;
+}
+.img-container{
+    text-align: center;
 }
