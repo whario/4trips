@@ -3,8 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			tripList: [],
-			travelerInfoCollected: [],
-			proInfoCollected: [],
+			travelerInfoCollected: {},
+			proInfoCollected: {},
 			profile: []
 		},
 		actions: {
@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profilTraveler: traveler => {
 				console.log("cualequecosa");
 				const token =
-					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsMjFAZW1haWwuY29tIiwicm9sIjoiVHJhdmVsZXIiLCJpZCI6MjAsImV4cCI6MTYxMjgyMDczM30.0U2eQ3KExXUpXbK0fN_GEjoo2PduGcVSa1knT_n5O74";
+					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsMjFAZW1haWwuY29tIiwicm9sIjoiVHJhdmVsZXIiLCJpZCI6MjAsImV4cCI6MTYxMjg5NjEzOX0.3s20C9fu4dVmGiHFUWHOlzfi9EJ8Js70ou20Q-xpAH4";
 				//localStorage.getItem("token");
 				const store = getStore();
 				fetch(URL + "traveler", {
