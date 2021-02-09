@@ -8,9 +8,6 @@
      color:rgb(240, 235, 235);
      background-color: none;
  }
- .logo{
-    width: 15%;
-}
 .search-btn{
     flex-wrap: nowrap ;
 }
