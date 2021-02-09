@@ -57,7 +57,7 @@ export const TripCard = props => {
 						<li className="list-group-item">
 							<div className="row">Descripción del viaje:</div>
 							<div className="row">
-								<div className="props description">{props.trip.description}</div>
+								<div className="props description">{props.trip.description.substring(0, 20)}</div>
 							</div>
 						</li>
 						<li className="list-group-item blue">
