@@ -23,22 +23,21 @@ const SignUp = props => {
 	const [view, setView] = useState("");
 
 	const handleChange = e => {
-		console.log("handels=ch");
 		if (e.target.name == "img") {
-			console.log("entrando img");
 			const reader = new FileReader();
 			reader.onload = event => {
 				console.log(reader.readyState);
 				if (reader.readyState === 2) {
-					console.log(reader.result);
+					console.log("target", e.target);
 					setDatos({ ...datos, img: reader.result });
 				}
 			};
+
 			if (e.target.files[0] != undefined) {
+				console.log("targen unbdefin", e.target.files[0]);
 				reader.readAsDataURL(e.target.files[0]);
 				setDatos({ ...datos, avatar: e.target.files[0] });
 			}
-			console.log(e.target.files[0]);
 		} else {
 			setDatos({ ...datos, [e.target.name]: e.target.value });
 		}
@@ -50,9 +49,10 @@ const SignUp = props => {
 			setValied(true);
 		}
 		setSubmited(true);
-		actions.registeredTraveler(datos, props);
+		//esto es para obtener la imagen en crudo y pasarla al back
+		const file = document.querySelector("#file");
+		actions.registeredTraveler(datos, props, file.files[0]);
 	};
-	//const input = document.getElementById('file');
 	console.log(datos);
 	return (
 		<div className="container ">

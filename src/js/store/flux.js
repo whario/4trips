@@ -1,4 +1,4 @@
-const URL = "https://3000-d6620844-473e-4005-a216-c78a8882d46d.ws-eu03.gitpod.io/";
+const URL = "https://3000-emerald-wasp-fa9vvq2s.ws-eu03.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -53,25 +53,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
 					.catch(error => console.log(error));
 			},
-			registeredTraveler: (traveler, props) => {
+			registeredTraveler: (traveler, props, file) => {
 				const store = getStore();
 				const { username, email, password, img } = traveler;
-				const newObject = {
-					username,
-					email,
-					password,
-					avatar: img
-				};
-				let form = new FormData();
-				form.append("username", username);
-				form.append("email", email);
-				form.append("password", password);
-				form.append("avatar", img);
+				let formData = new FormData();
+				formData.append("username", username);
+				formData.append("email", email);
+				formData.append("password", password);
+				formData.append("avatar", file, file.name);
+
 				fetch(URL + "user/register/traveler", {
 					method: "POST",
-					body: JSON.stringify(newObject),
+					body: formData,
+					redirect: "follow",
 					headers: {
-						"Content-Type": "application/json"
+						//"Content-Type": "application/json"
 					}
 				})
 					.then(res => res.json())
