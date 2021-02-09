@@ -26,8 +26,8 @@ export const TripCard = props => {
 		<div className="col-md-4 col-sm-1">
 			<div className="card h-100">
 				<div className="avatar">
-					<img src="..." className="rounded-circle" alt="..." />
-					<h5 className="card-title">username</h5>
+					<img src={props.trip.traveler.avatar} className="rounded-circle" alt="" />
+					<h5 className="card-title">{props.trip.traveler.username}</h5>
 				</div>
 				<div className="card-body">
 					<ul className="list-group list-group-flush">
