@@ -12,7 +12,8 @@ const SignUp = props => {
 		email: "",
 		password: "",
 		repeatPassword: "",
-		img: ""
+		img: "",
+		avatar: ""
 	});
 
 	const [submited, setSubmited] = useState(false);
@@ -35,6 +36,7 @@ const SignUp = props => {
 			};
 			if (e.target.files[0] != undefined) {
 				reader.readAsDataURL(e.target.files[0]);
+				setDatos({ ...datos, avatar: e.target.files[0] });
 			}
 			console.log(e.target.files[0]);
 		} else {

@@ -55,14 +55,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			registeredTraveler: (traveler, props) => {
 				const store = getStore();
+				const { username, email, password, img } = traveler;
+				const newObject = {
+					username,
+					email,
+					password,
+					avatar: img
+				};
+				let form = new FormData();
+				form.append("username", username);
+				form.append("email", email);
+				form.append("password", password);
+				form.append("avatar", img);
 				fetch(URL + "user/register/traveler", {
 					method: "POST",
-					body: JSON.stringify(traveler),
+					body: JSON.stringify(newObject),
 					headers: {
 						"Content-Type": "application/json"
 					}
 				})
+					.then(res => res.json())
 					.then(data => {
+						console.log(data);
 						setStore({ travelerInfoCollected: data });
 						setTimeout(() => {
 							props.history.push("/iniciar/sesion");
