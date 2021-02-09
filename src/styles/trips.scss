@@ -40,15 +40,13 @@
     display: flex;
     justify-content: space-around;
 }
-.avatar{
+.avatartraveler{
     padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 1.25rem;
-    width: 100%;
-    display: flex;
+    padding-top: 1rem;
 }
 .card-title{
-    margin-left: 40%;
+    margin-left: 10%;
+    padding-top: 2.5rem;
 }
 .publicar{
     background-color: #1C6EA4;
@@ -67,4 +65,13 @@
     margin-bottom: 40px;
     margin-top: 10px;
 
+}
+.card{
+    border-color: #1c6ea4;
+}
+.col-md-4{
+    margin-bottom: 5%;
+}
+.col-sm-1{
+    margin-bottom: 3%;
 }

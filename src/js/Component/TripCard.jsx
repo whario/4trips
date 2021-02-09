@@ -6,6 +6,7 @@ import logoMultia from "../../img/actividadesicon.png";
 import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
+import defaultAvatar from "../../img/default_avatar.png";
 import "../../styles/trips.scss";
 
 export const TripCard = props => {
@@ -25,9 +26,17 @@ export const TripCard = props => {
 	return (
 		<div className="col-md-4 col-sm-1">
 			<div className="card h-100">
-				<div className="avatar">
-					<img src={props.trip.traveler.avatar} className="rounded-circle" alt="" />
-					<h5 className="card-title">{props.trip.traveler.username}</h5>
+				<div className="row">
+					<div className="col-4">
+						{props.trip.traveler.avatar != null ? (
+							<img src={props.trip.traveler.avatar} className="rounded-circle" />
+						) : (
+							<img src={defaultAvatar} className="rounded-circle" />
+						)}
+					</div>
+					<div className="col-8">
+						<h5 className="card-title">{props.trip.traveler.username}</h5>
+					</div>
 				</div>
 				<div className="card-body">
 					<ul className="list-group list-group-flush">
