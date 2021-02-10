@@ -62,7 +62,7 @@ const SignUp = props => {
 					<form className="myForm m-5 " onChange={handleChange} onSubmit={handleSubmit}>
 						{submited && valied && datos.password == datos.repeatPassword ? (
 							<div className="alert alert-success" role="alert">
-								<p className="P">Registrado con éxito</p>
+								<p className="P">Registro completado con éxito</p>
 							</div>
 						) : null}
 						<br />
@@ -82,18 +82,18 @@ const SignUp = props => {
 						<div className="row">
 							<div className="col-sm-12 col-md-10 col-la-8 form">
 								<label className="label" value="validationServer01">
-									Nomber de usuario
+									Nombre de usuario
 								</label>
 								<input
-									name="username"
-									placeholder="Usuario"
-									value={datos.username}
+									name="userName"
+									placeholder="Nombre de usuario"
+									value={datos.userName}
 									type="text"
 									className="form-control"
 									id="validationServer01"
 								/>
-								{submited && !datos.username ? (
-									<span className="errormsg">Escribe su nombre de usuario por favor</span>
+								{submited && !datos.userName ? (
+									<span className="errormsg">Escoge un nombre de usuario</span>
 								) : null}
 								<br />
 
@@ -102,13 +102,13 @@ const SignUp = props => {
 								</label>
 								<input
 									name="email"
-									placeholder="Correo electronico"
+									placeholder="Email"
 									type="email"
 									className="form-control"
 									value={datos.email}
 								/>
 								{submited && !datos.email ? (
-									<span className="errormsg">Escribe su correo electronico por favor</span>
+									<span className="errormsg">Introduce una dirección de correo electronico</span>
 								) : null}
 								<br />
 								<label className="label" value="validationServer01">
@@ -123,22 +123,22 @@ const SignUp = props => {
 									value={datos.password}
 								/>
 								{submited && !datos.password ? (
-									<span className="errormsg">Escribe su contraseña por favor</span>
+									<span className="errormsg">Intorduce una contraseña</span>
 								) : null}
 								<br />
 								<label className="label" value="validationServer01">
-									Confirmacion de contraseña
+									Repite tu contraseña
 								</label>
 
 								<input
 									name="repeatPassword"
-									placeholder="Repite contraseña"
+									placeholder="Repite tu contraseña"
 									type="password"
 									className="form-control"
 									value={datos.repeatPassword}
 								/>
 								{submited && datos.repeatPassword != datos.password ? (
-									<span className="errormsg">Confirma su contraseña bien porfavor </span>
+									<span className="errormsg">La contraseña no coincide</span>
 								) : null}
 							</div>
 						</div>

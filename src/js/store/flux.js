@@ -8,8 +8,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: []
 		},
 		actions: {
-			registered: (user, props) => {
-				fetch(URL + "/user/register/pro", {
+			login: async body => {
+				const store = getStore();
+				try {
+					const res = await fetch(URL + "login", {
+						method: "POST",
+						body: JSON.stringify(body), //este es el body que paso al passwor para validar el login
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+					if (res.ok) {
+						setStore({ travelerInfoCollected: [...store, res] });
+					}
+				} catch (err) {
+					console.log(err, "error en login");
+				}
+			},
+			register: (user, props) => {
+				fetch(URL + "user/register/pro", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: {
@@ -54,7 +71,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error));
 			},
 			registeredTraveler: (traveler, props) => {
-				const store = getStore();
 				const { username, email, password, img } = traveler;
 				const newObject = {
 					username,
@@ -88,9 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			profilTraveler: traveler => {
 				console.log("cualequecosa");
-				const token =
-					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsMjFAZW1haWwuY29tIiwicm9sIjoiVHJhdmVsZXIiLCJpZCI6MjEsImV4cCI6MTYxMjkwMzIxM30.drFYOdvd70n29cjvukyxhIb_5WAnuH-M4rtNP0lZ6mk";
-				//localStorage.getItem("token");
+				const token = localStorage.getItem("token");
 				const store = getStore();
 				fetch(URL + "traveler", {
 					method: "GET",
@@ -100,7 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(res => res.json())
-					.then(data => setStore({ travelerInfoCollected: data }))
+					.then(data => getStore({ travelerInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			}
 		}
