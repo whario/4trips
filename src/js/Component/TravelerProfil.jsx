@@ -12,12 +12,16 @@ export const TravelerProfil = () => {
 	}, []);
 	return (
 		<div className="container">
-			<div className="img-container">
-				<img className="avatar-traveler" src={store.travelerInfoCollected.avatar} />
-			</div>
-			<div className="traveler-data">
-				<h1 className="traveler-data">{store.travelerInfoCollected.username}</h1>
-				<h1 className="traveler-data{">{store.travelerInfoCollected.email}</h1>
+			<div className="card">
+				<img src={store.travelerInfoCollected.avatar} className="card-img-top traveler-img" alt="..." />
+
+				<h5 className="card-title">{store.travelerInfoCollected.username}</h5>
+
+				<ul className="list-group list-group-flush">
+					<li className="list-group-item">An item</li>
+					<li className="list-group-item">A second item</li>
+					<li className="list-group-item">A third item</li>
+				</ul>
 			</div>
 		</div>
 	);
