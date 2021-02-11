@@ -1,8 +1,24 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useEffect } from "react";
+import "../../styles/TravelerProfil.css";
 
 export const TravelerProfil = () => {
-    const { store, actions } = useContext(Context);
-    
-	return <div>Hello world</div>;
+	const { store, actions } = useContext(Context);
+	console.log("texto");
+	useEffect(() => {
+		console.log("texto2");
+		actions.profilTraveler();
+	}, []);
+	return (
+		<div className="container">
+			<div className="img-container">
+				<img className="avatar-traveler" src={store.travelerInfoCollected.avatar} />
+			</div>
+			<div className="traveler-data">
+				<h1 className="traveler-data">{store.travelerInfoCollected.username}</h1>
+				<h1 className="traveler-data{">{store.travelerInfoCollected.email}</h1>
+			</div>
+		</div>
+	);
 };
