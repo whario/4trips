@@ -1,14 +1,12 @@
 
-.avatar{
+.avatar-pro{
     right: 1px;
     position: relative;
     border-radius: 50%;
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 200px;
     background: white;
     top: 9px;
-    height: 200px;
-
 }
 .hoveron{
     color: red;
@@ -19,9 +17,9 @@
 .P{
   text-align: center;
 }
-.avatar-container {
-      position: relative;
-    width: 250px;
+.avatar-pro-container{
+    position: relative;
+    width: 200px;
     border-radius: 50%;
     overflow: hidden;
     margin: auto;
@@ -41,7 +39,7 @@
   text-align: center;
 
 }
-.avatar-container:hover .overlay {
+.avatar-pro-container:hover .overlay {
   opacity: 1;
 }
 .uploadedimg{
@@ -60,3 +58,12 @@
   opacity: 1;
 }
 
+.label-pro{
+    position: relative;
+    left: 8%;
+}
+.error-msg-pro{
+    position: relative;
+    left: 8%;
+    color: red;
+}
