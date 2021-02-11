@@ -113,6 +113,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => setStore({ travelerInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
+			},
+			editTravelerProfil: (name, value) => {
+				console.log(name, value);
+				const store = getStore();
+				let travler = store.travelerInfoCollected;
+				travler[name] = value;
+				setStore({ travelerInfoCollected: travler });
 			}
 		}
 	};
