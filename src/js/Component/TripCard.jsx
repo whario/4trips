@@ -50,6 +50,8 @@ export const TripCard = props => {
 							<div className="row">
 								Desde:
 								<div className="props">{formatDay(props.trip.first_day)}</div>
+							</div>
+							<div className="row">
 								Hasta:
 								<div className="props">{formatDay(props.trip.last_day)}</div>
 							</div>
