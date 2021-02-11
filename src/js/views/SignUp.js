@@ -12,7 +12,6 @@ const SignUp = props => {
 		email: "",
 		password: "",
 		repeatPassword: "",
-		img: "",
 		avatar: ""
 	});
 
@@ -23,22 +22,21 @@ const SignUp = props => {
 	const [view, setView] = useState("");
 
 	const handleChange = e => {
-		console.log("handels=ch");
-		if (e.target.name == "img") {
-			console.log("entrando img");
+		if (e.target.name == "avatar") {
 			const reader = new FileReader();
 			reader.onload = event => {
 				console.log(reader.readyState);
 				if (reader.readyState === 2) {
-					console.log(reader.result);
-					setDatos({ ...datos, img: reader.result });
+					console.log("target", e.target);
+					setDatos({ ...datos, avatar: reader.result });
 				}
 			};
+
 			if (e.target.files[0] != undefined) {
+				console.log("targen unbdefin", e.target.files[0]);
 				reader.readAsDataURL(e.target.files[0]);
 				setDatos({ ...datos, avatar: e.target.files[0] });
 			}
-			console.log(e.target.files[0]);
 		} else {
 			setDatos({ ...datos, [e.target.name]: e.target.value });
 		}
@@ -50,9 +48,10 @@ const SignUp = props => {
 			setValied(true);
 		}
 		setSubmited(true);
-		actions.registeredTraveler(datos, props);
+		//esto es para obtener la imagen en crudo y pasarla al back
+		const file = document.querySelector("#file");
+		actions.registeredTraveler(datos, props, file.files[0]);
 	};
-	//const input = document.getElementById('file');
 	console.log(datos);
 	return (
 		<div className="container ">
@@ -67,32 +66,32 @@ const SignUp = props => {
 						) : null}
 						<br />
 						<div className="avatar-container">
-							{datos.img ? (
-								<img className="avatar-traveler" src={datos.img} />
+							{datos.avatar ? (
+								<img className="avatar-traveler" src={datos.avatar} />
 							) : (
 								<img
-									src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+									src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
 									className="avatar"
 								/>
 							)}
 
 							<div className="overlay"> sube una foto </div>
 						</div>
-						<input type="file" name="img" className="hidenButton" id="file" />
+						<input type="file" name="avatar" className="hidenButton" id="file" />
 						<div className="row">
 							<div className="col-sm-12 col-md-10 col-la-8 form">
 								<label className="label" value="validationServer01">
 									Nombre de usuario
 								</label>
 								<input
-									name="userName"
+									name="username"
 									placeholder="Nombre de usuario"
-									value={datos.userName}
+									value={datos.username}
 									type="text"
 									className="form-control"
 									id="validationServer01"
 								/>
-								{submited && !datos.userName ? (
+								{submited && !datos.username ? (
 									<span className="errormsg">Escoge un nombre de usuario</span>
 								) : null}
 								<br />

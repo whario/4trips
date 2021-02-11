@@ -16,8 +16,8 @@ export const TravelerProfil = () => {
 				<img className="avatar-traveler" src={store.travelerInfoCollected.avatar} />
 			</div>
 			<div className="traveler-data">
-				<h1 className="username-traveler">{store.travelerInfoCollected.username}</h1>
-				<h1>{store.travelerInfoCollected.email}</h1>
+				<h1 className="traveler-data">{store.travelerInfoCollected.username}</h1>
+				<h1 className="traveler-data{">{store.travelerInfoCollected.email}</h1>
 			</div>
 		</div>
 	);

@@ -8,22 +8,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: []
 		},
 		actions: {
-			login: async body => {
+			login: body => {
 				const store = getStore();
-				try {
-					const res = await fetch(URL + "login", {
-						method: "POST",
-						body: JSON.stringify(body), //este es el body que paso al passwor para validar el login
-						headers: {
-							"Content-Type": "application/json"
-						}
-					});
-					if (res.ok) {
-						setStore({ travelerInfoCollected: [...store, res] });
+				fetch(URL + "login", {
+					method: "POST",
+					body: JSON.stringify(body),
+					headers: {
+						"Content-Type": "application/json"
 					}
-				} catch (err) {
-					console.log(err, "error en login");
-				}
+				})
+					.then(res => {
+						return res.json();
+					})
+					.then(data => {
+						localStorage.setItem("token", data.access_token);
+						console.log(data, "data");
+						setStore({ travelerInfoCollected: { ...store, data } });
+					})
+					.catch(err => console.log(err, "error login "));
 			},
 			register: (user, props) => {
 				fetch(URL + "user/register/pro", {
@@ -70,24 +72,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
 					.catch(error => console.log(error));
 			},
-			registeredTraveler: (traveler, props) => {
-				const { username, email, password, img } = traveler;
-				const newObject = {
-					username,
-					email,
-					password,
-					avatar: img
-				};
-				let form = new FormData();
-				form.append("username", username);
-				form.append("email", email);
-				form.append("password", password);
-				form.append("avatar", img);
+			registeredTraveler: (traveler, props, file) => {
+				const store = getStore();
+				const { username, email, password, avatar } = traveler;
+				let formData = new FormData();
+				formData.append("username", username);
+				formData.append("email", email);
+				formData.append("password", password);
+				formData.append("avatar", file, file.name);
+
 				fetch(URL + "user/register/traveler", {
 					method: "POST",
-					body: JSON.stringify(newObject),
+					body: formData,
+					redirect: "follow",
 					headers: {
-						"Content-Type": "application/json"
+						//"Content-Type": "application/json"
 					}
 				})
 					.then(res => res.json())
@@ -95,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data);
 						setStore({ travelerInfoCollected: data });
 						setTimeout(() => {
-							props.history.push("/iniciar/sesion");
+							props.history.push("login");
 						}, 1000);
 					})
 					.catch(err => {
@@ -103,9 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			profilTraveler: traveler => {
-				console.log("cualequecosa");
 				const token = localStorage.getItem("token");
-				const store = getStore();
 				fetch(URL + "traveler", {
 					method: "GET",
 					headers: {
@@ -114,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(res => res.json())
-					.then(data => getStore({ travelerInfoCollected: data }))
+					.then(data => setStore({ travelerInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			}
 		}

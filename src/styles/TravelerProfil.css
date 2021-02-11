@@ -5,7 +5,21 @@
 }
 .traveler-data{
     text-align: center;
+    font-size: 48px;
+    color: #000000;
+    font-weight: 750;
 }
 .img-container{
     text-align: center;
+}
+.h2 {
+font-size: 48px;
+color: #000000;
+font-weight: 750;
+}
+
+/* Next, add a delay to the hover effect */
+.traveler-data:hover{
+color: #f00;
+transition: all 0.5s ease;
 }
