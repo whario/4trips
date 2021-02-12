@@ -50,7 +50,7 @@ const SignUpPro = props => {
 		setSubmited(true);
 		const file = document.querySelector("#file");
 		console.log(file);
-		//actions.registerPro(datos, props, file.files[0]);
+		actions.registerPro(datos, props, file.files[0]);
 	};
 
 	return (
