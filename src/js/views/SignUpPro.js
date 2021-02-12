@@ -49,7 +49,7 @@ const SignUpPro = props => {
 		}
 		setSubmited(true);
 		const file = document.querySelector("#file");
-		console.log(file, props, "props y file");
+		console.log(datos, "datos");
 		actions.registerPro(datos, props, file.files[0]);
 	};
 
@@ -75,7 +75,7 @@ const SignUpPro = props => {
 
 							<div className="overlay">Sube una foto de perfil</div>
 						</div>
-						<input type="file" name="avatar" className="hidenButton" />
+						<input type="file" name="avatar" className="hidenButton" id="file" />
 						<div className="row">
 							<div className="col-12">
 								<label className="label-pro" value="validationServer01">

@@ -41,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					social_reason,
 					avatar
 				} = pro;
+				console.log(pro, "pro en registrpro");
 				let formData = new FormData();
 				formData.append("user_name", user_name);
 				formData.append("email", email);
@@ -63,7 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ proInfoCollected: data });
 						setTimeout(() => {
-							props.history.push("/iniciar/sesion");
+							props.history.push("/login");
 						}, 1000);
 					})
 					.catch(err => {
