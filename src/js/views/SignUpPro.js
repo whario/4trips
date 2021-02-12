@@ -49,7 +49,7 @@ const SignUpPro = props => {
 		}
 		setSubmited(true);
 		const file = document.querySelector("#file");
-		console.log(file);
+		console.log(file, props, "props y file");
 		actions.registerPro(datos, props, file.files[0]);
 	};
 
