@@ -22,16 +22,36 @@ font-weight: 750;
     height: 200px;
     border-radius: 50%;
     margin: auto;
+    position: relative;
+    bottom: 15px;
 }
 .card{
-    padding: 15px;
+    padding: 20px;
     top: 75px;
-    width: 500px;
+    width: 350px;
     margin: auto;
-}
+ }
 .card-title{
     margin: auto;
 }
 .edit-icon:hover{
     cursor: pointer;
 }
+.username{
+    margin: 20px;
+    width: 175px;
+    position: relative;
+    left: 14%;
+}
+.email-input{
+    margin: 12px;
+    position: relative;
+    left: 12%
+}
+.save-btn{
+    width: 75%;
+    margin: auto;
+    position: relative;
+    top: 10px;
+}
+

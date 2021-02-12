@@ -10,7 +10,7 @@ export const TravelerProfil = () => {
 		setedit(!edit);
 	};
 	const handleChange = e => {
-		//actions.editTravelerProfil(e.target.name, e.target.value);
+		actions.editTravelerProfil(e.target.name, e.target.value);
 	};
 
 	useEffect(() => {
@@ -27,10 +27,12 @@ export const TravelerProfil = () => {
 					className="card-img-top traveler-img"
 					alt="..."
 				/>
+				<div className="overlay-traveler"> sube una foto </div>
 				{edit == false ? (
 					<strong>{store.travelerInfoCollected.username}</strong>
 				) : (
 					<input
+						className="username"
 						name="username"
 						type="text"
 						value={store.travelerInfoCollected.username}
@@ -44,6 +46,7 @@ export const TravelerProfil = () => {
 							<strong>{store.travelerInfoCollected.email} </strong>
 						) : (
 							<input
+								className="email-input"
 								name="email"
 								type="text"
 								value={store.travelerInfoCollected.email}
@@ -52,7 +55,7 @@ export const TravelerProfil = () => {
 						)}
 					</li>
 				</ul>
-				{edit == true ? <button>guardad</button> : null}
+				{edit == true ? <button className="btn btn-primary save-btn">guardad</button> : null}
 			</div>
 		</div>
 	);
