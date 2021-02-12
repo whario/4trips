@@ -1,4 +1,4 @@
-const URL = "https://3000-da6ab1ae-94da-4aa6-a9e4-f8a865970036.ws-eu03.gitpod.io/";
+const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -64,6 +64,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
 					.catch(error => console.log(error));
+			},
+			getTrip: trip => {
+				setStore({ contactToShow: trip });
 			}
 		}
 	};

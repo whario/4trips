@@ -10,6 +10,7 @@ import Navbar from "./Component/Navbar.js";
 import Footer from "./Component/Footer.jsx";
 import { PerfilPro } from "./Component/PerfilPro.jsx";
 import LogIn from "./views/LogIn";
+import { TripDetail } from "./views/tripDetail.jsx";
 
 //create your first component
 const Layout = () => {
@@ -31,6 +32,7 @@ const Layout = () => {
 					<Route exact path="/addTrip" component={AddTrip} />
 					<Route exact path="/elige/tipo/deusuario" component={ChoseUser} />
 					<Route exact path="/login" component={LogIn} />
+					<Route exact path="/trip/:id" component={TripDetail} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>

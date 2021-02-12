@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import { withRouter, Link } from "react-router-dom";
 import logoAloj from "../../img/alojamientoicon.png";
 import logoMultia from "../../img/actividadesicon.png";
 import logoBbq from "../../img/barbacoaicon.png";
@@ -59,7 +60,11 @@ export const TripCard = props => {
 						<li className="list-group-item">
 							<div className="row">Descripción del viaje:</div>
 							<div className="row">
-								<div className="props description">{props.trip.description.substring(0, 20)}</div>
+								<Link to={"/trip/" + props.trip.id}>
+									<div className="props description" onClick={() => actions.getTrip(props.trip)}>
+										{props.trip.description.substring(0, 20)}
+									</div>
+								</Link>
 							</div>
 						</li>
 						<li className="list-group-item blue">
