@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			addTrip: async trip => {
-				const token = localStorage.getItem('token');
+				const token = localStorage.getItem("token");
 				let newNeedsTrip = ""; //convierto el array needs_trip en string para que lo pueda recoger el backend
 				for (let i = 0; i < trip.needs_trip.length; i++) {
 					newNeedsTrip += trip.needs_trip[i] + ",";
@@ -72,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error));
 			},
 			addTrip: async trip => {
-				const token = localStorage.getItem('token');
+				const token = localStorage.getItem("token");
 				let newNeedsTrip = ""; //convierto el array needs_trip en string para que lo pueda recoger el backend
 				for (let i = 0; i < trip.needs_trip.length; i++) {
 					newNeedsTrip += trip.needs_trip[i] + ",";
