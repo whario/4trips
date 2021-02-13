@@ -23,7 +23,8 @@ export const TripDetail = () => {
 	};
 
 	return (
-		<div className="w-auto p-3">
+		<div className="col-md-6 offset-md-3">
+			<div className="espaciador" />
 			<div className="card">
 				<div className="row">
 					<div className="col-4">
