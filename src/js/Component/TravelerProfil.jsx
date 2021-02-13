@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, Fragment } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
 import "../../styles/TravelerProfil.css";
@@ -27,7 +27,6 @@ export const TravelerProfil = () => {
 			};
 			if (e.target.files[0] != undefined) {
 				reader.readAsDataURL(e.target.files[0]);
-				setFoto({ ...foto, travelerAvatar: e.target.files[0] });
 			}
 		} else {
 			setFoto({ ...foto, [e.target.name]: e.target.value });
@@ -36,6 +35,22 @@ export const TravelerProfil = () => {
 	const handleClick = e => {
 		const file = document.querySelector("#file");
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]);
+	};
+	const showItems = () => {
+		console.log(edit, "dentor de shgow");
+		if (edit == true) {
+			return (
+				<Fragment>
+					<img
+						className="card-img-top traveler-img"
+						name="travelerAvatar"
+						src={foto.travelerAvatar}
+						value={store.travelerInfoCollected.avatar}
+					/>
+					<input type="file" id="file" onChange={handleFoto} />
+				</Fragment>
+			);
+		}
 	};
 	useEffect(() => {
 		console.log("texto2");
@@ -48,13 +63,12 @@ export const TravelerProfil = () => {
 				<div>
 					{edit == false ? (
 						<img
+							className="card-img-top traveler-img"
 							name="travelerAvatar"
 							src={store.travelerInfoCollected.avatar}
-							className="card-img-top traveler-img"
-							alt="..."
 						/>
 					) : (
-						<input id="file" type="file" />
+						showItems()
 					)}
 				</div>
 
