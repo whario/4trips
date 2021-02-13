@@ -19,10 +19,14 @@ export const TripDetail = () => {
 		adventure: logoMultia,
 		relax: logoPiscina
 	};
+	const formatDay = day => {
+		let newFormatDay = new Date(day);
+		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
+	};
 
 	return (
-		<div className="col-md-4 col-sm-1">
-			<div className="card h-100">
+		<div className="w-auto p-3">
+			<div className="card">
 				<div className="row">
 					<div className="col-4">{store.detailTrip.avatar}</div>
 					<div className="col-8">
@@ -40,11 +44,11 @@ export const TripDetail = () => {
 						<li className="list-group-item">
 							<div className="row">
 								Desde:
-								<div className="props">{store.detailTrip.first_day}</div>
+								<div className="props">{formatDay(store.detailTrip.first_day)}</div>
 							</div>
 							<div className="row">
 								Hasta:
-								<div className="props">{store.detailTrip.last_day}</div>
+								<div className="props">{formatDay(store.detailTrip.last_day)}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
