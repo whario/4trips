@@ -10,7 +10,7 @@ import Navbar from "./Component/Navbar.js";
 import Footer from "./Component/Footer.jsx";
 import LogIn from "./views/LogIn";
 import { TravelerProfil } from "./Component/TravelerProfil.jsx";
-
+import { PerfilPro } from "./Component/PerfilPro.jsx";
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -25,6 +25,7 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
+					<Route exact path="/perfil/pro" component={PerfilPro} />
 					<Route exact path="/perfil/Traveler" component={TravelerProfil} />
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />

@@ -1,11 +1,13 @@
-const URL = "https://3000-d6620844-473e-4005-a216-c78a8882d46d.ws-eu03.gitpod.io/";
+const URL = "https://3000-tan-vole-6vvk5e0t.ws-eu03.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			tripList: [],
 			travelerInfoCollected: {},
 			proInfoCollected: {},
-			profile: []
+			profile: [],
+			isLogin: false,
+			rol: ""
 		},
 		actions: {
 			login: body => {
@@ -22,8 +24,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => {
 						localStorage.setItem("token", data.access_token);
+						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
-						setStore({ travelerInfoCollected: { ...store, data } });
+						setStore({ isLogin: true, rol: data.rol });
 					})
 					.catch(err => console.log(err, "error login "));
 			},
@@ -120,6 +123,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let travler = store.travelerInfoCollected;
 				travler[name] = value;
 				setStore({ travelerInfoCollected: travler });
+			},
+			updateTravelerData: (traveler, file) => {
+				console.log(file);
+				console.log(traveler, "ttraveler");
+				const token = localStorage.getItem("token");
+				const formdata = new FormData();
+				if (file != undefined || file != null) {
+					formdata.append("avatar", file, file.name);
+				}
+				formdata.append("username", traveler.username);
+				formdata.append("email", traveler.email);
+				// fetch(URL+ "traveler",{
+				//   method:"PUT",
+
+				//})
+			},
+			logout: () => {
+				localStorage.removeItem("token");
+				setStore({ isLogin: false });
 			}
 		}
 	};
