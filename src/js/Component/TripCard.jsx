@@ -32,7 +32,9 @@ export const TripCard = props => {
 						{props.trip.traveler.avatar != null ? (
 							<img src={props.trip.traveler.avatar} className="rounded-circle" />
 						) : (
-							<img src={defaultAvatar} className="rounded-circle" />
+							<div>
+								<img src={defaultAvatar} className="rounded-circle" />
+							</div>
 						)}
 					</div>
 					<div className="col-8">

@@ -6,12 +6,10 @@ import logoMultia from "../../img/actividadesicon.png";
 import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
+import "../../styles/trips.scss";
 
 export const TripDetail = () => {
 	const { store, actions } = useContext(Context);
-	const [travel, setTravel] = useState({
-		avatar: store.tripList.avatar
-	});
 	const logos = {
 		sleep: logoAloj,
 		eat: logoComida,
@@ -28,9 +26,11 @@ export const TripDetail = () => {
 		<div className="w-auto p-3">
 			<div className="card">
 				<div className="row">
-					<div className="col-4">{store.detailTrip.avatar}</div>
+					<div className="col-4">
+						<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
+					</div>
 					<div className="col-8">
-						<h5 className="card-title">{store.detailTrip.username}</h5>
+						<h5 className="card-title">{store.detailTrip.traveler.username}</h5>
 					</div>
 				</div>
 				<div className="card-body">

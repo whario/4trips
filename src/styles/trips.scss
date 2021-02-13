@@ -40,10 +40,6 @@
     display: flex;
     justify-content: space-around;
 }
-.avatartraveler{
-    padding-left: 1.25rem;
-    padding-top: 1rem;
-}
 .card-title{
     margin-left: 10%;
     padding-top: 2.5rem;
@@ -74,4 +70,14 @@
 }
 .col-sm-1{
     margin-bottom: 3%;
+}
+.rounded-circle{
+    display: block;
+    max-width: 120px;
+    max-height: 120px;
+    margin: 6%;
+}
+.big{
+    height: 200px;
+    width: 200px;
 }
