@@ -27,18 +27,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(err => console.log(err, "error login "));
 			},
-			register: (user, props) => {
+			registerPro: (pro, props, file) => {
+				const store = getStore();
+				const {
+					user_name,
+					email,
+					password,
+					phone,
+					url,
+					direction,
+					location,
+					vat_number,
+					social_reason,
+					avatar
+				} = pro;
+				console.log(pro, "pro en registrpro");
+				let formData = new FormData();
+				formData.append("user_name", user_name);
+				formData.append("email", email);
+				formData.append("password", password);
+				formData.append("phone", phone);
+				formData.append("url", url);
+				formData.append("direction", direction);
+				formData.append("location", location);
+				formData.append("vat_number", vat_number);
+				formData.append("social_reason", social_reason);
+				formData.append("avatar", file, file.name);
 				fetch(URL + "user/register/pro", {
 					method: "POST",
-					body: JSON.stringify(user),
+					body: formData,
 					headers: {
-						"Content-Type": "application/json"
+						//"Content-Type": "application/json"
 					}
 				})
 					.then(res => res.json())
 					.then(data => {
+						setStore({ proInfoCollected: data });
 						setTimeout(() => {
-							props.history.push("/iniciar/sesion");
+							props.history.push("/login");
 						}, 1000);
 					})
 					.catch(err => {

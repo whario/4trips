@@ -16,18 +16,19 @@ const SignUpPro = props => {
 		direction: "",
 		location: "",
 		vat_number: "",
-		social_reason: ""
+		social_reason: "",
+		avatar: ""
 	});
 	const handleChange = e => {
 		console.log("handels=ch");
-		if (e.target.name == "img") {
-			console.log("entrando img");
+		if (e.target.name == "avatar") {
+			console.log("entrando avatar");
 			const reader = new FileReader();
 			reader.onload = event => {
 				console.log(reader.readyState);
 				if (reader.readyState === 2) {
 					console.log(reader.result);
-					setDatos({ ...datos, img: reader.result });
+					setDatos({ ...datos, avatar: reader.result });
 				}
 			};
 			if (e.target.files[0] != undefined) {
@@ -45,9 +46,11 @@ const SignUpPro = props => {
 		event.preventDefault();
 		if (datos.user_name && datos.email && datos.password == datos.repeatPassword) {
 			setValied(true);
-			actions.register(datos, props);
 		}
 		setSubmited(true);
+		const file = document.querySelector("#file");
+		console.log(datos, "datos");
+		actions.registerPro(datos, props, file.files[0]);
 	};
 
 	return (
@@ -60,22 +63,24 @@ const SignUpPro = props => {
 								Registro completado con éxito!
 							</div>
 						) : null}
-						<div className="avatar-container">
-							{datos.img ? (
-								<img className="avatar" src={datos.img} />
+						<div className="avatar-pro-container">
+							{datos.avatar ? (
+								<img className="avatar-pro" src={datos.avatar} />
 							) : (
 								<img
 									src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-									className="avatar"
+									className="avatar-pro"
 								/>
 							)}
 
 							<div className="overlay">Sube una foto de perfil</div>
 						</div>
-						<input type="file" name="img" className="hidenButton" />
+						<input type="file" name="avatar" className="hidenButton" id="file" />
 						<div className="row">
 							<div className="col-12">
-								<label value="validationServer01">Nombre de usuario</label>
+								<label className="label-pro" value="validationServer01">
+									Nombre de usuario
+								</label>
 								<input
 									name="user_name"
 									value={datos.user_name}
@@ -84,9 +89,13 @@ const SignUpPro = props => {
 									id="validationServer01"
 									placeholder="Nombre de usuario"
 								/>
-								{submited && !datos.user_name ? <span>Escoge un nombre de usuario</span> : null}
+								{submited && !datos.user_name ? (
+									<span className="error-msg-pro">Escoge un nombre de usuario</span>
+								) : null}
 								<br />
-								<label value="validationServer01">Correo electronico</label>
+								<label className="label-pro" value="validationServer01">
+									Correo electronico
+								</label>
 								<input
 									name="email"
 									placeholder="email"
@@ -94,9 +103,13 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.email}
 								/>
-								{submited && !datos.email ? <span>Introduce una dirección de email</span> : null}
+								{submited && !datos.email ? (
+									<span className="error-msg-pro">Introduce una dirección de email</span>
+								) : null}
 								<br />
-								<label value="validationServer01">Contraseña</label>
+								<label className="label-pro" value="validationServer01">
+									Contraseña
+								</label>
 								<input
 									name="password"
 									placeholder="Contraseña"
@@ -104,9 +117,13 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.password}
 								/>
-								{submited && !datos.password ? <span>Introduce una contraseña</span> : null}
+								{submited && !datos.password ? (
+									<span className="error-msg-pro">Introduce una contraseña</span>
+								) : null}
 								<br />
-								<label value="validationServer01">Repite tu contraseña </label>
+								<label className="label-pro" value="validationServer01">
+									Repite tu contraseña{" "}
+								</label>
 								<input
 									name="repeatPassword"
 									placeholder="Repite tu contraseña"
@@ -115,10 +132,12 @@ const SignUpPro = props => {
 									value={datos.repeatPassword}
 								/>
 								{submited && datos.repeatPassword != datos.password ? (
-									<span>La contraseña no coincide</span>
+									<span className="error-msg-pro">La contraseña no coincide</span>
 								) : null}
 								<br />
-								<label value="validationServer01">Número de telefono </label>
+								<label className="label-pro" value="validationServer01">
+									Número de telefono{" "}
+								</label>
 								<input
 									name="phone"
 									placeholder="número de telefono"
@@ -126,9 +145,13 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.phone}
 								/>
-								{submited && !datos.phone ? <span>Introduce un teléfono de contacto</span> : null}
+								{submited && !datos.phone ? (
+									<span className="error-msg-pro">Introduce un teléfono de contacto</span>
+								) : null}
 								<br />
-								<label value="validationServer01">URL de tu página web</label>
+								<label className="label-pro" value="validationServer01">
+									URL de tu página web
+								</label>
 								<input
 									name="url"
 									placeholder="https://..."
@@ -137,7 +160,9 @@ const SignUpPro = props => {
 									value={datos.url}
 								/>
 								<br />
-								<label value="validationServer01">Dirección</label>
+								<label className="label-pro" value="validationServer01">
+									Dirección
+								</label>
 								<input
 									name="direction"
 									placeholder="Dirección"
@@ -145,9 +170,13 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.dierction}
 								/>
-								{submited && !datos.direction ? <span>Introduce una dirección</span> : null}
+								{submited && !datos.direction ? (
+									<span className="error-msg-pro">Introduce una dirección</span>
+								) : null}
 								<br />
-								<label value="validationServer01">Localidad</label>
+								<label className="label-pro" value="validationServer01">
+									Localidad
+								</label>
 								<input
 									name="location"
 									placeholder="Localidad"
@@ -155,9 +184,13 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.location}
 								/>
-								{submited && !datos.location ? <span>Introduce una localidad</span> : null}
+								{submited && !datos.location ? (
+									<span className="error-msg-pro">Introduce una localidad</span>
+								) : null}
 								<br />
-								<label value="validationServer01">CIF(opcional)</label>
+								<label className="label-pro" value="validationServer01">
+									CIF(opcional)
+								</label>
 								<input
 									name="vat_number"
 									placeholder="CIF"
@@ -166,7 +199,9 @@ const SignUpPro = props => {
 									value={datos.vat_number}
 								/>
 
-								<label value="validationServer01">Razón social (opcional)</label>
+								<label className="label-pro" value="validationServer01">
+									Razón social (opcional)
+								</label>
 
 								<input
 									name="social_reason"
