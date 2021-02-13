@@ -37,7 +37,6 @@ export const TravelerProfil = () => {
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]);
 	};
 	const showItems = () => {
-		console.log(edit, "dentor de shgow");
 		if (edit == true) {
 			return (
 				<Fragment>
