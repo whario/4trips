@@ -69,7 +69,7 @@ export const TripCard = props => {
 						</li>
 						<li className="list-group-item blue">
 							Nº ofertas recibidas:
-							<div className="numero">5</div>
+							<div className="numero">{props.trip.counter}</div>
 						</li>
 					</ul>
 				</div>

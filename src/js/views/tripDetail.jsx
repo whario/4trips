@@ -59,7 +59,7 @@ export const TripDetail = () => {
 						</li>
 						<li className="list-group-item blue">
 							Nº ofertas recibidas:
-							<div className="numero">5</div>
+							<div className="numero">{store.detailTrip.counter}</div>
 						</li>
 					</ul>
 				</div>
