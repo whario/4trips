@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/SignUp.css";
 import bootstrap from "react-bootstrap";
 import context from "react-bootstrap/esm/AccordionContext";
+
 ///Componentes
 
 const SignUp = props => {

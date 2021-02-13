@@ -82,7 +82,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formData.append("username", username);
 				formData.append("email", email);
 				formData.append("password", password);
-				formData.append("avatar", file, file.name);
+				if (file != undefined) {
+					formData.append("avatar", file, file.name);
+				}
 
 				fetch(URL + "user/register/traveler", {
 					method: "POST",
@@ -122,6 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let travler = store.travelerInfoCollected;
 				travler[name] = value;
+				console.log(travler[name], "name traveler");
 				setStore({ travelerInfoCollected: travler });
 			},
 			updateTravelerData: (traveler, file) => {
