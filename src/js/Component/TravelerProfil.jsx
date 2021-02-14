@@ -113,10 +113,8 @@ export const TravelerProfil = () => {
 						guardad
 					</button>
 				) : null}
-				{modal == false ? (
-					<Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} />
-				) : null}
 			</div>
+			{modal == false ? <Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} /> : null}
 		</div>
 	);
 };
