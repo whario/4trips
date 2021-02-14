@@ -24,7 +24,7 @@
     border-radius: 100%;
     z-index: 100;
     float: right;
-    width: 13%;
+    padding: 1%;
 }
 .props{
     color: #1C6EA4;
@@ -40,15 +40,9 @@
     display: flex;
     justify-content: space-around;
 }
-.avatar{
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 1.25rem;
-    width: 100%;
-    display: flex;
-}
 .card-title{
-    margin-left: 40%;
+    margin-left: 10%;
+    padding-top: 2.5rem;
 }
 .publicar{
     background-color: #1C6EA4;
@@ -67,4 +61,23 @@
     margin-bottom: 40px;
     margin-top: 10px;
 
+}
+.card{
+    border-color: #1c6ea4;
+}
+.col-md-4{
+    margin-bottom: 5%;
+}
+.col-sm-1{
+    margin-bottom: 3%;
+}
+.rounded-circle{
+    display: block;
+    max-width: 120px;
+    max-height: 120px;
+    margin: 6%;
+}
+.big{
+    height: 200px;
+    width: 200px;
 }

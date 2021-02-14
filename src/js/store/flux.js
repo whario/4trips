@@ -1,4 +1,5 @@
-const URL = "https://3000-tan-vole-6vvk5e0t.ws-eu03.gitpod.io/";
+const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -6,9 +7,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			travelerInfoCollected: {},
 			proInfoCollected: {},
 			profile: [],
+			detailTrip: {},
 			isLogin: false,
 			rol: ""
 		},
+    
 		actions: {
 			login: body => {
 				const store = getStore();
@@ -75,8 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			addTrip: async trip => {
-				const token =
-					"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQHRyYXZlbGVyLmNvbSIsInJvbCI6IlRyYXZlbGVyIiwiaWQiOjMsImV4cCI6MTYxMjYxMDEzNn0.yP-RaA7z8wcdt60_VAOrSjF_LyhcDUyDquvNb1NpwK4";
+				const token = localStorage.getItem("token");
 				let newNeedsTrip = ""; //convierto el array needs_trip en string para que lo pueda recoger el backend
 				for (let i = 0; i < trip.needs_trip.length; i++) {
 					newNeedsTrip += trip.needs_trip[i] + ",";
@@ -145,6 +147,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ travelerInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			},
+
+			getTrip: trip => {
+				setStore({ detailTrip: trip });
+      },
 			editTravelerProfil: (name, value) => {
 				console.log(name, value);
 				const store = getStore();
