@@ -17,6 +17,7 @@ export const TripDetail = () => {
 		adventure: logoMultia,
 		relax: logoPiscina
 	};
+	const detailTrip = JSON.parse(sessionStorage.getItem("detailTrip")); //json.parse me convierte en objeto la string que viene de sessionStorage
 	const formatDay = day => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
@@ -28,10 +29,10 @@ export const TripDetail = () => {
 			<div className="card">
 				<div className="row">
 					<div className="col-4">
-						<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
+						<img src={detailTrip.traveler.avatar} className="rounded-circle big" />
 					</div>
 					<div className="col-8">
-						<h5 className="card-title">{store.detailTrip.traveler.username}</h5>
+						<h5 className="card-title">{detailTrip.traveler.username}</h5>
 					</div>
 				</div>
 				<div className="card-body">
@@ -39,33 +40,33 @@ export const TripDetail = () => {
 						<li className="list-group-item">
 							<div className="row">
 								Destino:
-								<div className="props">{store.detailTrip.destination}</div>
+								<div className="props">{detailTrip.destination}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
 							<div className="row">
 								Desde:
-								<div className="props">{formatDay(store.detailTrip.first_day)}</div>
+								<div className="props">{formatDay(detailTrip.first_day)}</div>
 							</div>
 							<div className="row">
 								Hasta:
-								<div className="props">{formatDay(store.detailTrip.last_day)}</div>
+								<div className="props">{formatDay(detailTrip.last_day)}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
 							<div className="row">Descripción del viaje:</div>
 							<div className="row">
-								<div className="props description">{store.detailTrip.description}</div>
+								<div className="props description">{detailTrip.description}</div>
 							</div>
 						</li>
 						<li className="list-group-item blue">
 							Nº ofertas recibidas:
-							<div className="numero">{store.detailTrip.counter}</div>
+							<div className="numero">{detailTrip.counter}</div>
 						</li>
 					</ul>
 				</div>
 				<div className="card-footer">
-					{store.detailTrip.needs_trip.map((need, index) => {
+					{detailTrip.needs_trip.map((need, index) => {
 						return <img src={logos[need]} key={index} />;
 					})}
 				</div>
