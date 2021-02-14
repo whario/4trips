@@ -1,8 +1,42 @@
-import React from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import "../../styles/Navbar.css";
 import logotipo from "../../img/logo_4Trips_navbar.png";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+import { Context } from "../store/appContext";
+const Navbar = props => {
+	const { store, actions } = useContext(Context);
+	console.log(store, "props");
+
+	const redirect = () => {
+		if (store.isLogin == false) {
+			return (
+				<Fragment>
+					<Link to="/elige/tipo/deusuario" className="btn  my-2 my-sm-0 btnRegistroLogin">
+						{" "}
+						Registro{" "}
+					</Link>
+					<Link to="/login" className="btn  my-2 my-sm-0 btnRegistroLogin">
+						{" "}
+						Login{" "}
+					</Link>
+				</Fragment>
+			);
+		} else {
+			const path = store.rol == "Traveler" ? "/perfil/Traveler" : "/perfil/pro";
+			return (
+				<Fragment>
+					<Link to={path} className="btn  my-2 my-sm-0 btnRegistroLogin">
+						Mi perfil
+					</Link>
+					<Link to="/login" onClick={e => actions.logout()} className="btn  my-2 my-sm-0 btnRegistroLogin">
+						{" "}
+						Logout
+					</Link>
+				</Fragment>
+			);
+		}
+	};
+
 	return (
 		<div>
 			{" "}
@@ -18,14 +52,7 @@ const Navbar = () => {
 							placeholder="Buscar viajes"
 							aria-label="Search"
 						/>
-						<Link to="/elige/tipo/deusuario" className="btn  my-2 my-sm-0 btnRegistroLogin">
-							{" "}
-							Registro{" "}
-						</Link>
-						<Link to="/login" className="btn  my-2 my-sm-0 btnRegistroLogin">
-							{" "}
-							Login{" "}
-						</Link>
+						{redirect()}
 					</form>
 				</nav>
 			</div>
