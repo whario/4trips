@@ -1,4 +1,5 @@
 const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -6,8 +7,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			travelerInfoCollected: {},
 			proInfoCollected: {},
 			profile: [],
-			detailTrip: {}
+			detailTrip: {},
+			isLogin: false,
+			rol: ""
 		},
+    
 		actions: {
 			login: body => {
 				const store = getStore();
@@ -23,23 +27,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => {
 						localStorage.setItem("token", data.access_token);
+						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
-						setStore({ travelerInfoCollected: { ...store, data } });
+						setStore({ isLogin: true, rol: data.rol });
 					})
 					.catch(err => console.log(err, "error login "));
 			},
-			register: (user, props) => {
+			registerPro: (pro, props, file) => {
+				const store = getStore();
+				const {
+					user_name,
+					email,
+					password,
+					phone,
+					url,
+					direction,
+					location,
+					vat_number,
+					social_reason,
+					avatar
+				} = pro;
+				console.log(pro, "pro en registrpro");
+				let formData = new FormData();
+				formData.append("user_name", user_name);
+				formData.append("email", email);
+				formData.append("password", password);
+				formData.append("phone", phone);
+				formData.append("url", url);
+				formData.append("direction", direction);
+				formData.append("location", location);
+				formData.append("vat_number", vat_number);
+				formData.append("social_reason", social_reason);
+				formData.append("avatar", file, file.name);
 				fetch(URL + "user/register/pro", {
 					method: "POST",
-					body: JSON.stringify(user),
+					body: formData,
 					headers: {
-						"Content-Type": "application/json"
+						//"Content-Type": "application/json"
 					}
 				})
 					.then(res => res.json())
 					.then(data => {
+						setStore({ proInfoCollected: data });
 						setTimeout(() => {
-							props.history.push("/iniciar/sesion");
+							props.history.push("/login");
 						}, 1000);
 					})
 					.catch(err => {
@@ -79,7 +110,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formData.append("username", username);
 				formData.append("email", email);
 				formData.append("password", password);
-				formData.append("avatar", file, file.name);
+				if (file != undefined) {
+					formData.append("avatar", file, file.name);
+				}
 
 				fetch(URL + "user/register/traveler", {
 					method: "POST",
@@ -114,8 +147,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ travelerInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			},
+
 			getTrip: trip => {
 				setStore({ detailTrip: trip });
+      },
+			editTravelerProfil: (name, value) => {
+				console.log(name, value);
+				const store = getStore();
+				let travler = store.travelerInfoCollected;
+				travler[name] = value;
+				console.log(travler[name], "name traveler");
+				setStore({ travelerInfoCollected: travler });
+			},
+			updateTravelerData: (traveler, file) => {
+				console.log(file);
+				console.log(traveler, "ttraveler");
+				const token = localStorage.getItem("token");
+				const formdata = new FormData();
+				if (file != undefined || file != null) {
+					formdata.append("avatar", file, file.name);
+				}
+				formdata.append("username", traveler.username);
+				formdata.append("email", traveler.email);
+				// fetch(URL+ "traveler",{
+				//   method:"PUT",
+
+				//})
+			},
+			logout: () => {
+				localStorage.removeItem("token");
+				setStore({ isLogin: false });
 			}
 		}
 	};

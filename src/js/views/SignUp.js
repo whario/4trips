@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/SignUp.css";
 import bootstrap from "react-bootstrap";
 import context from "react-bootstrap/esm/AccordionContext";
+
 ///Componentes
 
 const SignUp = props => {
@@ -23,19 +24,22 @@ const SignUp = props => {
 
 	const handleChange = e => {
 		if (e.target.name == "avatar") {
-			const reader = new FileReader();
+			// verficamos el nombre del input con el nombre "avatar"
+			const reader = new FileReader(); // creamos una instancia new FileReader que nos permite leer archivos
 			reader.onload = event => {
+				// esta es la parte que lee el archivo
 				console.log(reader.readyState);
 				if (reader.readyState === 2) {
+					// el estado que esta el archivo "2 el estado final que se ha leido el archivo por completo"
 					console.log("target", e.target);
-					setDatos({ ...datos, avatar: reader.result });
+					setDatos({ ...datos, avatar: reader.result }); // seteamos en el estado el resultado que hemos tenido
 				}
 			};
 
 			if (e.target.files[0] != undefined) {
+				//verfeicamos que existe un elemento de tipo file
 				console.log("targen unbdefin", e.target.files[0]);
-				reader.readAsDataURL(e.target.files[0]);
-				setDatos({ ...datos, avatar: e.target.files[0] });
+				reader.readAsDataURL(e.target.files[0]); // inicio eel proceso para convertit en una url y pasamos el archivo orginal e.target.files[0]
 			}
 		} else {
 			setDatos({ ...datos, [e.target.name]: e.target.value });
