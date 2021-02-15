@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
 
 export const Modal = props => {
+	const { store, actions } = useContext(Context);
+	const handleSave = () => {
+		actions.updateTravelerData();
+	};
 	console.log(props, "props en modal");
 	return (
-		<div tabIndex="-1" role="dialog">
+		<div className="dialago" tabIndex="-1" role="dialog">
 			<div className="modal-dialog">
 				<div className="modal-content">
 					<div className="modal-header">
@@ -39,7 +44,7 @@ export const Modal = props => {
 							onClick={() => props.onClose()}>
 							Cancelar
 						</button>
-						<button type="button" className="btn btn-secondary" data-dismiss="modal">
+						<button onClick={handleSave} type="button" className="btn btn-secondary" data-dismiss="modal">
 							Confirmar
 						</button>
 					</div>

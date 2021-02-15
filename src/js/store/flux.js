@@ -137,10 +137,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				formdata.append("username", traveler.username);
 				formdata.append("email", traveler.email);
-				// fetch(URL+ "traveler",{
-				//   method:"PUT",
-
-				//})
+				fetch(URL + "traveler", {
+					method: "PUT",
+					headers: formdata
+				});
 			},
 			logout: () => {
 				localStorage.removeItem("token");

@@ -76,12 +76,8 @@ export const TravelerProfil = () => {
 	useEffect(() => {
 		actions.profilTraveler();
 	}, []);
-	const cancelClick = () => {
-		setedit(!edit);
-	};
 	return (
 		<div className="container">
-			{modal == false ? <Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} /> : null}
 			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2  ">
 				<div className="card row icon">
 					{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
@@ -126,12 +122,15 @@ export const TravelerProfil = () => {
 							</button>
 						) : null}
 						{edit == true ? (
-							<button onClick={cancelClick} className="btn btn-primary cancel-btn">
+							<button onClick={handleEdit} className="btn btn-primary cancel-btn">
 								Cancelar
 							</button>
 						) : null}
 					</div>
 				</div>
+				{modal == false ? (
+					<Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} />
+				) : null}
 			</div>
 		</div>
 	);
