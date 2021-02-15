@@ -11,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLogin: false,
 			rol: ""
 		},
-    
+
 		actions: {
 			login: body => {
 				const store = getStore();
@@ -150,7 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getTrip: trip => {
 				setStore({ detailTrip: trip });
-      },
+			},
 			editTravelerProfil: (name, value) => {
 				console.log(name, value);
 				const store = getStore();
