@@ -9,7 +9,15 @@ export const Modal = props => {
 				<div className="modal-content">
 					<div className="modal-header">
 						<h5 className="modal-title">Modal title</h5>
-						<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+						<button
+							type="button"
+							className="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+							onClick={() => props.onClose()}>
+							{" "}
+							<i className="fas fa-times" />
+						</button>
 					</div>
 					<div className="modal-body">
 						<p>Modal body text goes here.</p>
@@ -24,7 +32,16 @@ export const Modal = props => {
 								onClick={() => props.onClose()}
 							/>
 						) : null}
-						<button type="button" className="btn btn-secondary" data-dismiss="modal" />
+						<button
+							type="button"
+							className="btn btn-secondary"
+							data-dismiss="modal"
+							onClick={() => props.onClose()}>
+							Cancelar
+						</button>
+						<button type="button" className="btn btn-secondary" data-dismiss="modal">
+							Confirmar
+						</button>
 					</div>
 				</div>
 			</div>

@@ -68,7 +68,7 @@ export const TravelerProfil = () => {
 			return (
 				<Fragment>
 					<img className="card-img-top traveler-img" src={foto.travelerAvatar} />
-					<input type="file" id="file" name="travelerAvatar" onChange={handleFoto} />
+					<input className="file-input" type="file" id="file" name="travelerAvatar" onChange={handleFoto} />
 				</Fragment>
 			);
 		}
@@ -76,50 +76,63 @@ export const TravelerProfil = () => {
 	useEffect(() => {
 		actions.profilTraveler();
 	}, []);
+	const cancelClick = () => {
+		setedit(!edit);
+	};
 	return (
 		<div className="container">
-			<div className="card">
-				<i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" />
-				<div>{showItems()}</div>
-				{edit == false ? (
-					<strong>{store.travelerInfoCollected.username}</strong>
-				) : (
-					<input
-						className="username"
-						name="username"
-						type="text"
-						value={store.travelerInfoCollected.username}
-						onChange={handleChange}
-					/>
-				)}
-
-				<ul className="list-group list-group-flush">
-					<li className="list-group-item">
+			{modal == false ? <Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} /> : null}
+			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2  ">
+				<div className="card row icon">
+					{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
+					<div className="img-place">{showItems()}</div>
+					<ul className="list-group list-group-flush data-list">
 						{edit == false ? (
-							<strong>{store.travelerInfoCollected.email} </strong>
+							<li className="list-group-item">
+								<strong>{store.travelerInfoCollected.username}</strong>
+							</li>
 						) : (
 							<input
-								className="emailInput"
-								name="email"
+								className="username"
+								name="username"
 								type="text"
-								value={store.travelerInfoCollected.email}
+								value={store.travelerInfoCollected.username}
 								onChange={handleChange}
 							/>
 						)}
-					</li>
-				</ul>
-				{edit == true ? (
-					<button
-						onClick={() => {
-							handleClick();
-							handleModal();
-						}}
-						className="btn btn-primary save-btn">
-						guardad
-					</button>
-				) : null}
+						<li className="list-group-item">
+							{edit == false ? (
+								<strong>{store.travelerInfoCollected.email} </strong>
+							) : (
+								<input
+									className="emailInput"
+									name="email"
+									type="text"
+									value={store.travelerInfoCollected.email}
+									onChange={handleChange}
+								/>
+							)}
+						</li>
+					</ul>
+					<div className="div-btns">
+						{edit == true ? (
+							<button
+								onClick={() => {
+									handleClick();
+									handleModal();
+								}}
+								className="btn btn-primary save-btn">
+								Guardar
+							</button>
+						) : null}
+						{edit == true ? (
+							<button onClick={cancelClick} className="btn btn-primary cancel-btn">
+								Cancelar
+							</button>
+						) : null}
+					</div>
+				</div>
 			</div>
-			{modal == false ? <Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} /> : null}
 		</div>
 	);
 };
