@@ -149,11 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getTrip: trip => {
-<<<<<<< HEAD
-				setStore({ detailTrip: trip });
-=======
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
->>>>>>> 3f4df8dbde817435d0541698fa30dc9dcccc6228
 			},
 			editTravelerProfil: (name, value) => {
 				console.log(name, value);
