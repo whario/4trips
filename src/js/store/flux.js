@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: [],
 			detailTrip: {},
 			isLogin: false,
-			rol: ""
+			rol: "",
+			offerSubmited: {}
 		},
 
 		actions: {
@@ -177,6 +178,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				localStorage.removeItem("token");
 				setStore({ isLogin: false });
+			},
+			sendOffer: (oferta, props, file) => {
+				const store = getStore();
+				const { offer, attached } = oferta;
+				console.log(oferta, "oferta enviada desde frontend");
+				let formData = new FormData();
+				formData.append("oferta", offer);
+				formData.append("attached", file, file.name);
+				fetch(URL + "user/postoffer", {
+					method: "POST",
+					body: formData,
+					headers: {
+						//"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(data => {
+						setStore({ offerSubmited: data });
+					})
+					.catch(err => {
+						console.log(err);
+					});
 			}
 		}
 	};
