@@ -9,39 +9,51 @@ export const TravelerProfil = () => {
 	const [foto, setFoto] = useState({
 		travelerAvatar: ""
 	});
+	useEffect(
+		() => {
+			setFoto({ travelerAvatar: store.travelerInfoCollected.avatar });
+		},
+		[store.travelerInfoCollected.avatar]
+	);
 	const [modal, setModal] = useState({
 		showModal: false
 	});
 
 	const [edit, setedit] = useState(false); //este es cuando le dan al button del editar que salgan los inputs de editar
+
 	const handleEdit = () => {
 		setedit(!edit);
 	};
 
 	const handleModal = () => {
-		console.log("handle");
 		setModal(!modal);
 	};
 	const handleChange = e => {
 		actions.editTravelerProfil(e.target.name, e.target.value);
 	};
 	const handleFoto = e => {
-		if ((e.target.name = "travelerAvatar")) {
+		if (e.target.name == "travelerAvatar") {
+			console.log("1");
 			const reader = new FileReader();
 			reader.onload = event => {
+				console.log("render.inlaad 1 ");
 				if (reader.readyState === 2) {
-					setFoto({ ...foto, travelerAvatar: reader.result });
+					console.log("render.oonload 2 ");
+					setFoto({ travelerAvatar: reader.result });
 				}
 			};
 			if (e.target.files[0] != undefined) {
+				console.log("2");
 				reader.readAsDataURL(e.target.files[0]);
 			}
 		} else {
-			setFoto({ ...foto, [e.target.name]: e.target.value });
+			console.log("else 1");
+			setFoto({ travelerAvatar: e.target.value });
 		}
 	};
 	const handleClick = () => {
 		const file = document.querySelector("#file");
+		console.log(file, "estoy en handleClick");
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]);
 	};
 	const showItems = () => {
@@ -56,65 +68,73 @@ export const TravelerProfil = () => {
 		} else {
 			return (
 				<Fragment>
-					<img
-						className="card-img-top traveler-img"
-						name="travelerAvatar"
-						src={foto.travelerAvatar}
-						value={store.travelerInfoCollected.avatar}
-					/>
-					<input type="file" id="file" onChange={handleFoto} />
+					<img className="card-img-top traveler-img" src={foto.travelerAvatar} />
+					<input className="file-input" type="file" id="file" name="travelerAvatar" onChange={handleFoto} />
 				</Fragment>
 			);
 		}
 	};
 	useEffect(() => {
-		console.log("texto2");
 		actions.profilTraveler();
 	}, []);
+
 	return (
 		<div className="container">
-			<div className="card">
-				<i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" />
-				<div>{showItems()}</div>
-				{edit == false ? (
-					<strong>{store.travelerInfoCollected.username}</strong>
-				) : (
-					<input
-						className="username"
-						name="username"
-						type="text"
-						value={store.travelerInfoCollected.username}
-						onChange={handleChange}
-					/>
-				)}
-
-				<ul className="list-group list-group-flush">
-					<li className="list-group-item">
+			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2  ">
+				<div className="card row icon">
+					{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
+					<div className="img-place">{showItems()}</div>
+					<ul className="list-group list-group-flush data-list">
 						{edit == false ? (
-							<strong>{store.travelerInfoCollected.email} </strong>
+							<li className="list-group-item">
+								<strong>{store.travelerInfoCollected.username}</strong>
+							</li>
 						) : (
 							<input
-								className="emailInput"
-								name="email"
+								className="username"
+								name="username"
 								type="text"
-								value={store.travelerInfoCollected.email}
+								value={store.travelerInfoCollected.username}
 								onChange={handleChange}
 							/>
 						)}
-					</li>
-				</ul>
-				{edit == true ? (
-					<button
-						onClick={() => {
-							handleClick();
-							handleModal();
-						}}
-						className="btn btn-primary save-btn">
-						guardad
-					</button>
-				) : null}
+						<li className="list-group-item">
+							{edit == false ? (
+								<strong>{store.travelerInfoCollected.email} </strong>
+							) : (
+								<input
+									className="emailInput"
+									name="email"
+									type="text"
+									value={store.travelerInfoCollected.email}
+									onChange={handleChange}
+								/>
+							)}
+						</li>
+					</ul>
+					<div className="div-btns">
+						{edit == true ? (
+							<button
+								onClick={() => {
+									handleModal();
+								}}
+								className="btn btn-primary save-btn">
+								Guardar
+							</button>
+						) : null}
+						{edit == true ? (
+							<button onClick={handleEdit} className="btn btn-primary cancel-btn">
+								Cancelar
+							</button>
+						) : null}
+					</div>
+				</div>
 				{modal == false ? (
-					<Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} />
+					<Modal
+						handleClick={handleClick}
+						show={modal.showModal}
+						onClose={() => setModal({ showModal: false })}
+					/>
 				) : null}
 			</div>
 		</div>

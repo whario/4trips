@@ -1,22 +1,4 @@
-.avatar-traveler{
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-}
-.traveler-data{
-    text-align: center;
-    font-size: 48px;
-    color: #000000;
-    font-weight: 750;
-}
-.img-container{
-    text-align: center;
-}
-.h2 {
-font-size: 48px;
-color: #000000;
-font-weight: 750;
-}
+
 .traveler-img{ 
     width: 200px;
     height: 200px;
@@ -28,7 +10,6 @@ font-weight: 750;
 .card{
     padding: 20px;
     top: 75px;
-    width: 350px;
     margin: auto;
  }
 .card-title{
@@ -39,9 +20,9 @@ font-weight: 750;
 }
 .username{
     margin: 20px;
-    width: 175px;
+    width: 192px;
     position: relative;
-    left: 14%;
+ 
 }
 .email-input{
     margin: 12px;
@@ -55,3 +36,26 @@ font-weight: 750;
     top: 10px;
 }
 
+.strog{
+        padding: 20px 12px 20px 12px;
+}
+.img-place{
+        text-align: center;
+}
+.div-btns{
+    width: 100%;
+    text-align: center;
+}
+.data-list{
+    width: 90%;
+}
+.cancel-btn{
+    width: 75%;
+    position: relative;
+    top: 15px;
+}
+.file-input{
+    position: relative;
+    bottom: 10px;
+    font-size: 12px;
+}
