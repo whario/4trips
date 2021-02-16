@@ -186,7 +186,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formData = new FormData();
 				formData.append("oferta", offer);
 				formData.append("attached", file, file.name);
-				fetch(URL + "user/postoffer", {
+				fetch(URL + "publishoffer", {
 					method: "POST",
 					body: formData,
 					headers: {
