@@ -132,14 +132,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(traveler, "ttraveler");
 				const token = localStorage.getItem("token");
 				const formdata = new FormData();
-				if (file != undefined || file != null) {
+				if (file != undefined && file != null) {
 					formdata.append("avatar", file, file.name);
 				}
+
 				formdata.append("username", traveler.username);
 				formdata.append("email", traveler.email);
+				console.log(file, "form data");
 				fetch(URL + "traveler", {
 					method: "PUT",
-					headers: formdata
+					body: formdata,
+					headers: {
+						formdata,
+						Authorization: "Bearer " + token
+					}
 				});
 			},
 			logout: () => {

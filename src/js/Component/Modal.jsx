@@ -4,9 +4,7 @@ import { Context } from "../store/appContext";
 
 export const Modal = props => {
 	const { store, actions } = useContext(Context);
-	const handleSave = () => {
-		actions.updateTravelerData();
-	};
+
 	console.log(props, "props en modal");
 	return (
 		<div className="dialago" tabIndex="-1" role="dialog">
@@ -44,7 +42,11 @@ export const Modal = props => {
 							onClick={() => props.onClose()}>
 							Cancelar
 						</button>
-						<button onClick={handleSave} type="button" className="btn btn-secondary" data-dismiss="modal">
+						<button
+							onClick={props.handleClick}
+							type="button"
+							className="btn btn-secondary"
+							data-dismiss="modal">
 							Confirmar
 						</button>
 					</div>
@@ -56,7 +58,8 @@ export const Modal = props => {
 Modal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
-	show: PropTypes.bool
+	show: PropTypes.bool,
+	handleClick: PropTypes.func
 };
 Modal.defaultProps = {
 	show: false,

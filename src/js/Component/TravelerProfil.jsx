@@ -53,6 +53,7 @@ export const TravelerProfil = () => {
 	};
 	const handleClick = () => {
 		const file = document.querySelector("#file");
+		console.log(file, "estoy en handleClick");
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]);
 	};
 	const showItems = () => {
@@ -76,6 +77,7 @@ export const TravelerProfil = () => {
 	useEffect(() => {
 		actions.profilTraveler();
 	}, []);
+
 	return (
 		<div className="container">
 			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2  ">
@@ -114,7 +116,6 @@ export const TravelerProfil = () => {
 						{edit == true ? (
 							<button
 								onClick={() => {
-									handleClick();
 									handleModal();
 								}}
 								className="btn btn-primary save-btn">
@@ -129,7 +130,11 @@ export const TravelerProfil = () => {
 					</div>
 				</div>
 				{modal == false ? (
-					<Modal show={modal.showModal} onClose={() => setModal({ showModal: false })} />
+					<Modal
+						handleClick={handleClick}
+						show={modal.showModal}
+						onClose={() => setModal({ showModal: false })}
+					/>
 				) : null}
 			</div>
 		</div>
