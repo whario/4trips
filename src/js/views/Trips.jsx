@@ -10,11 +10,8 @@ export const Trips = () => {
 	const { store, actions } = useContext(Context);
 	const [page, setPage] = useState(1);
 
-	console.log("LOADING", store.tripList);
 	useEffect(
-		() => {
-			console.log(store.tripList.length, "en useffect");
-		},
+		() => {},
 		[store.tripList] //espero a que haya cambios en la variable tripList con useEffect para hacer el mapeado
 	);
 	const changePage = () => {

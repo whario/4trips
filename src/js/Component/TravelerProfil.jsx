@@ -31,23 +31,18 @@ export const TravelerProfil = () => {
 	const handleChange = e => {
 		actions.editTravelerProfil(e.target.name, e.target.value);
 	};
-	const handleFoto = e => {
+	const proAvatar = e => {
 		if (e.target.name == "travelerAvatar") {
-			console.log("1");
 			const reader = new FileReader();
 			reader.onload = event => {
-				console.log("render.inlaad 1 ");
 				if (reader.readyState === 2) {
-					console.log("render.oonload 2 ");
 					setFoto({ travelerAvatar: reader.result });
 				}
 			};
 			if (e.target.files[0] != undefined) {
-				console.log("2");
 				reader.readAsDataURL(e.target.files[0]);
 			}
 		} else {
-			console.log("else 1");
 			setFoto({ travelerAvatar: e.target.value });
 		}
 	};

@@ -1,4 +1,4 @@
-const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
+const URL = "https://3000-tan-vole-6vvk5e0t.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -77,6 +77,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(err);
 					});
 			},
+			profilPro: () => {
+				const token = localStorage.getItem("token");
+				console.log(token, "token");
+				fetch(URL + "pro", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore({ proInfoCollected: data }))
+					.catch(err => console.log(err, "err"));
+			},
 			addTrip: async trip => {
 				const token = localStorage.getItem("token");
 				let newNeedsTrip = ""; //convierto el array needs_trip en string para que lo pueda recoger el backend
@@ -97,7 +111,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadingTrips: page => {
 				const store = getStore();
-				console.log(page, "pagina");
 				fetch(URL + "viajes" + "/" + page)
 					.then(res => res.json())
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
