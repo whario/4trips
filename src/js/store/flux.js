@@ -181,16 +181,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			sendOffer: (oferta, props, file) => {
 				const store = getStore();
-				const { offer, attached } = oferta;
+				const token = localStorage.getItem("token");
+				const { text, attached, id_trip } = oferta;
 				console.log(oferta, "oferta enviada desde frontend");
 				let formData = new FormData();
-				formData.append("oferta", offer);
+				formData.append("oferta", text);
 				formData.append("attached", file, file.name);
+				formData.append("id_trip", id_trip); //lo que está entre "" viene del servidor
 				fetch(URL + "publishoffer", {
 					method: "POST",
 					body: formData,
 					headers: {
-						//"Content-Type": "application/json"
+						Authorization: "Bearer " + token
 					}
 				})
 					.then(res => res.json())

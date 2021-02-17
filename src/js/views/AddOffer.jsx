@@ -6,8 +6,9 @@ import PropTypes from "prop-types";
 export const AddOffer = props => {
 	const { store, actions } = useContext(Context);
 	const [inputs, setInputs] = useState({
-		offer: "",
-		attached: ""
+		text: "",
+		attached: "",
+		id_trip: props.id_trip
 	});
 	const handelChange = e => {
 		console.log("handleChange", e.target.value);
@@ -30,7 +31,7 @@ export const AddOffer = props => {
 
 	const handelSubmit = event => {
 		event.preventDefault();
-		if (inputs.offer != "") {
+		if (inputs.text != "") {
 			setValied(true);
 		}
 		setSubmit(true);
@@ -46,14 +47,12 @@ export const AddOffer = props => {
 					<div className="input-group mb-3">
 						<input
 							type="text"
-							name="offer"
+							name="text"
 							className="form-control"
 							placeholder="Envia una oferta a este viajero"
 							src={inputs.offer}
 						/>
-						{submit && !inputs.offer ? (
-							<span className="alert alert-danger">Describe tu oferta</span>
-						) : null}
+						{submit && !inputs.text ? <span className="alert alert-danger">Describe tu oferta</span> : null}
 						<input type="file" name="attached" className="form-control" id="file" />
 						<button className="btn btn-outline-secondary" type="submit" id="button-addon1">
 							Enviar
@@ -66,7 +65,8 @@ export const AddOffer = props => {
 };
 
 AddOffer.propTypes = {
-	history: PropTypes.object
+	history: PropTypes.object,
+	id_trip: PropTypes.integer
 };
 
 export default AddOffer;

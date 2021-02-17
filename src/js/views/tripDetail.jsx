@@ -77,8 +77,8 @@ export const TripDetail = () => {
 				</div>
 			</div>
 			<div>
-				<AddOffer />
+				<AddOffer id_trip={detailTrip.id} />
 			</div>
 		</div>
-	);
+	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props)
 };
