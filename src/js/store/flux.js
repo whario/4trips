@@ -58,7 +58,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formData.append("location", location);
 				formData.append("vat_number", vat_number);
 				formData.append("social_reason", social_reason);
-				formData.append("avatar", file, file.name);
+				if (file != undefined) {
+					formData.append("avatar", file, file.name);
+				}
 				fetch(URL + "user/register/pro", {
 					method: "POST",
 					body: formData,
