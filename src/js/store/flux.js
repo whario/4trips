@@ -150,6 +150,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getTrip: trip => {
+				console.log(trip, "@@@@@@@@@@@");
+				setStore({ detailTrip: trip });
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
 			},
 			editTravelerProfil: (name, value) => {
@@ -179,7 +181,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem("token");
 				setStore({ isLogin: false });
 			},
-			sendOffer: (oferta, props, file) => {
+			sendOffer: async (oferta, props, file) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
 				const { text, attached, id_trip } = oferta;
@@ -193,20 +195,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					formData.append("attached", file, file.name);
 				}
 				formData.append("id_trip", id_trip); //lo que está entre "" viene del servidor
-				fetch(URL + "publishoffer", {
+				const res = await fetch(URL + "publishoffer", {
 					method: "POST",
 					body: formData,
 					headers: {
 						Authorization: "Bearer " + token
 					}
-				})
-					.then(res => res.json())
-					.then(data => {
-						setStore({ offerSubmited: data });
-					})
-					.catch(err => {
-						console.log(err);
+				});
+
+				if (res.ok) {
+					//Así me devuelve ok si la respuesta es correcta
+					const response = await fetch(URL + "viaje/" + id_trip, {
+						headers: {
+							Authorization: "Bearer " + token
+						}
 					});
+					const data = await response.json();
+					console.log(data);
+					getActions().getTrip(data);
+				}
 			}
 		}
 	};

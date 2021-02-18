@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { checkPropTypes } from "prop-types";
 import logoAloj from "../../img/alojamientoicon.png";
@@ -18,13 +18,22 @@ export const TripDetail = () => {
 		adventure: logoMultia,
 		relax: logoPiscina
 	};
-	const detailTrip = JSON.parse(sessionStorage.getItem("detailTrip")); //json.parse me convierte en objeto la string que viene de sessionStorage
+	const [detailTrip, setdetailTrip] = useState(JSON.parse(sessionStorage.getItem("detailTrip")));
+	console.log("fuera de useEffect", typeof detailTrip.needs_trip);
+	useEffect(
+		() => {
+			setdetailTrip(JSON.parse(sessionStorage.getItem("detailTrip")));
+			console.log("dentro de useEffect", detailTrip);
+		},
+		[store.detailTrip]
+	);
+
 	const formatDay = day => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
 
-	console.log(typeof detailTrip.id, "id_trip");
+	console.log(detailTrip.traveler.avatar, "AVATARP");
 	return (
 		<div className="container">
 			<div className="row">
@@ -65,7 +74,7 @@ export const TripDetail = () => {
 								</li>
 								<li className="list-group-item blue">
 									Nº ofertas recibidas:
-									<div className="numero">{detailTrip.counter}</div>
+									<div className="numero">{detailTrip.offers.length}</div>
 								</li>
 							</ul>
 						</div>
