@@ -24,6 +24,7 @@ export const TripDetail = () => {
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
 
+	console.log(typeof detailTrip.id, "id_trip");
 	return (
 		<div className="container">
 			<div className="row">

@@ -183,10 +183,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
 				const { text, attached, id_trip } = oferta;
+				console.log(attached, "ATTACHED");
+				console.log(file, "FILE");
 				console.log(oferta, "oferta enviada desde frontend");
 				let formData = new FormData();
 				formData.append("oferta", text);
-				formData.append("attached", file, file.name);
+				if (attached != "" && attached != null && file != undefined) {
+					console.log("ENTRANDO EN IF FLUX SIN ADJUNTO");
+					formData.append("attached", file, file.name);
+				}
 				formData.append("id_trip", id_trip); //lo que está entre "" viene del servidor
 				fetch(URL + "publishoffer", {
 					method: "POST",

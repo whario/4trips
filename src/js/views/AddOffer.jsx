@@ -66,7 +66,7 @@ export const AddOffer = props => {
 
 AddOffer.propTypes = {
 	history: PropTypes.object,
-	id_trip: PropTypes.integer
+	id_trip: PropTypes.number
 };
 
 export default AddOffer;
