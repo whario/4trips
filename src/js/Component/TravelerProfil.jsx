@@ -5,11 +5,13 @@ import { Modal } from "./Modal.jsx";
 import "../../styles/TravelerProfil.css";
 
 export const TravelerProfil = () => {
-	const { store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context); //
 	const [foto, setFoto] = useState({
+		//
 		travelerAvatar: ""
 	});
 	useEffect(
+		//
 		() => {
 			setFoto({ travelerAvatar: store.travelerInfoCollected.avatar });
 		},
@@ -19,9 +21,10 @@ export const TravelerProfil = () => {
 		showModal: false
 	});
 
-	const [edit, setedit] = useState(false); //este es cuando le dan al button del editar que salgan los inputs de editar
+	const [edit, setedit] = useState(false); //este es cuando le dan al button del editar que salgan los inputs de editar //
 
 	const handleEdit = () => {
+		//
 		setedit(!edit);
 	};
 
@@ -29,9 +32,11 @@ export const TravelerProfil = () => {
 		setModal(!modal);
 	};
 	const handleChange = e => {
+		//
 		actions.editTravelerProfil(e.target.name, e.target.value);
 	};
-	const proAvatar = e => {
+	const handleFoto = e => {
+		//
 		if (e.target.name == "travelerAvatar") {
 			const reader = new FileReader();
 			reader.onload = event => {
@@ -47,11 +52,13 @@ export const TravelerProfil = () => {
 		}
 	};
 	const handleClick = () => {
+		//
 		const file = document.querySelector("#file");
 		console.log(file, "estoy en handleClick");
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]);
 	};
 	const showItems = () => {
+		//666
 		if (edit == false) {
 			return (
 				<img
@@ -70,6 +77,7 @@ export const TravelerProfil = () => {
 		}
 	};
 	useEffect(() => {
+		//
 		actions.profilTraveler();
 	}, []);
 

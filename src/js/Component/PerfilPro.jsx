@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import SignUpPro from "../views/SignUpPro.js";
@@ -8,6 +8,12 @@ export const PerfilPro = () => {
 	const [foto, setFoto] = useState({
 		proAvatar: ""
 	});
+	useEffect(
+		() => {
+			setFoto({ proAvatar: store.proInfoCollected.avatar });
+		},
+		[store.proInfoCollected.avatar]
+	);
 	useEffect(() => {
 		actions.profilPro();
 	}, []);
@@ -15,6 +21,9 @@ export const PerfilPro = () => {
 
 	const handleEdit = () => {
 		setedit(!edit);
+	};
+	const handleChange = e => {
+		actions.editProProfail(e.target.name, e.target.value);
 	};
 	const handleFoto = e => {
 		if (e.target.name == "proAvatar") {
@@ -25,39 +34,75 @@ export const PerfilPro = () => {
 				}
 			};
 			if (e.target.files[0] != undefined) {
-				reader.readAsDataUrl(e.target.files[0]);
+				reader.readAsDataURL(e.target.files[0]);
 			}
 		} else {
 			setFoto({ proAvatar: e.target.value });
 		}
 	};
+	const handleSave = () => {
+		const file = document.querySelector("#file");
+		actions.updateProData(store.proInfoCollected, file.files[0]);
+	};
+	console.log(store.proInfoCollected, "proinfocolec");
 	return (
 		<div className="container">
 			<div className="card">
-				<i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" />
-				<img className="card-img-top traveler-img" src={store.proInfoCollected.avatar} alt="avatar" />
+				{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
+				{edit == false ? (
+					<img className="card-img-top traveler-img" src={store.proInfoCollected.avatar} alt="avatar" />
+				) : (
+					<Fragment>
+						<img className="card-img-top traveler-img" src={foto.proAvatar} />,
+						<input className="file-input" type="file" id="file" name="proAvatar" onChange={handleFoto} />
+					</Fragment>
+				)}
 				{edit == false ? (
 					<li className="list-group-item">
 						<strong>{store.proInfoCollected.user_name}</strong>
 					</li>
 				) : (
-					<input className="username" name="user_name" type="text" value={store.proInfoCollected.user_name} />
+					<input
+						className="username"
+						name="user_name"
+						type="text"
+						value={store.proInfoCollected.user_name}
+						onChange={handleChange}
+					/>
 				)}
 				<ul className="list-group list-group-flush">
 					{edit == false ? (
 						<li className="list-group-item">{store.proInfoCollected.email} </li>
 					) : (
-						<input className="email" name="email" type="text" value={store.proInfoCollected.email} />
+						<input
+							className="email"
+							name="email"
+							type="text"
+							value={store.proInfoCollected.email}
+							onChange={handleChange}
+						/>
 					)}
 					{edit == false ? (
 						<li className="list-group-item">{store.proInfoCollected.phone} </li>
 					) : (
-						<input className="phone" name="phone" type="text" value={store.proInfoCollected.phone} />
+						<input
+							className="phone"
+							name="phone"
+							type="text"
+							value={store.proInfoCollected.phone}
+							onChange={handleChange}
+						/>
 					)}
 					{edit == false ? (
 						<li className="list-group-item">{store.proInfoCollected.url} </li>
 					) : (
-						<input className="url" name="url" type="text" value={store.proInfoCollected.url} />
+						<input
+							className="url"
+							name="url"
+							type="text"
+							value={store.proInfoCollected.url}
+							onChange={handleChange}
+						/>
 					)}
 					{edit == false ? (
 						<li className="list-group-item">{store.proInfoCollected.direction}</li>
@@ -67,6 +112,7 @@ export const PerfilPro = () => {
 							name="direction"
 							type="text"
 							value={store.proInfoCollected.direction}
+							onChange={handleChange}
 						/>
 					)}
 					{edit == false ? (
@@ -77,9 +123,20 @@ export const PerfilPro = () => {
 							name="location"
 							type="text"
 							value={store.proInfoCollected.location}
+							onChange={handleChange}
 						/>
 					)}
 				</ul>
+				{edit == true ? (
+					<Fragment>
+						<button onClick={handleSave} className="btn btn-primary">
+							Guardar
+						</button>
+						<button onClick={handleEdit} className="btn btn-primary">
+							Cancelar
+						</button>
+					</Fragment>
+				) : null}
 			</div>
 		</div>
 	);
