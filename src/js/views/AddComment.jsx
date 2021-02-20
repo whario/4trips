@@ -8,8 +8,8 @@ export const AddComment = props => {
 	const [inputs, setInputs] = useState({
 		text: "",
 		attached: "",
-        id_trip: props.id_trip,
-        id_offer: props.id_offer,
+		id_trip: props.id_trip,
+		id_offer: props.id_offer
 	});
 	const handelChange = e => {
 		console.log("handleChange", e.target.value);
@@ -69,8 +69,8 @@ export const AddComment = props => {
 
 AddComment.propTypes = {
 	history: PropTypes.object,
-    id_trip: PropTypes.number,
-    id_offer: PropTypes.number
+	id_trip: PropTypes.number,
+	id_offer: PropTypes.number
 };
 
 export default AddComment;

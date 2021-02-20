@@ -1,4 +1,4 @@
-const URL = "https://3000-tan-vole-6vvk5e0t.ws-eu03.gitpod.io/";
+const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -10,8 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			detailTrip: {},
 			isLogin: false,
 			rol: "",
-            offerSubmited: {},
-            detailOffer: {}
+			offerSubmited: {},
+			detailOffer: {}
 		},
 
 		actions: {
@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("token", data.access_token);
 						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
-						setStore({ isLogin: true, rol: data.rol });
+						setStore({ isLogin: true, rol: data.rol, tripList: [] });
 					})
 					.catch(err => console.log(err, "error login "));
 			},
@@ -152,7 +152,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				fetch(URL + "viajes" + "/" + page)
 					.then(res => res.json())
-					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
+					.then(data => {
+						const list = page != 1 ? [...store.tripList, data.data] : data.data;
+						setStore({ tripList: list });
+					})
 					.catch(error => console.log(error));
 			},
 			registeredTraveler: (traveler, props, file) => {
@@ -188,8 +191,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getTrip: trip => {
 				console.log(trip, "@@@@@@@@@@@");
-				setStore({ detailTrip: trip });
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
+				setStore({ detailTrip: trip });
 			},
 			// la perfil traverler con su funconalidades
 			editTravelerProfil: (name, value) => {
@@ -242,7 +245,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
 				console.log(store.detailTrip, "DETAIL TRIP");
-				const { text, attached, id_trip } = oferta;
+				const { text, attached, id_trip, id_offer } = oferta;
 				let formData = new FormData();
 				formData.append("oferta", text);
 				formData.append("email", store.detailTrip.traveler.email);
@@ -260,7 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if (res.ok) {
 					//Así me devuelve ok si la respuesta es correcta
-					const response = await fetch(URL + "oferta/" + id_offer, {
+					const response = await fetch(URL + "viaje/" + id_trip, {
 						headers: {
 							Authorization: "Bearer " + token
 						}
@@ -269,24 +272,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					getActions().getTrip(data);
 				}
-            },
-            getOffer: offer => {
+			},
+			getOffer: offer => {
 				console.log(offer, "@@@@@@@@@@@");
 				setStore({ detailOffer: offer });
 				sessionStorage.setItem("detailOffer", JSON.stringify(offer)); //almaceno offer en session storage
-            },
-            sendComment: async (comentario, props, file) => {
+			},
+			sendComment: async (comentario, props, file) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
-                console.log(store.detailTrip, "DETAIL TRIP");
-                console.log(store.detailOffer, "DETAIL OFFER")
+				console.log(store.detailTrip, "DETAIL TRIP");
+				console.log(store.detailOffer, "DETAIL OFFER");
 				const { text, attached, id_trip, id_offer } = comentario;
 				let formData = new FormData();
 				formData.append("comentario", text);
 				if (attached != "" && attached != null && file != undefined) {
 					formData.append("attached", file, file.name);
 				}
-                formData.append("id_offer", id_offer);
+				formData.append("id_offer", id_offer);
 				const res = await fetch(URL + "publishcomment", {
 					method: "POST",
 					body: formData,
@@ -306,7 +309,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					getActions().getOffer(data);
 				}
-            },
+			}
 		}
 	};
 };

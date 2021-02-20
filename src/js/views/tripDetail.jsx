@@ -20,7 +20,14 @@ export const TripDetail = () => {
 		relax: logoPiscina
 	};
 	const [detailTrip, setdetailTrip] = useState(JSON.parse(sessionStorage.getItem("detailTrip")));
-	console.log("fuera de useEffect", typeof detailTrip.needs_trip);
+	console.log("----------detail trip", detailTrip);
+	useEffect(() => {
+		console.log("Fuera de IF", Object.keys(store.detailTrip).length == 0);
+		if (Object.keys(store.detailTrip).length == 0) {
+			console.log("Dentro de IF");
+			actions.getTrip(detailTrip);
+		}
+	}, []);
 	useEffect(
 		() => {
 			setdetailTrip(JSON.parse(sessionStorage.getItem("detailTrip")));
@@ -34,7 +41,6 @@ export const TripDetail = () => {
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
 
-	console.log(detailTrip.traveler.avatar, "AVATARP");
 	return (
 		<div className="container">
 			<div className="row">
