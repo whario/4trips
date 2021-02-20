@@ -1,4 +1,4 @@
-const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
+const URL = "https://3000-tan-vole-6vvk5e0t.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -59,7 +59,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formData.append("location", location);
 				formData.append("vat_number", vat_number);
 				formData.append("social_reason", social_reason);
-				formData.append("avatar", file, file.name);
+				if (file != undefined) {
+					formData.append("avatar", file, file.name);
+				}
 				fetch(URL + "user/register/pro", {
 					method: "POST",
 					body: formData,
@@ -77,6 +79,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => {
 						console.log(err);
 					});
+			},
+			// perfil pro con sus funcionalidades
+			profilPro: () => {
+				const token = localStorage.getItem("token");
+				console.log(token, "token");
+				fetch(URL + "pro", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore({ proInfoCollected: data }))
+					.catch(err => console.log(err, "err"));
+			},
+			editProProfail: (name, value) => {
+				console.log(name, value);
+				const store = getStore();
+				let pro = store.proInfoCollected;
+				pro[name] = value;
+				console.log(pro[name], "name pro");
+				setStore({ proInfoCollected: pro });
+			},
+			updateProData: (pro, file) => {
+				console.log(file);
+				console.log(pro, "PRO");
+				const token = localStorage.getItem("token");
+				const formdata = new FormData();
+				if (file != undefined && file != null) {
+					formdata.append("avatar", file, file.name);
+				}
+				formdata.append("user_name", pro.user_name);
+				formdata.append("email", pro.email);
+				formdata.append("phone", pro.phone);
+				formdata.append("url", pro.url);
+				formdata.append("direction", pro.direction);
+				formdata.append("location", pro.location);
+				formdata.append("vat_number", pro.vat_number);
+				formdata.append("social_reason", pro.social_reason);
+				console.log(file, "form data");
+				fetch(URL + "pro", {
+					method: "PUT",
+					body: formdata,
+					headers: {
+						formdata,
+						Authorization: "Bearer " + token
+					}
+				});
 			},
 			addTrip: async trip => {
 				const token = localStorage.getItem("token");
@@ -98,7 +149,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadingTrips: page => {
 				const store = getStore();
-				console.log(page, "pagina");
 				fetch(URL + "viajes" + "/" + page)
 					.then(res => res.json())
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
@@ -135,25 +185,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(err);
 					});
 			},
-			profilTraveler: traveler => {
-				const token = localStorage.getItem("token");
-				fetch(URL + "traveler", {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + token
-					}
-				})
-					.then(res => res.json())
-					.then(data => setStore({ travelerInfoCollected: data }))
-					.catch(err => console.log(err, "err"));
-			},
-
 			getTrip: trip => {
 				console.log(trip, "@@@@@@@@@@@");
 				setStore({ detailTrip: trip });
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
 			},
+			// la perfil traverler con su funconalidades
 			editTravelerProfil: (name, value) => {
 				console.log(name, value);
 				const store = getStore();
@@ -183,6 +220,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
+			profilTraveler: traveler => {
+				const token = localStorage.getItem("token");
+				fetch(URL + "traveler", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore({ travelerInfoCollected: data }))
+					.catch(err => console.log(err, "err"));
+			}, /////////////////////////////////
 			logout: () => {
 				localStorage.removeItem("token");
 				setStore({ isLogin: false });

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 const Navbar = props => {
 	const { store, actions } = useContext(Context);
-	console.log(store, "props");
 
 	const redirect = () => {
 		if (store.isLogin == false) {
@@ -17,7 +16,7 @@ const Navbar = props => {
 					</Link>
 					<Link to="/login" className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
-						Login{" "}
+						iniciar sesion{" "}
 					</Link>
 				</Fragment>
 			);
@@ -30,7 +29,7 @@ const Navbar = props => {
 					</Link>
 					<Link to="/login" onClick={e => actions.logout()} className="btn  my-2 my-sm-0 btnRegistroLogin">
 						{" "}
-						Logout
+						Salir
 					</Link>
 				</Fragment>
 			);
