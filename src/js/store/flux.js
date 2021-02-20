@@ -190,14 +190,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			sendOffer: async (oferta, props, file) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
+				console.log(store.detailTrip, "DETAIL TRIP");
 				const { text, attached, id_trip } = oferta;
-				console.log(attached, "ATTACHED");
-				console.log(file, "FILE");
-				console.log(oferta, "oferta enviada desde frontend");
 				let formData = new FormData();
 				formData.append("oferta", text);
+				formData.append("email", store.detailTrip.traveler.email);
 				if (attached != "" && attached != null && file != undefined) {
-					console.log("ENTRANDO EN IF FLUX SIN ADJUNTO");
 					formData.append("attached", file, file.name);
 				}
 				formData.append("id_trip", id_trip); //lo que está entre "" viene del servidor
