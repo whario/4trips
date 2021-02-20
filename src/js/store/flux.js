@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			detailTrip: {},
 			isLogin: false,
 			rol: "",
-			offerSubmited: {}
+            offerSubmited: {},
+            detailOffer: {}
 		},
 
 		actions: {
@@ -259,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if (res.ok) {
 					//Así me devuelve ok si la respuesta es correcta
-					const response = await fetch(URL + "viaje/" + id_trip, {
+					const response = await fetch(URL + "oferta/" + id_offer, {
 						headers: {
 							Authorization: "Bearer " + token
 						}
@@ -268,7 +269,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					getActions().getTrip(data);
 				}
-			}
+            },
+            getOffer: offer => {
+				console.log(offer, "@@@@@@@@@@@");
+				setStore({ detailOffer: offer });
+				sessionStorage.setItem("detailOffer", JSON.stringify(offer)); //almaceno offer en session storage
+            },
+            sendComment: async (comentario, props, file) => {
+				const store = getStore();
+				const token = localStorage.getItem("token");
+                console.log(store.detailTrip, "DETAIL TRIP");
+                console.log(store.detailOffer, "DETAIL OFFER")
+				const { text, attached, id_trip, id_offer } = comentario;
+				let formData = new FormData();
+				formData.append("comentario", text);
+				if (attached != "" && attached != null && file != undefined) {
+					formData.append("attached", file, file.name);
+				}
+                formData.append("id_offer", id_offer);
+				const res = await fetch(URL + "publishcomment", {
+					method: "POST",
+					body: formData,
+					headers: {
+						Authorization: "Bearer " + token
+					}
+				});
+
+				if (res.ok) {
+					//Así me devuelve ok si la respuesta es correcta
+					const response = await fetch(URL + "viaje/" + id_trip, {
+						headers: {
+							Authorization: "Bearer " + token
+						}
+					});
+					const data = await response.json();
+					console.log(data);
+					getActions().getOffer(data);
+				}
+            },
 		}
 	};
 };

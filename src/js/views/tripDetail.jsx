@@ -8,6 +8,7 @@ import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "./AddOffer.jsx";
+import { AddComment } from "./AddComment.jsx";
 
 export const TripDetail = () => {
 	const { store, actions } = useContext(Context);
@@ -88,6 +89,9 @@ export const TripDetail = () => {
 			</div>
 			<div>
 				<AddOffer id_trip={detailTrip.id} />
+			</div>{" "}
+			<div>
+				<AddComment id_offer={detailTrip.id_offer} />
 			</div>
 		</div>
 	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props)
