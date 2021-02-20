@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			login: body => {
+			login: (body, setErrFetch, history) => {
 				const store = getStore();
 				fetch(URL + "login", {
 					method: "POST",
@@ -24,6 +24,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(res => {
+						console.log(res);
+						if (res.status == 401 || res.status == 404) {
+							console.log("error password incorrect");
+							setErrFetch({
+								status: true,
+								msg: "usuario o contraseña incorrectos"
+							});
+							return;
+						} else if (res.status == 500) {
+							setErrFetch({
+								status: true,
+								msg: "erro interno "
+							});
+							return;
+						}
 						return res.json();
 					})
 					.then(data => {
@@ -31,6 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol });
+						history.push("/");
 					})
 					.catch(err => console.log(err, "error login "));
 			},

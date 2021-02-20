@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import Error from "../Component/Error.jsx";
 
 export default function LogIn(props) {
 	const { store, actions } = useContext(Context);
@@ -19,7 +20,10 @@ export default function LogIn(props) {
 		email: "",
 		password: ""
 	});
-
+	const [errFetch, setErrFetch] = useState({
+		status: false,
+		msg: ""
+	});
 	const handelChange = e => {
 		setState({ ...state, [e.target.name]: e.target.value });
 		if (state.email != "") {
@@ -28,18 +32,20 @@ export default function LogIn(props) {
 			setError({ ...error, password: "" });
 		}
 	};
-
 	const handelSubmit = event => {
 		event.preventDefault();
+		setErrFetch({
+			status: false,
+			msg: ""
+		});
 		let div = document.querySelector("#loading");
 		console.log(state.email, "state.email");
 		if (state.email == "" && state.password == "") {
 			setError({ ...error, email: "Introduce tu email", password: "Introduce tu contraseña" });
 		} else {
-			actions.login(state);
+			actions.login(state, setErrFetch, props.history);
 			div.classList.remove("oculto");
 			div.classList.add("spinner-border");
-			props.history.push("/");
 		}
 	};
 
@@ -74,6 +80,7 @@ export default function LogIn(props) {
 							<span />
 							<div className="oculto" id="loading" />
 						</button>
+						{errFetch.status ? <Error msg={errFetch.msg} /> : null}
 					</form>
 				</div>
 			</div>
