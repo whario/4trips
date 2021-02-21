@@ -46,17 +46,17 @@ export const TripCard = props => {
 						<li className="list-group-item">
 							<div className="row">
 								Destino:
-								<div className="props">{props.trip.destination}</div>
+								<div className="props destino">{props.trip.destination}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
 							<div className="row">
 								Desde:
-								<div className="props">{formatDay(props.trip.first_day)}</div>
+								<div className="props day1">{formatDay(props.trip.first_day)}</div>
 							</div>
 							<div className="row">
 								Hasta:
-								<div className="props">{formatDay(props.trip.last_day)}</div>
+								<div className="props day2">{formatDay(props.trip.last_day)}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
@@ -64,7 +64,14 @@ export const TripCard = props => {
 							<div className="row">
 								<Link to={"/trip/" + props.trip.id}>
 									<div className="props description" onClick={() => actions.getTrip(props.trip)}>
-										{props.trip.description.substring(0, 20)}
+										{props.trip.description.substring(0, 25)}
+										<p>...</p>
+									</div>
+								</Link>
+								<Link to={"/trip/" + props.trip.id}>
+									<div className="leermas" onClick={() => actions.getTrip(props.trip)}>
+										<span />
+										<p>leer más</p>
 									</div>
 								</Link>
 							</div>

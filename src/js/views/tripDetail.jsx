@@ -9,6 +9,7 @@ import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "./AddOffer.jsx";
 import { AddComment } from "./AddComment.jsx";
+import { OfferCard } from "../Component/OfferCard.jsx";
 
 export const TripDetail = () => {
 	const { store, actions } = useContext(Context);
