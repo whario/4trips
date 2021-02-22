@@ -30,18 +30,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 								status: true,
 								msg: "usuario o contraseña incorrectos"
 							});
+							setLoading(false);
 							return;
 						} else if (res.status == 404) {
 							setErrFetch({
 								status: true,
 								msg: "usuario no existe"
 							});
+							setLoading(false);
 							return;
 						} else if (res.status == 500) {
 							setErrFetch({
 								status: true,
 								msg: "error interno"
 							});
+							setLoading(false);
 							return;
 						}
 						return res.json();
@@ -51,6 +54,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol });
+						setLoading(false);
+						history.push("/");
 					})
 					.catch(err => console.log(err, "error login "));
 			},
@@ -288,6 +293,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					getActions().getTrip(data);
 				}
+			},
+			isLoginVerified: () => {
+				setStore({ isLogin: true });
 			}
 		}
 	};

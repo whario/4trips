@@ -17,9 +17,7 @@ export default function LogIn(props) {
 	const [loading, setLoading] = useState(false);
 	useEffect(
 		// hago que se cambie ejecuta el useEffect solamente cuando se hace un cambio en en state.email.length
-		() => {
-			setLoading(false);
-		},
+		() => {},
 		[state.email.length, state.password.length]
 	);
 
@@ -48,10 +46,9 @@ export default function LogIn(props) {
 		});
 		if (state.email == "" || state.password == "") {
 			setError({ ...error, email: "Introduce tu email", password: "Introduce tu contraseña" });
-			setLoading(true);
 		} else {
-			actions.login(state, setErrFetch, props.history);
-			setLoading(false);
+			actions.login(state, setErrFetch, props.history, setLoading);
+			setLoading(true);
 		}
 	};
 
@@ -82,20 +79,15 @@ export default function LogIn(props) {
 							</div>
 						</div>
 						{loading == true ? (
-							<button type="button" className="btn btn-lg btn-primary btn-login" disabled>
-								Iniciar sesion
+							<button className="btn btn-primary" type="button" disabled>
+								<span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
+								<span className="visually-hidden">Loading...</span>
 							</button>
 						) : (
 							<button type="submit" className="btn btn-primary btn-block btn-login">
 								Iniciar sesion
 							</button>
 						)}
-
-						{loading == true ? (
-							<div className="spinner-grow text-primary spiner" role="status">
-								<span className="sr-only" />
-							</div>
-						) : null}
 						{errFetch.status ? <Error msg={errFetch.msg} /> : null}
 					</form>
 				</div>
