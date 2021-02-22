@@ -1,4 +1,4 @@
-const URL = "https://3000-tan-vole-6vvk5e0t.ws-eu03.gitpod.io/";
+const URL = "https://3000-maroon-sailfish-dcx9l543.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			login: (body, setErrFetch, history) => {
+			login: (body, setErrFetch, history, setLoading) => {
 				const store = getStore();
 				fetch(URL + "login", {
 					method: "POST",
@@ -25,17 +25,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => {
 						console.log(res);
-						if (res.status == 401 || res.status == 404) {
-							console.log("error password incorrect");
+						if (res.status == 401) {
 							setErrFetch({
 								status: true,
 								msg: "usuario o contraseña incorrectos"
 							});
 							return;
+						} else if (res.status == 404) {
+							setErrFetch({
+								status: true,
+								msg: "usuario no existe"
+							});
+							return;
 						} else if (res.status == 500) {
 							setErrFetch({
 								status: true,
-								msg: "erro interno "
+								msg: "error interno"
 							});
 							return;
 						}
@@ -46,7 +51,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol });
-						history.push("/");
 					})
 					.catch(err => console.log(err, "error login "));
 			},

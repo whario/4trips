@@ -2,12 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 const ErrorMsg = props => {
 	return (
-		<div className="alert alert-danger" role="alert">
-			<p>{props.msg} </p>
+		<div>
+			<div className="alert alert-danger" role="alert">
+				<p>{props.msg}</p>
+			</div>
 		</div>
 	);
 };
 ErrorMsg.propTypes = {
-	msg: PropTypes.string
+	msg: PropTypes.string,
+	sucsses: PropTypes.string
 };
 export default ErrorMsg;

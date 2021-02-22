@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../styles/Login.css";
 import logo4Trips from "../../img/logo_4Trips.png";
 import "bootstrap/dist/css/bootstrap.css";
@@ -14,13 +14,21 @@ export default function LogIn(props) {
 		password: ""
 	});
 
-	const [validate, setValidate] = useState(false);
+	const [loading, setLoading] = useState(false);
+	useEffect(
+		// hago que se cambie ejecuta el useEffect solamente cuando se hace un cambio en en state.email.length
+		() => {
+			setLoading(false);
+		},
+		[state.email.length, state.password.length]
+	);
 
 	const [error, setError] = useState({
 		email: "",
 		password: ""
 	});
 	const [errFetch, setErrFetch] = useState({
+		// aqui esta vinculado con el fetch del backend para si hay algun erro o el usuario no existe mandar un mensaje en el front
 		status: false,
 		msg: ""
 	});
@@ -38,14 +46,12 @@ export default function LogIn(props) {
 			status: false,
 			msg: ""
 		});
-		let div = document.querySelector("#loading");
-		console.log(state.email, "state.email");
-		if (state.email == "" && state.password == "") {
+		if (state.email == "" || state.password == "") {
 			setError({ ...error, email: "Introduce tu email", password: "Introduce tu contraseña" });
+			setLoading(true);
 		} else {
 			actions.login(state, setErrFetch, props.history);
-			div.classList.remove("oculto");
-			div.classList.add("spinner-border");
+			setLoading(false);
 		}
 	};
 
@@ -58,7 +64,7 @@ export default function LogIn(props) {
 						onSubmit={handelSubmit}
 						onChange={handelChange}>
 						<h3 className="title"> Inicia sesion</h3>
-						<label className="label1"> Email</label>
+						<label className="label1"> Correo</label>
 						<input className="form-control  " type="email" placeholder="Email" name="email" />
 						{error.email != "" ? <span className="msg-error-login"> {error.email} </span> : null}
 						<br />
@@ -75,11 +81,21 @@ export default function LogIn(props) {
 								</div>
 							</div>
 						</div>
-						<button type="submit" className="btn btn-primary btn-block btn-login">
-							Iniciar sesion
-							<span />
-							<div className="oculto" id="loading" />
-						</button>
+						{loading == true ? (
+							<button type="button" className="btn btn-lg btn-primary btn-login" disabled>
+								Iniciar sesion
+							</button>
+						) : (
+							<button type="submit" className="btn btn-primary btn-block btn-login">
+								Iniciar sesion
+							</button>
+						)}
+
+						{loading == true ? (
+							<div className="spinner-grow text-primary spiner" role="status">
+								<span className="sr-only" />
+							</div>
+						) : null}
 						{errFetch.status ? <Error msg={errFetch.msg} /> : null}
 					</form>
 				</div>
