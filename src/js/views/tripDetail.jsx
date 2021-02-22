@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import { checkPropTypes } from "prop-types";
 import logoAloj from "../../img/alojamientoicon.png";
 import logoMultia from "../../img/actividadesicon.png";
@@ -9,7 +10,7 @@ import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "./AddOffer.jsx";
 import { AddComment } from "./AddComment.jsx";
-import { OfferCard } from "../Component/OfferCard.jsx";
+import { Offers } from "../Component/Offers.jsx";
 
 export const TripDetail = () => {
 	const { store, actions } = useContext(Context);
@@ -41,7 +42,7 @@ export const TripDetail = () => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
-
+	console.log(store.detailTrip, "detailtrip");
 	return (
 		<div className="container">
 			<div className="row">
@@ -94,9 +95,17 @@ export const TripDetail = () => {
 					</div>
 				</div>
 			</div>
+			<div className="row">
+				<div className="col-12 col-lg-8 offset-lg-2 col-md-6 offset-md-3">
+					<div className="espaciador" />
+					<div className="card">
+						<Offers offers={store.detailTrip.offers} />
+					</div>
+				</div>
+			</div>
 			<div>
 				<AddOffer id_trip={detailTrip.id} />
-			</div>{" "}
+			</div>
 			<div>
 				<AddComment id_offer={detailTrip.id_offer} />
 			</div>
