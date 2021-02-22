@@ -103,12 +103,10 @@ export const TripDetail = () => {
 					</div>
 				</div>
 			</div>
-			<div>
+			<div className="row">
 				<AddOffer id_trip={detailTrip.id} />
-			</div>
-			<div>
 				<AddComment id_offer={detailTrip.id_offer} />
 			</div>
 		</div>
-	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props)
+	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props) Al componente Offers paso offers que está almacenado en el store
 };

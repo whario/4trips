@@ -13,7 +13,7 @@ export const Offers = props => {
 			{props.offers.map((offer, index) => {
 				return <OfferCard offer={offer} key={index} />;
 			})}
-		</div>
+		</div> //hago mapeo de offers y se lo paso por props a offercard
 	);
 };
 
