@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../styles/Login.css";
 import logo4Trips from "../../img/logo_4Trips.png";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import Error from "../Component/Error.jsx";
 
 export default function LogIn(props) {
 	const { store, actions } = useContext(Context);
@@ -13,13 +14,22 @@ export default function LogIn(props) {
 		password: ""
 	});
 
-	const [validate, setValidate] = useState(false);
+	const [loading, setLoading] = useState(false);
+	useEffect(
+		// hago que se cambie ejecuta el useEffect solamente cuando se hace un cambio en en state.email.length
+		() => {},
+		[state.email.length, state.password.length]
+	);
 
 	const [error, setError] = useState({
 		email: "",
 		password: ""
 	});
-
+	const [errFetch, setErrFetch] = useState({
+		// aqui esta vinculado con el fetch del backend para si hay algun erro o el usuario no existe mandar un mensaje en el front
+		status: false,
+		msg: ""
+	});
 	const handelChange = e => {
 		setState({ ...state, [e.target.name]: e.target.value });
 		if (state.email != "") {
@@ -28,18 +38,17 @@ export default function LogIn(props) {
 			setError({ ...error, password: "" });
 		}
 	};
-
 	const handelSubmit = event => {
 		event.preventDefault();
-		let div = document.querySelector("#loading");
-		console.log(state.email, "state.email");
-		if (state.email == "" && state.password == "") {
+		setErrFetch({
+			status: false,
+			msg: ""
+		});
+		if (state.email == "" || state.password == "") {
 			setError({ ...error, email: "Introduce tu email", password: "Introduce tu contraseña" });
 		} else {
-			actions.login(state);
-			div.classList.remove("oculto");
-			div.classList.add("spinner-border");
-			props.history.push("/");
+			actions.login(state, setErrFetch, props.history, setLoading);
+			setLoading(true);
 		}
 	};
 
@@ -52,7 +61,7 @@ export default function LogIn(props) {
 						onSubmit={handelSubmit}
 						onChange={handelChange}>
 						<h3 className="title"> Inicia sesion</h3>
-						<label className="label1"> Email</label>
+						<label className="label1"> Correo</label>
 						<input className="form-control  " type="email" placeholder="Email" name="email" />
 						{error.email != "" ? <span className="msg-error-login"> {error.email} </span> : null}
 						<br />
@@ -69,11 +78,17 @@ export default function LogIn(props) {
 								</div>
 							</div>
 						</div>
-						<button type="submit" className="btn btn-primary btn-block btn-login">
-							Iniciar sesion
-							<span />
-							<div className="oculto" id="loading" />
-						</button>
+						{loading == true ? (
+							<button className="btn btn-primary" type="button" disabled>
+								<span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
+								<span className="visually-hidden">Loading...</span>
+							</button>
+						) : (
+							<button type="submit" className="btn btn-primary btn-block btn-login">
+								Iniciar sesion
+							</button>
+						)}
+						{errFetch.status ? <Error msg={errFetch.msg} /> : null}
 					</form>
 				</div>
 			</div>
