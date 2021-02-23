@@ -189,8 +189,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(err);
 					});
 			},
-			getTrip: trip => {
+			getTrip: () => {
+				let trip = sessionStorage.getItem("detailTrip");
 				console.log(trip, "@@@@@@@@@@@");
+				setStore({ detailTrip: JSON.parse(trip) });
+			},
+			saveTrip: trip => {
+				console.log(trip, "trip en saveTrip");
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
 				setStore({ detailTrip: trip });
 			},

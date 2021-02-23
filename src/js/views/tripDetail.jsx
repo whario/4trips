@@ -21,22 +21,21 @@ export const TripDetail = () => {
 		adventure: logoMultia,
 		relax: logoPiscina
 	};
-	const [detailTrip, setdetailTrip] = useState(JSON.parse(sessionStorage.getItem("detailTrip")));
-	console.log("----------detail trip", detailTrip);
-	useEffect(() => {
-		console.log("Fuera de IF", Object.keys(store.detailTrip).length == 0);
-		if (Object.keys(store.detailTrip).length == 0) {
-			console.log("Dentro de IF");
-			actions.getTrip(detailTrip);
-		}
-	}, []);
+	console.log(store.detailTrip, "DETAIIIIL TRIP");
 	useEffect(
 		() => {
-			setdetailTrip(JSON.parse(sessionStorage.getItem("detailTrip")));
-			console.log("dentro de useEffect", detailTrip);
+			console.log(Object.entries(store.detailTrip).length === 0);
+			if (Object.entries(store.detailTrip).length === 0) {
+				actions.getTrip();
+			} else {
+				actions.saveTrip(store.detailTrip);
+			}
 		},
 		[store.detailTrip]
 	);
+	if (Object.entries(store.detailTrip).length === 0) {
+		actions.getTrip();
+	}
 
 	const formatDay = day => {
 		let newFormatDay = new Date(day);
@@ -51,10 +50,10 @@ export const TripDetail = () => {
 					<div className="card">
 						<div className="row">
 							<div className="col-4">
-								<img src={detailTrip.traveler.avatar} className="rounded-circle big" />
+								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
 							</div>
 							<div className="col-8">
-								<h5 className="card-title">{detailTrip.traveler.username}</h5>
+								<h5 className="card-title">{store.detailTrip.traveler.username}</h5>
 							</div>
 						</div>
 						<div className="card-body">
@@ -62,33 +61,33 @@ export const TripDetail = () => {
 								<li className="list-group-item">
 									<div className="row">
 										Destino:
-										<div className="props">{detailTrip.destination}</div>
+										<div className="props">{store.detailTrip.destination}</div>
 									</div>
 								</li>
 								<li className="list-group-item">
 									<div className="row">
 										Desde:
-										<div className="props">{formatDay(detailTrip.first_day)}</div>
+										<div className="props">{formatDay(store.detailTrip.first_day)}</div>
 									</div>
 									<div className="row">
 										Hasta:
-										<div className="props">{formatDay(detailTrip.last_day)}</div>
+										<div className="props">{formatDay(store.detailTrip.last_day)}</div>
 									</div>
 								</li>
 								<li className="list-group-item">
 									<div className="row">Descripción del viaje:</div>
 									<div className="row">
-										<div className="props description">{detailTrip.description}</div>
+										<div className="props description">{store.detailTrip.description}</div>
 									</div>
 								</li>
 								<li className="list-group-item blue">
 									Nº ofertas recibidas:
-									<div className="numero">{detailTrip.offers.length}</div>
+									<div className="numero">{store.detailTrip.offers.length}</div>
 								</li>
 							</ul>
 						</div>
 						<div className="card-footer">
-							{detailTrip.needs_trip.map((need, index) => {
+							{store.detailTrip.needs_trip.map((need, index) => {
 								return <img src={logos[need]} key={index} />;
 							})}
 						</div>
@@ -104,8 +103,8 @@ export const TripDetail = () => {
 				</div>
 			</div>
 			<div className="row">
-				<AddOffer id_trip={detailTrip.id} />
-				<AddComment id_offer={detailTrip.id_offer} />
+				<AddOffer id_trip={store.detailTrip.id} />
+				<AddComment id_offer={store.detailTrip.id_offer} />
 			</div>
 		</div>
 	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props) Al componente Offers paso offers que está almacenado en el store

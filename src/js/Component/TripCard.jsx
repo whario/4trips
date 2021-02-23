@@ -63,13 +63,13 @@ export const TripCard = props => {
 							<div className="row">Descripción del viaje:</div>
 							<div className="row">
 								<Link to={"/trip/" + props.trip.id}>
-									<div className="props description" onClick={() => actions.getTrip(props.trip)}>
+									<div className="props description" onClick={() => actions.saveTrip(props.trip)}>
 										{props.trip.description.substring(0, 25)}
 										<p>...</p>
 									</div>
 								</Link>
 								<Link to={"/trip/" + props.trip.id}>
-									<div className="leermas" onClick={() => actions.getTrip(props.trip)}>
+									<div className="leermas" onClick={() => actions.saveTrip(props.trip)}>
 										<span />
 										<p>leer más</p>
 									</div>
