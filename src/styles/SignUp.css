@@ -1,7 +1,7 @@
 body{
     background-color: gainsboro;}
     
-.avatar-traveler{
+.avatar-traveler-register{
     border-radius: 50%;
     width: 100%;
     height: 220px;
@@ -16,7 +16,7 @@ body{
 .P{
   text-align: center;
 }
-.avatar-container {
+.avatar-container-register{
     position: relative;
     width: 250px;
     border-radius: 50%;
@@ -37,7 +37,7 @@ body{
     padding: 20px;
     text-align: center;
 }
-.avatar-container:hover .overlay {
+.avatar-container-register:hover .overlay {
   opacity: 1;
 }
 .uploadedimg{

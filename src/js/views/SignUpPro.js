@@ -44,13 +44,13 @@ const SignUpPro = props => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.user_name && datos.email && datos.password == datos.repeatPassword) {
+		if (datos.user_name != "" && datos.email != "") {
 			setValied(true);
+			setSubmited(true);
+			const file = document.querySelector("#file");
+			console.log(datos, "datos");
+			actions.registerPro(datos, props, file.files[0]);
 		}
-		setSubmited(true);
-		const file = document.querySelector("#file");
-		console.log(datos, "datos");
-		actions.registerPro(datos, props, file.files[0]);
 	};
 
 	return (

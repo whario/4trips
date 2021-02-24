@@ -179,7 +179,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
 					.catch(error => console.log(error));
 			},
-			registeredTraveler: (traveler, props, file) => {
+			registeredTraveler: (traveler, props, file, setNoValied, setValied) => {
 				const store = getStore();
 				const { username, email, password, avatar } = traveler;
 				let formData = new FormData();
@@ -198,13 +198,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//"Content-Type": "application/json"
 					}
 				})
-					.then(res => res.json())
+					.then(res => {
+						if (res.status == 200) {
+							setValied({ status: true, msg: "Registro completado con éxito" });
+						} else if (res.status == 404) {
+							console.log(res, "login res");
+							setNoValied({
+								status: true,
+								msg: "introduce todos los campos"
+							});
+							return;
+							res.json();
+						}
+					})
 					.then(data => {
 						console.log(data);
 						setStore({ travelerInfoCollected: data });
-						setTimeout(() => {
-							props.history.push("login");
-						}, 1000);
+						props.history.push("login");
 					})
 					.catch(err => {
 						console.log(err);
