@@ -19,37 +19,32 @@ const SignUpPro = props => {
 		social_reason: "",
 		avatar: ""
 	});
+
+	const [submited, setSubmited] = useState(false);
+	const [valied, setValied] = useState({ status: false, msg: "" });
+
 	const handleChange = e => {
-		console.log("handels=ch");
 		if (e.target.name == "avatar") {
-			console.log("entrando avatar");
 			const reader = new FileReader();
 			reader.onload = event => {
-				console.log(reader.readyState);
 				if (reader.readyState === 2) {
-					console.log(reader.result);
 					setDatos({ ...datos, avatar: reader.result });
 				}
 			};
 			if (e.target.files[0] != undefined) {
 				reader.readAsDataURL(e.target.files[0]);
 			}
-			console.log(e.target.files[0]);
 		} else {
 			setDatos({ ...datos, [e.target.name]: e.target.value });
 		}
 	};
-	const [submited, setSubmited] = useState(false);
-	const [valied, setValied] = useState(false);
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.user_name != "" && datos.email != "") {
-			setValied(true);
-			setSubmited(true);
+		if (datos.user_name != "" && datos.email != "" && datos.password == datos.repeatPassword) {
 			const file = document.querySelector("#file");
 			console.log(datos, "datos");
-			actions.registerPro(datos, props, file.files[0]);
+			actions.registerPro(datos, props, file.files[0], setValied);
 		}
 	};
 
@@ -58,9 +53,9 @@ const SignUpPro = props => {
 			<div className="row  justify-content-center">
 				<div className="col-sm-12 col-md-10 col-la-8 ">
 					<form className="myForm m-5" onChange={handleChange} onSubmit={handleSubmit}>
-						{submited && valied ? (
+						{valied.status == true ? (
 							<div className="alert alert-success" role="alert">
-								Registro completado con éxito!
+								{valied.msg}
 							</div>
 						) : null}
 						<div className="avatar-pro-container">
@@ -89,7 +84,7 @@ const SignUpPro = props => {
 									id="validationServer01"
 									placeholder="Nombre de usuario"
 								/>
-								{submited && !datos.user_name ? (
+								{submited == true && !datos.user_name ? (
 									<span className="error-msg-pro">Escoge un nombre de usuario</span>
 								) : null}
 								<br />
@@ -103,7 +98,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.email}
 								/>
-								{submited && !datos.email ? (
+								{submited == true && !datos.email ? (
 									<span className="error-msg-pro">Introduce una dirección de email</span>
 								) : null}
 								<br />
@@ -117,7 +112,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.password}
 								/>
-								{submited && !datos.password ? (
+								{submited == true && !datos.password ? (
 									<span className="error-msg-pro">Introduce una contraseña</span>
 								) : null}
 								<br />
@@ -131,7 +126,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.repeatPassword}
 								/>
-								{submited && datos.repeatPassword != datos.password ? (
+								{submited == true && datos.repeatPassword != datos.password ? (
 									<span className="error-msg-pro">La contraseña no coincide</span>
 								) : null}
 								<br />
@@ -145,7 +140,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.phone}
 								/>
-								{submited && !datos.phone ? (
+								{submited == true && !datos.phone ? (
 									<span className="error-msg-pro">Introduce un teléfono de contacto</span>
 								) : null}
 								<br />
@@ -170,7 +165,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.dierction}
 								/>
-								{submited && !datos.direction ? (
+								{submited == true && !datos.direction ? (
 									<span className="error-msg-pro">Introduce una dirección</span>
 								) : null}
 								<br />
@@ -184,7 +179,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.location}
 								/>
-								{submited && !datos.location ? (
+								{submited == true && !datos.location ? (
 									<span className="error-msg-pro">Introduce una localidad</span>
 								) : null}
 								<br />

@@ -54,7 +54,7 @@ const SignUp = props => {
 		event.preventDefault();
 		if (datos.username != "" && datos.email != "" && datos.repeatPassword == datos.password) {
 			//esto es para obtener la imagen en crudo y pasarla al back
-
+			const file = document.querySelector("#file");
 			actions.registeredTraveler(datos, props, file.files[0], setNoValied, setValied);
 			setSubmited(true);
 		}
