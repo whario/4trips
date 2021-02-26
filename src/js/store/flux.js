@@ -1,4 +1,4 @@
-const URL = "https://3000-maroon-sailfish-dcx9l543.ws-eu03.gitpod.io/";
+const URL = "https://fortrips.herokuapp.com/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
