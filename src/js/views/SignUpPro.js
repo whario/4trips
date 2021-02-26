@@ -41,7 +41,13 @@ const SignUpPro = props => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.user_name != "" && datos.email != "" && datos.password == datos.repeatPassword) {
+		setSubmited(true);
+		if (
+			datos.user_name != "" &&
+			datos.email != "" &&
+			datos.password.length > 6 &&
+			datos.password == datos.repeatPassword
+		) {
 			const file = document.querySelector("#file");
 			console.log(datos, "datos");
 			actions.registerPro(datos, props, file.files[0], setValied);
@@ -84,7 +90,7 @@ const SignUpPro = props => {
 									id="validationServer01"
 									placeholder="Nombre de usuario"
 								/>
-								{submited == true && !datos.user_name ? (
+								{submited && !datos.user_name ? (
 									<span className="error-msg-pro">Escoge un nombre de usuario</span>
 								) : null}
 								<br />
@@ -98,7 +104,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.email}
 								/>
-								{submited == true && !datos.email ? (
+								{submited && !datos.email ? (
 									<span className="error-msg-pro">Introduce una dirección de email</span>
 								) : null}
 								<br />
@@ -112,8 +118,8 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.password}
 								/>
-								{submited == true && !datos.password ? (
-									<span className="error-msg-pro">Introduce una contraseña</span>
+								{submited && !datos.password < 6 ? (
+									<span className="error-msg-pro">Introduce 6 caracteres por lo menos</span>
 								) : null}
 								<br />
 								<label className="label-pro" value="validationServer01">
@@ -140,7 +146,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.phone}
 								/>
-								{submited == true && !datos.phone ? (
+								{submited && !datos.phone ? (
 									<span className="error-msg-pro">Introduce un teléfono de contacto</span>
 								) : null}
 								<br />
@@ -165,7 +171,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.dierction}
 								/>
-								{submited == true && !datos.direction ? (
+								{submited && !datos.direction ? (
 									<span className="error-msg-pro">Introduce una dirección</span>
 								) : null}
 								<br />
@@ -179,7 +185,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.location}
 								/>
-								{submited == true && !datos.location ? (
+								{submited && !datos.location ? (
 									<span className="error-msg-pro">Introduce una localidad</span>
 								) : null}
 								<br />
