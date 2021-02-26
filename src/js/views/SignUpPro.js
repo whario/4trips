@@ -118,7 +118,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.password}
 								/>
-								{submited && !datos.password < 6 ? (
+								{submited && datos.password.length < 6 ? (
 									<span className="error-msg-pro">Introduce 6 caracteres por lo menos</span>
 								) : null}
 								<br />
