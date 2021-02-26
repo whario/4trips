@@ -41,7 +41,7 @@ export const TripDetail = () => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
-	console.log(store.detailTrip, "detailtrip");
+	console.log(store.detailTrip.offers, "OFFERS");
 	return (
 		<div className="container">
 			<div className="row">
@@ -100,6 +100,7 @@ export const TripDetail = () => {
 					<div className="card">
 						<Offers offers={store.detailTrip.offers} />
 					</div>
+					<div className="espaciador" />
 				</div>
 			</div>
 			<div className="row">

@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { checkPropTypes } from "prop-types";
-import defaultAvatarPro from "../../img/default_avatar.png";
+import defaultAvatarPro from "../../img/default_avatar_pro.png";
+import { Comments } from "./Comments.jsx";
 
 export const OfferCard = props => {
 	const { store, actions } = useContext(Context);
-	console.log(props.offer, "offer en ofercard");
 
 	return (
 		<div className="card">
@@ -26,6 +26,9 @@ export const OfferCard = props => {
 						</div>
 					</li>
 				</div>
+			</div>
+			<div className="card">
+				<Comments comments={props.offer.comments} />
 			</div>
 		</div>
 	);
