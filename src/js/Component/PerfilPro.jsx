@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import SignUpPro from "../views/SignUpPro.js";
+import "../../styles/ProfilPro.css";
 
 export const PerfilPro = () => {
 	const { store, actions } = useContext(Context);
@@ -48,34 +49,37 @@ export const PerfilPro = () => {
 	return (
 		<div className="container">
 			<div className="card">
-				{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
+				{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon-pro" /> : null}
 				{edit == false ? (
 					<img className="card-img-top traveler-img" src={store.proInfoCollected.avatar} alt="avatar" />
 				) : (
 					<Fragment>
-						<img className="card-img-top traveler-img" src={foto.proAvatar} />,
+						<img className="card-img-top Pro-img" src={foto.proAvatar} />,
 						<input className="file-input" type="file" id="file" name="proAvatar" onChange={handleFoto} />
 					</Fragment>
 				)}
-				{edit == false ? (
-					<p className="list-group-item">
-						<strong>{store.proInfoCollected.user_name}</strong>
-					</p>
-				) : (
-					<input
-						className="username"
-						name="user_name"
-						type="text"
-						value={store.proInfoCollected.user_name}
-						onChange={handleChange}
-					/>
-				)}
+
 				<div className="">
 					{edit == false ? (
-						<p className="list-group-item">{store.proInfoCollected.email} </p>
+						<p className="list-group-item">
+							<strong>{store.proInfoCollected.user_name}</strong>
+						</p>
 					) : (
 						<input
-							className="email"
+							className="editInput"
+							name="user_name"
+							type="text"
+							value={store.proInfoCollected.user_name}
+							onChange={handleChange}
+						/>
+					)}
+					{edit == false ? (
+						<p className="list-group-item">
+							<strong>{store.proInfoCollected.email} </strong>
+						</p>
+					) : (
+						<input
+							className="editInput"
 							name="email"
 							type="text"
 							value={store.proInfoCollected.email}
@@ -83,10 +87,12 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<p className="list-group-item">{store.proInfoCollected.phone} </p>
+						<p className="list-group-item">
+							<strong>{store.proInfoCollected.phone} </strong>
+						</p>
 					) : (
 						<input
-							className="phone"
+							className="editInput"
 							name="phone"
 							type="text"
 							value={store.proInfoCollected.phone}
@@ -94,10 +100,12 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<p className="list-group-item">{store.proInfoCollected.url} </p>
+						<p className="list-group-item">
+							<strong>{store.proInfoCollected.url}</strong>{" "}
+						</p>
 					) : (
 						<input
-							className="url"
+							className="editInput"
 							name="url"
 							type="text"
 							value={store.proInfoCollected.url}
@@ -105,10 +113,12 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<p className="list-group-item">{store.proInfoCollected.direction}</p>
+						<p className="list-group-item">
+							<strong>{store.proInfoCollected.direction}</strong>
+						</p>
 					) : (
 						<input
-							className="direction"
+							className="editInput"
 							name="direction"
 							type="text"
 							value={store.proInfoCollected.direction}
@@ -116,10 +126,12 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<p className="list-group-item">{store.proInfoCollected.location}</p>
+						<p className="list-group-item">
+							<strong>{store.proInfoCollected.location}</strong>
+						</p>
 					) : (
 						<input
-							className="locaton"
+							className="editInput"
 							name="location"
 							type="text"
 							value={store.proInfoCollected.location}
@@ -127,16 +139,18 @@ export const PerfilPro = () => {
 						/>
 					)}
 				</div>
-				{edit == true ? (
-					<Fragment>
-						<button onClick={handleSave} className="btn btn-primary">
-							Guardar
-						</button>
-						<button onClick={handleEdit} className="btn btn-primary">
-							Cancelar
-						</button>
-					</Fragment>
-				) : null}
+				<div className="buttons">
+					{edit == true ? (
+						<Fragment>
+							<button onClick={handleSave} className="btn btn-primary btn-save-cancele">
+								Guardar
+							</button>
+							<button onClick={handleEdit} className="btn btn-primary btn-cancele">
+								Cancelar
+							</button>
+						</Fragment>
+					) : null}
+				</div>
 			</div>
 		</div>
 	);
