@@ -25,14 +25,6 @@ export const Trips = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="row">
-				<div className="col">
-					<div className="espaciador" />
-				</div>
-			</div>
-			<div className="row">
-				<div className="ultimos">Últimos viajes publicados:</div>
-			</div>
 			<div className="container">
 				<div className="row">
 					{store.tripList.length > 0

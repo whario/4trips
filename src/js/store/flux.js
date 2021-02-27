@@ -343,7 +343,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					const data = await response.json();
 					console.log(data);
-					getActions().getOffer(data);
+					getActions().getTrip(data);
 				}
 			},
 			isLoginVerified: () => {

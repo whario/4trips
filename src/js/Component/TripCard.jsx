@@ -30,19 +30,17 @@ export const TripCard = props => {
 			<div className="card h-100">
 				<div className="row">
 					<div className="col-4">
-						{props.trip.traveler != null ? (
+						{props.trip.traveler != null && props.trip.traveler.avatar != null ? (
 							<img src={props.trip.traveler.avatar} className="rounded-circle" />
 						) : (
-							<div>
-								<img src={defaultAvatar} className="rounded-circle" />
-							</div>
+							<img src={defaultAvatar} className="rounded-circle" />
 						)}
 					</div>
 					<div className="col-8">
 						<h5 className="card-title">{props.trip.traveler.username}</h5>
 					</div>
 				</div>
-				<div className="card-body">
+				<div className="card-body p-0">
 					<ul className="list-group list-group-flush">
 						<li className="list-group-item">
 							<div className="row">

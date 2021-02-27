@@ -43,27 +43,23 @@ export const AddComment = props => {
 	};
 
 	return (
-		<div className="container offer">
-			<div className="col-8">
-				<form className="" onChange={handelChange} onSubmit={handelSubmit}>
-					<div className="input-group mb-3">
-						<input
-							type="text"
-							name="text"
-							className="form-control"
-							placeholder="Escribe tu comentario"
-							src={inputs.offer}
-						/>
-						{submit && !inputs.text ? (
-							<span className="alert alert-danger">Tienes que escribir un comentario</span>
-						) : null}
-						<input type="file" name="attached" className="form-control" id="file" />
-						<button className="btn btn-outline-secondary" type="submit" id="button-addon1">
-							Enviar
-						</button>
-					</div>
-				</form>
-			</div>
+		<div className="card my-1">
+			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
+				<input
+					type="text"
+					name="text"
+					className="col-6"
+					placeholder="Escribe tu comentario"
+					src={inputs.offer}
+				/>
+				{submit && !inputs.text ? (
+					<span className="alert alert-danger">Tienes que escribir un comentario</span>
+				) : null}
+				<input type="file" name="attached" className="col-4" id="file" />
+				<button className="btn btn-outline-secondary col-2" type="submit" id="button-addon1">
+					Enviar
+				</button>
+			</form>
 		</div>
 	);
 };

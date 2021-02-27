@@ -9,10 +9,11 @@ import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "./AddOffer.jsx";
-import { Offers } from "../Component/Offers.jsx";
+import { OfferCard } from "../Component/OfferCard.jsx";
 
 export const TripDetail = () => {
 	const { store, actions } = useContext(Context);
+	const [showOffers, setShowOffers] = useState(false);
 	const logos = {
 		sleep: logoAloj,
 		eat: logoComida,
@@ -47,7 +48,7 @@ export const TripDetail = () => {
 				<div className="col-12 col-lg-8 offset-lg-2 col-md-6 offset-md-3">
 					<div className="espaciador" />
 					<div className="card">
-						<div className="row">
+						<div className="card-header row bg-white">
 							<div className="col-4">
 								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
 							</div>
@@ -55,7 +56,7 @@ export const TripDetail = () => {
 								<h5 className="card-title">{store.detailTrip.traveler.username}</h5>
 							</div>
 						</div>
-						<div className="card-body">
+						<div className="card-body p-0">
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
 									<div className="row">
@@ -81,7 +82,13 @@ export const TripDetail = () => {
 								</li>
 								<li className="list-group-item blue">
 									Nº ofertas recibidas:
-									<div className="numero">{store.detailTrip.offers.length}</div>
+									<div
+										className="numero"
+										onClick={() => {
+											setShowOffers(!showOffers);
+										}}>
+										{store.detailTrip.offers.length}
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -91,19 +98,14 @@ export const TripDetail = () => {
 							})}
 						</div>
 					</div>
+					<AddOffer id_trip={store.detailTrip.id} />
+
+					{showOffers && store.detailTrip.offers.length > 0
+						? store.detailTrip.offers.map((offer, index) => {
+								return <OfferCard offer={offer} key={index} />;
+						  })
+						: null}
 				</div>
-			</div>
-			<div className="row">
-				<div className="col-12 col-lg-8 offset-lg-2 col-md-6 offset-md-3">
-					<div className="espaciador" />
-					<div className="card">
-						<Offers offers={store.detailTrip.offers} />
-					</div>
-					<div className="espaciador" />
-				</div>
-			</div>
-			<div className="row">
-				<AddOffer id_trip={store.detailTrip.id} />
 			</div>
 		</div>
 	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props) Al componente Offers paso offers que está almacenado en el store

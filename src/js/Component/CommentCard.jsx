@@ -18,23 +18,19 @@ export const CommentCard = props => {
 	};
 
 	return (
-		<>
-			{props.comment ? (
-				<div className="card">
-					<div className="col-4">{checkingImageUser(props.comment)}</div>
-					<div className="col-8">
-						<h5 className="card-title">
-							{props.comment.userpro != null
-								? props.comment.userpro.user_name
-								: props.comment.traveler.username}
-						</h5>
-						<div className="card-body">
-							<div className="props description">{props.comment.text}</div>
-						</div>
-					</div>
+		<div className="card w-100">
+			<div className="row">
+				<div className="col-3">
+					{checkingImageUser(props.comment)}
+					<h6>
+						{props.comment.userpro != null
+							? props.comment.userpro.user_name
+							: props.comment.traveler.username}
+					</h6>
 				</div>
-			) : null}
-		</>
+				<div className="col-9">{props.comment.text}</div>
+			</div>
+		</div>
 	);
 };
 
