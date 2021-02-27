@@ -58,9 +58,9 @@ export const PerfilPro = () => {
 					</Fragment>
 				)}
 				{edit == false ? (
-					<li className="list-group-item">
+					<p className="list-group-item">
 						<strong>{store.proInfoCollected.user_name}</strong>
-					</li>
+					</p>
 				) : (
 					<input
 						className="username"
@@ -70,9 +70,9 @@ export const PerfilPro = () => {
 						onChange={handleChange}
 					/>
 				)}
-				<ul className="list-group list-group-flush">
+				<div className="">
 					{edit == false ? (
-						<li className="list-group-item">{store.proInfoCollected.email} </li>
+						<p className="list-group-item">{store.proInfoCollected.email} </p>
 					) : (
 						<input
 							className="email"
@@ -83,7 +83,7 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<li className="list-group-item">{store.proInfoCollected.phone} </li>
+						<p className="list-group-item">{store.proInfoCollected.phone} </p>
 					) : (
 						<input
 							className="phone"
@@ -94,7 +94,7 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<li className="list-group-item">{store.proInfoCollected.url} </li>
+						<p className="list-group-item">{store.proInfoCollected.url} </p>
 					) : (
 						<input
 							className="url"
@@ -105,7 +105,7 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<li className="list-group-item">{store.proInfoCollected.direction}</li>
+						<p className="list-group-item">{store.proInfoCollected.direction}</p>
 					) : (
 						<input
 							className="direction"
@@ -116,7 +116,7 @@ export const PerfilPro = () => {
 						/>
 					)}
 					{edit == false ? (
-						<li className="list-group-item">{store.proInfoCollected.location}</li>
+						<p className="list-group-item">{store.proInfoCollected.location}</p>
 					) : (
 						<input
 							className="locaton"
@@ -126,7 +126,7 @@ export const PerfilPro = () => {
 							onChange={handleChange}
 						/>
 					)}
-				</ul>
+				</div>
 				{edit == true ? (
 					<Fragment>
 						<button onClick={handleSave} className="btn btn-primary">
