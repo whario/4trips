@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLogin: false,
 			rol: "",
 			offerSubmited: {},
-			detailOffer: {}
+			detailOffer: {},
+			page: 1
 		},
 
 		actions: {
@@ -171,8 +172,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				});
-				if (response.status == 200) return true;
-				else return false;
+				if (response.status == 200) {
+					setStore({ page: 1, tripList: [] });
+					getActions().loadingTrips(1);
+					return true;
+				} else return false;
 			},
 			loadingTrips: page => {
 				const store = getStore();
@@ -180,7 +184,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => {
 						const list = page != 1 ? [...store.tripList, ...data.data] : data.data;
-						setStore({ tripList: list });
+						setStore({ tripList: list, page: store.page + 1 });
 					})
 					.catch(error => console.log(error));
 			},

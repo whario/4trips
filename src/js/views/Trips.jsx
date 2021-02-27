@@ -11,10 +11,7 @@ export const Trips = () => {
 	const [page, setPage] = useState(1);
 
 	const changePage = () => {
-		let newPage = page + 1;
-		console.log(newPage);
-		setPage(newPage);
-		actions.loadingTrips(newPage);
+		actions.loadingTrips(store.page);
 	};
 	return (
 		<div className="container">
