@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			login: body => {
+			login: (body, setErrFetch, history, setLoading) => {
 				const store = getStore();
 				fetch(URL + "login", {
 					method: "POST",
@@ -25,6 +25,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(res => {
+						console.log(res);
+						if (res.status == 401) {
+							setErrFetch({
+								status: true,
+								msg: "usuario o contraseña incorrectos"
+							});
+							setLoading(false);
+							return;
+						} else if (res.status == 404) {
+							setErrFetch({
+								status: true,
+								msg: "usuario no existe"
+							});
+							setLoading(false);
+							return;
+						} else if (res.status == 500) {
+							setErrFetch({
+								status: true,
+								msg: "error interno"
+							});
+							setLoading(false);
+							return;
+						}
 						return res.json();
 					})
 					.then(data => {
@@ -315,6 +338,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					getActions().getOffer(data);
 				}
+      },
+			isLoginVerified: () => {
+				setStore({ isLogin: true });
 			}
 		}
 	};
