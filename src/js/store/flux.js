@@ -1,4 +1,4 @@
-const URL = "https://3000-maroon-sailfish-dcx9l543.ws-eu03.gitpod.io/";
+const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			detailTrip: {},
 			isLogin: false,
 			rol: "",
-			offerSubmited: {}
+			offerSubmited: {},
+			detailOffer: {}
 		},
 
 		actions: {
@@ -53,9 +54,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("token", data.access_token);
 						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
-						setStore({ isLogin: true, rol: data.rol });
-						setLoading(false);
-						history.push("/");
+						setStore({ isLogin: true, rol: data.rol, tripList: [] });
+						getActions().loadingTrips(1);
 					})
 					.catch(err => console.log(err, "error login "));
 			},
@@ -174,9 +174,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadingTrips: page => {
 				const store = getStore();
-				fetch(URL + "viajes" + "/" + page)
+				fetch(URL + "viajes/" + page)
 					.then(res => res.json())
-					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
+					.then(data => {
+						const list = page != 1 ? [...store.tripList, ...data.data] : data.data;
+						setStore({ tripList: list });
+					})
 					.catch(error => console.log(error));
 			},
 			registeredTraveler: (traveler, props, file) => {
@@ -210,10 +213,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(err);
 					});
 			},
-			getTrip: trip => {
+			getTrip: data => {
+				let trip = data ? data : JSON.parse(sessionStorage.getItem("detailTrip"));
 				console.log(trip, "@@@@@@@@@@@");
 				setStore({ detailTrip: trip });
+			},
+			saveTrip: trip => {
+				console.log(trip, "trip en saveTrip");
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
+				setStore({ detailTrip: trip });
 			},
 			// la perfil traverler con su funconalidades
 			editTravelerProfil: (name, value) => {
@@ -266,7 +274,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
 				console.log(store.detailTrip, "DETAIL TRIP");
-				const { text, attached, id_trip } = oferta;
+				const { text, attached, id_trip, id_offer } = oferta;
 				let formData = new FormData();
 				formData.append("oferta", text);
 				formData.append("email", store.detailTrip.traveler.email);
@@ -294,6 +302,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 					getActions().getTrip(data);
 				}
 			},
+			getOffer: offer => {
+				console.log(offer, "@@@@@@@@@@@");
+				setStore({ detailOffer: offer });
+				sessionStorage.setItem("detailOffer", JSON.stringify(offer)); //almaceno offer en session storage
+			},
+			sendComment: async (comentario, props, file) => {
+				const store = getStore();
+				const token = localStorage.getItem("token");
+				console.log(store.detailTrip, "DETAIL TRIP");
+				console.log(store.detailOffer, "DETAIL OFFER");
+				const { text, attached, id_trip, id_offer } = comentario;
+				let formData = new FormData();
+				formData.append("comment", text);
+				if (attached != "" && attached != null && file != undefined) {
+					formData.append("attached", file, file.name);
+				}
+				formData.append("id_offer", id_offer);
+				const res = await fetch(URL + "publishcomment", {
+					method: "POST",
+					body: formData,
+					headers: {
+						Authorization: "Bearer " + token
+					}
+				});
+
+				if (res.ok) {
+					//Así me devuelve ok si la respuesta es correcta
+					const response = await fetch(URL + "viaje/" + id_trip, {
+						headers: {
+							Authorization: "Bearer " + token
+						}
+					});
+					const data = await response.json();
+					console.log(data);
+					getActions().getOffer(data);
+				}
+      },
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
 			}

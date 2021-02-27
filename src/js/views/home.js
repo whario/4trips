@@ -7,6 +7,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {
 		actions.loadingTrips(1);
+		console.log("loading trips @@@@");
 	}, []);
 	return (
 		<div>
