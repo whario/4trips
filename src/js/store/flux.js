@@ -56,6 +56,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol, tripList: [] });
 						getActions().loadingTrips(1);
+						setLoading(false);
+						history.push("/");
 					})
 					.catch(err => console.log(err, "error login "));
 			},
@@ -268,6 +270,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}, /////////////////////////////////
 			logout: () => {
 				localStorage.removeItem("token");
+				localStorage.removeItem("rol");
 				setStore({ isLogin: false });
 			},
 			sendOffer: async (oferta, props, file) => {
@@ -338,7 +341,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					getActions().getOffer(data);
 				}
-      },
+			},
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
 			}
