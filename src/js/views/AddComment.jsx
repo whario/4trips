@@ -11,6 +11,7 @@ export const AddComment = props => {
 		id_trip: props.id_trip,
 		id_offer: props.id_offer
 	});
+	console.log(props, "***************props");
 	const handelChange = e => {
 		console.log("handleChange", e.target.value);
 		if (e.target.name == "attached") {

@@ -24,12 +24,13 @@ export const TripCard = props => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
+	console.log(props.trip.needs_trip, "neeeeeeeeds triiiiip en prop");
 	return (
 		<div className="col-md-4 col-sm-1">
 			<div className="card h-100">
 				<div className="row">
 					<div className="col-4">
-						{props.trip.traveler.avatar != null ? (
+						{props.trip.traveler != null ? (
 							<img src={props.trip.traveler.avatar} className="rounded-circle" />
 						) : (
 							<div>
@@ -84,6 +85,7 @@ export const TripCard = props => {
 				</div>
 				<div className="card-footer">
 					{props.trip.needs_trip.map((need, index) => {
+						console.log(need, "neeeeeeeed");
 						return <img src={logos[need]} key={index} />;
 					})}
 				</div>

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { checkPropTypes } from "prop-types";
 import defaultAvatarPro from "../../img/default_avatar_pro.png";
 import { Comments } from "./Comments.jsx";
+import { AddComment } from "../views/AddComment.jsx";
 
 export const OfferCard = props => {
 	const { store, actions } = useContext(Context);
@@ -30,6 +31,7 @@ export const OfferCard = props => {
 			<div className="card">
 				<Comments comments={props.offer.comments} />
 			</div>
+			<AddComment id_offer={props.offer.id} id_trip={props.offer.id_trip} />
 		</div>
 	);
 };

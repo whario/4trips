@@ -10,10 +10,6 @@ export const Trips = () => {
 	const { store, actions } = useContext(Context);
 	const [page, setPage] = useState(1);
 
-	useEffect(
-		() => {},
-		[store.tripList] //espero a que haya cambios en la variable tripList con useEffect para hacer el mapeado
-	);
 	const changePage = () => {
 		let newPage = page + 1;
 		console.log(newPage);
@@ -43,7 +39,10 @@ export const Trips = () => {
 			<div className="container">
 				<div className="row">
 					{store.tripList.length > 0
-						? store.tripList.map((trip, index) => <TripCard key={index} trip={trip} />)
+						? store.tripList.map((trip, index) => {
+								console.log(trip, "trip/////");
+								return <TripCard key={index} trip={trip} />;
+						  })
 						: "cargando viajes..."}
 				</div>
 			</div>

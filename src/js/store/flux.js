@@ -32,6 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("rol", data.rol);
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol, tripList: [] });
+						getActions().loadingTrips(1);
 					})
 					.catch(err => console.log(err, "error login "));
 			},
@@ -150,10 +151,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadingTrips: page => {
 				const store = getStore();
-				fetch(URL + "viajes" + "/" + page)
+				fetch(URL + "viajes/" + page)
 					.then(res => res.json())
 					.then(data => {
-						const list = page != 1 ? [...store.tripList, data.data] : data.data;
+						const list = page != 1 ? [...store.tripList, ...data.data] : data.data;
 						setStore({ tripList: list });
 					})
 					.catch(error => console.log(error));
@@ -189,10 +190,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(err);
 					});
 			},
-			getTrip: () => {
-				let trip = sessionStorage.getItem("detailTrip");
+			getTrip: data => {
+				let trip = data ? data : JSON.parse(sessionStorage.getItem("detailTrip"));
 				console.log(trip, "@@@@@@@@@@@");
-				setStore({ detailTrip: JSON.parse(trip) });
+				setStore({ detailTrip: trip });
 			},
 			saveTrip: trip => {
 				console.log(trip, "trip en saveTrip");
@@ -290,7 +291,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(store.detailOffer, "DETAIL OFFER");
 				const { text, attached, id_trip, id_offer } = comentario;
 				let formData = new FormData();
-				formData.append("comentario", text);
+				formData.append("comment", text);
 				if (attached != "" && attached != null && file != undefined) {
 					formData.append("attached", file, file.name);
 				}

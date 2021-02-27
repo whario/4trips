@@ -9,7 +9,6 @@ import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "./AddOffer.jsx";
-import { AddComment } from "./AddComment.jsx";
 import { Offers } from "../Component/Offers.jsx";
 
 export const TripDetail = () => {
@@ -105,7 +104,6 @@ export const TripDetail = () => {
 			</div>
 			<div className="row">
 				<AddOffer id_trip={store.detailTrip.id} />
-				<AddComment id_offer={store.detailTrip.id_offer} />
 			</div>
 		</div>
 	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props) Al componente Offers paso offers que está almacenado en el store
