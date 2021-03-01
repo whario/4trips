@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { TripCard } from "../Component/TripCard.jsx";
+import { TripCard } from "./TripCard.jsx";
 import "../../styles/trips.scss";
 
 import { checkPropTypes } from "prop-types";
@@ -10,15 +10,8 @@ export const Trips = () => {
 	const { store, actions } = useContext(Context);
 	const [page, setPage] = useState(1);
 
-	useEffect(
-		() => {},
-		[store.tripList] //espero a que haya cambios en la variable tripList con useEffect para hacer el mapeado
-	);
 	const changePage = () => {
-		let newPage = page + 1;
-		console.log(newPage);
-		setPage(newPage);
-		actions.loadingTrips(newPage);
+		actions.loadingTrips(store.page);
 	};
 	return (
 		<div className="container">
@@ -32,18 +25,13 @@ export const Trips = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="row">
-				<div className="col">
-					<div className="espaciador" />
-				</div>
-			</div>
-			<div className="row">
-				<div className="ultimos">Últimos viajes publicados:</div>
-			</div>
 			<div className="container">
 				<div className="row">
 					{store.tripList.length > 0
-						? store.tripList.map((trip, index) => <TripCard key={index} trip={trip} />)
+						? store.tripList.map((trip, index) => {
+								console.log(trip, "trip/////");
+								return <TripCard key={index} trip={trip} />;
+						  })
 						: "cargando viajes..."}
 				</div>
 			</div>
