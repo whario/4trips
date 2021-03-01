@@ -8,7 +8,7 @@ import logoBbq from "../../img/barbacoaicon.png";
 import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
-import { AddOffer } from "./AddOffer.jsx";
+import { AddOffer } from "../Component/AddOffer.jsx";
 import { OfferCard } from "../Component/OfferCard.jsx";
 
 export const TripDetail = () => {

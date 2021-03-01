@@ -42,8 +42,12 @@ export const AddComment = props => {
 		actions.sendComment(inputs, props, file.files[0]);
 	};
 
+	const hiddenFileInput = React.useRef(null);
+	const handleClick = event => {
+		hiddenFileInput.current.click();
+	};
 	return (
-		<div className="card my-1">
+		<div className="card my-1 sendcomment col-9 offset-2">
 			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
 				<input
 					type="text"
@@ -55,7 +59,10 @@ export const AddComment = props => {
 				{submit && !inputs.text ? (
 					<span className="alert alert-danger">Tienes que escribir un comentario</span>
 				) : null}
-				<input type="file" name="attached" className="col-4" id="file" />
+				<p className="postcomment" onClick={handleClick}>
+					<i className="fas fa-camera" />
+				</p>
+				<input type="file" name="attached" ref={hiddenFileInput} className="col-4 inputfile" id="file" />
 				<button className="btn btn-outline-secondary col-2" type="submit" id="button-addon1">
 					Enviar
 				</button>
