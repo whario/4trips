@@ -1,0 +1,72 @@
+
+.avatar-pro{
+    right: 1px;
+    position: relative;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background: white;
+    top: 9px;
+}
+.hoveron{
+    color: red;
+}
+.errormsg{
+    color: red;
+}
+.P{
+  text-align: center;
+}
+.avatar-pro-container{
+    position: relative;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+
+}
+.avatar-pro-container:hover .overlay {
+  opacity: 1;
+}
+.uploadedimg{
+    width: 200px;
+    height: 200px;
+}
+.hidenButton{
+    position: relative;
+    bottom: 50px;
+    left: 133px;
+    opacity: 0;
+    z-index: 10;
+}
+
+.hidenButton:hover .overlay {
+  opacity: 1;
+}
+
+.label-pro{
+    position: relative;
+    left: 8%;
+}
+.error-msg-pro{
+    position: relative;
+    left: 8%;
+    color: red;
+}
+.hide{
+    display: none;
+}

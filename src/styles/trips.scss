@@ -1,0 +1,103 @@
+.needs{
+    width: 45px;
+    height: 45px;
+}
+.espaciador{
+    height: 20px;
+}
+.ultimos{
+    padding: 3%;
+    width: 100%;
+    color: #1C6EA4;
+    font-weight: bold;
+}
+.blue{
+    background-color: #1C6EA4;
+    color: white;
+    font-weight: bold;
+}
+.numero{
+    background-color: white;
+    color: #1C6EA4;
+    font-weight: bolder;
+    text-align: center;
+    border-radius: 100%;
+    z-index: 100;
+    float: right;
+    padding: 1%;
+    cursor: pointer;
+}
+.props{
+    color: #1C6EA4;
+    font-weight: bolder;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+.description{
+    font-weight: normal;
+    margin: 0%;
+}
+.card-footer{
+    display: flex;
+    justify-content: space-around;
+}
+.card-title{
+    margin-left: 10%;
+    padding-top: 2.5rem;
+}
+.publicar{
+    background-color: #1C6EA4;
+    border-color: #1C6EA4;
+    position: relative;
+    margin-top: 5%;
+    display: block;
+}
+.masviajes{
+    text-align: center;
+    margin-top: 2%;
+}
+.showmore{
+    position: relative;
+    bottom: 20px;
+    margin-bottom: 40px;
+    margin-top: 50px;
+
+}
+.card{
+    border-color: #1c6ea4;
+}
+.col-md-4{
+    margin-bottom: 5%;
+}
+.col-sm-1{
+    margin-bottom: 3%;
+}
+.rounded-circle{
+    display: block;
+    max-width: 120px;
+    max-height: 120px;
+    margin: 6%;
+}
+.big{
+    height: 200px;
+    width: 200px;
+}
+.leermas{
+    font-size: medium;
+    color: gray;
+    display: flex;
+    padding-left: 4px;
+}
+.description{
+    width: 100%;
+    display: flex;
+}
+.day1{
+    padding-left: 3px;
+}
+.day2{
+    padding-left: 6px;
+}
+.destino{
+    padding-left: 3px;
+}

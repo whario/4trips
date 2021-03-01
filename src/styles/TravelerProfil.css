@@ -1,0 +1,59 @@
+
+.traveler-img{ 
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+    bottom: 15px;
+}
+.card{
+    padding: 20px;
+ }
+.card-title{
+    margin: auto;
+}
+.edit-icon:hover{
+    cursor: pointer;
+}
+.username{
+    margin: 20px;
+    width: 192px;
+    position: relative;
+ 
+}
+.email-input{
+    margin: 12px;
+    position: relative;
+    left: 12%
+}
+.save-btn{
+    width: 75%;
+    margin: auto;
+    position: relative;
+    top: 10px;
+}
+
+.strog{
+        padding: 20px 12px 20px 12px;
+}
+.img-place{
+        text-align: center;
+}
+.div-btns{
+    width: 100%;
+    text-align: center;
+}
+.data-list{
+    width: 90%;
+}
+.cancel-btn{
+    width: 75%;
+    position: relative;
+    top: 15px;
+}
+.file-input{
+    position: relative;
+    bottom: 10px;
+    font-size: 12px;
+}

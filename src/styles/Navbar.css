@@ -1,0 +1,13 @@
+
+.navbar{ 
+    background:#2e8fd6;
+    color : bisque;
+} 
+
+ .btnRegistroLogin{ 
+     color:rgb(240, 235, 235);
+     background-color: none;
+ }
+.search-btn{
+    flex-wrap: nowrap ;
+}
