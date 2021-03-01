@@ -46,18 +46,12 @@ export const AddOffer = props => {
 	return (
 		<div className="card my-2 sendoffer">
 			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
-				<input
-					type="text"
-					name="text"
-					className="col-6"
-					placeholder="Envia una oferta a este viajero"
-					src={inputs.offer}
-				/>
+				<input type="text" name="text" className="col-6" placeholder="Describe tu oferta" src={inputs.offer} />
 				{valied ? <span className="alert alert-danger">Describe tu oferta</span> : null}
 				<div className="attachment">
 					<input type="file" name="attached" className="seleccionar" id="file" />
 				</div>
-				<button className="btn btn-outline-secondary col-2" type="submit" id="button-addon1">
+				<button className="btn btn-light col-3" type="submit" id="button-addon1">
 					Enviar
 				</button>
 			</form>

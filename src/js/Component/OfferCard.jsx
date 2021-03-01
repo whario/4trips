@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { checkPropTypes } from "prop-types";
 import defaultAvatarPro from "../../img/default_avatar_pro.png";
 import { CommentCard } from "./CommentCard.jsx";
-import { AddComment } from "../views/AddComment.jsx";
+import { AddComment } from "./AddComment.jsx";
 
 export const OfferCard = props => {
 	const { store, actions } = useContext(Context);

@@ -13,7 +13,7 @@ import LogIn from "./views/LogIn";
 import { TripDetail } from "./views/tripDetail.jsx";
 import { TravelerProfil } from "./Component/TravelerProfil.jsx";
 import { PerfilPro } from "./Component/PerfilPro.jsx";
-import { AddOffer } from "./views/AddOffer.jsx";
+import { AddOffer } from "./Component/AddOffer.jsx";
 //create your first component
 const Layout = () => {
 	const { store, actions } = useContext(Context);
