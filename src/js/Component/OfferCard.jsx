@@ -40,7 +40,7 @@ export const OfferCard = props => {
 								return <CommentCard comment={comment} key={index} />;
 						  })
 						: null}
-					<AddComment id_offer={props.offer.id} id_trip={props.offer.id_trip} />
+					{showComments ? <AddComment id_offer={props.offer.id} id_trip={props.offer.id_trip} /> : null}
 				</div>
 			</div>
 		</div>

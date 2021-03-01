@@ -45,5 +45,14 @@
     border-radius: 15px;
 }
 .sendcomment{
-    background-color: hsl(204, 48%, 45%);
+    background-color: hsl(204, 28%, 57%);
+}
+.inputfile{
+    display: none;
+}
+.postcomment :hover{
+    cursor: pointer;
+}
+.postcomment{
+    margin: 0 4%; 
 }

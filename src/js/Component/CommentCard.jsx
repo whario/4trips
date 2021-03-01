@@ -31,6 +31,7 @@ export const CommentCard = props => {
 				</div>
 				<div className="col-9">{props.comment.text}</div>
 			</div>
+			<div className="row" />
 		</div>
 	);
 };
