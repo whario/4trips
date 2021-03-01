@@ -1,42 +1,34 @@
 import React, { useContext, useState, Fragment } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
-import { Modal } from "./Modal.jsx";
 import "../../styles/TravelerProfil.css";
 
 export const TravelerProfil = () => {
 	const { store, actions } = useContext(Context); //
 	const [foto, setFoto] = useState({
-		//
 		travelerAvatar: ""
 	});
 	useEffect(
 		//
 		() => {
-			setFoto({ travelerAvatar: store.travelerInfoCollected.avatar });
+			setFoto({ travelerAvatar: store.travelerInfoCollected.avatar }); //seteo la foto en el store para cuando quiero hacer cambio a del estado de editar a no editar
 		},
-		[store.travelerInfoCollected.avatar]
+		[store.travelerInfoCollected.avatar] // se ejecuta la funcion simplemente cuando haya un cambio en la posicion store.travelerInfoCollected.avatar
 	);
-	const [modal, setModal] = useState({
-		showModal: false
-	});
 
 	const [edit, setedit] = useState(false); //este es cuando le dan al button del editar que salgan los inputs de editar //
 
 	const handleEdit = () => {
-		//
+		// para poner quitar la pagina de editar
 		setedit(!edit);
 	};
 
-	const handleModal = () => {
-		setModal(!modal);
-	};
 	const handleChange = e => {
-		//
+		// aqui llamo la funcion de flux donde tengo la funcion que guardo los datos editados en el store
 		actions.editTravelerProfil(e.target.name, e.target.value);
 	};
 	const handleFoto = e => {
-		//
+		// aqui tengo la explicacion en el signup
 		if (e.target.name == "travelerAvatar") {
 			const reader = new FileReader();
 			reader.onload = event => {
@@ -55,7 +47,8 @@ export const TravelerProfil = () => {
 		//
 		const file = document.querySelector("#file");
 		console.log(file, "estoy en handleClick");
-		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]);
+		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]); // aqui la actualicacion del perfil en el backend
+		setedit(!edit);
 	};
 	const showItems = () => {
 		//666
@@ -77,7 +70,7 @@ export const TravelerProfil = () => {
 		}
 	};
 	useEffect(() => {
-		//
+		//para poder obtener el perfil
 		actions.profilTraveler();
 	}, []);
 
@@ -117,11 +110,7 @@ export const TravelerProfil = () => {
 					</ul>
 					<div className="div-btns">
 						{edit == true ? (
-							<button
-								onClick={() => {
-									handleModal();
-								}}
-								className="btn btn-primary save-btn">
+							<button onClick={handleClick} className="btn btn-primary save-btn">
 								Guardar
 							</button>
 						) : null}
@@ -132,13 +121,6 @@ export const TravelerProfil = () => {
 						) : null}
 					</div>
 				</div>
-				{modal == false ? (
-					<Modal
-						handleClick={handleClick}
-						show={modal.showModal}
-						onClose={() => setModal({ showModal: false })}
-					/>
-				) : null}
 			</div>
 		</div>
 	);

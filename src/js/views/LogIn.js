@@ -79,8 +79,8 @@ export default function LogIn(props) {
 							</div>
 						</div>
 						{loading == true ? (
-							<button className="btn btn-primary" type="button" disabled>
-								<span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
+							<button className="btn btn-primary loading-login" type="button" disabled>
+								<span className="spinner-grow spinner-grow-sm " role="status" aria-hidden="true" />
 								<span className="visually-hidden">Loading...</span>
 							</button>
 						) : (
