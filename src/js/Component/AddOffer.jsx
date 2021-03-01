@@ -43,15 +43,22 @@ export const AddOffer = props => {
 		}
 	};
 
+	const hiddenFileInput = React.useRef(null);
+	const handleClick = event => {
+		hiddenFileInput.current.click();
+	};
 	return (
 		<div className="card my-2 sendoffer">
 			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
 				<input type="text" name="text" className="col-6" placeholder="Describe tu oferta" src={inputs.offer} />
 				{valied ? <span className="alert alert-danger">Describe tu oferta</span> : null}
-				<div className="attachment">
-					<input type="file" name="attached" className="seleccionar" id="file" />
+				<div className="col-1 postcommen" onClick={handleClick}>
+					<i className="fas fa-camera" />
 				</div>
-				<button className="btn btn-light col-3" type="submit" id="button-addon1">
+				<div className="col-1">
+					<input type="file" name="attached" ref={hiddenFileInput} className="inputfile" id="file" />
+				</div>
+				<button className="btn btn-dark col-3" type="submit" id="button-addon1">
 					Enviar
 				</button>
 			</form>

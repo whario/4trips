@@ -12,9 +12,9 @@ export const CommentCard = props => {
 	const checkingImageUser = comment => {
 		console.log(comment, "dentro de la funcion");
 		if (comment.userpro != null) {
-			return <img src={comment.userpro.avatar} />;
+			return <img src={comment.userpro.avatar} className="avatarcomment" />;
 		} else {
-			return <img src={comment.traveler.avatar} />;
+			return <img src={comment.traveler.avatar} className="avatarcomment" />;
 		}
 	};
 
