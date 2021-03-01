@@ -1,4 +1,4 @@
-const URL = "https://3000-blue-tarantula-cmm1u21j.ws-eu03.gitpod.io/";
+const URL = "https://fortrips.herokuapp.com/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {

@@ -69,13 +69,13 @@ const SignUp = props => {
 							</div>
 						) : null}
 						<br />
-						<div className="avatar-container">
+						<div className="avatar-container-signup">
 							{datos.avatar ? (
-								<img className="avatar-traveler" src={datos.avatar} />
+								<img className="avatar-traveler-signup" src={datos.avatar} />
 							) : (
 								<img
 									src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
-									className="avatar"
+									className="avatar-traveler-signup"
 								/>
 							)}
 
