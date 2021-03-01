@@ -43,7 +43,7 @@ export const AddComment = props => {
 	};
 
 	return (
-		<div className="card my-1">
+		<div className="card my-1 sendcomment">
 			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
 				<input
 					type="text"

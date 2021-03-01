@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { checkPropTypes } from "prop-types";
 import defaultAvatarPro from "../../img/default_avatar_pro.png";
 import defaultAvatarTra from "../../img/default_avatar.png";
+import "../../styles/Offers.scss";
 
 export const CommentCard = props => {
 	const { store, actions } = useContext(Context);
@@ -18,7 +19,7 @@ export const CommentCard = props => {
 	};
 
 	return (
-		<div className="card w-100">
+		<div className="card w-100 detallecomentarios">
 			<div className="row">
 				<div className="col-3">
 					{checkingImageUser(props.comment)}
