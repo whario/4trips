@@ -44,6 +44,7 @@ export const PerfilPro = () => {
 	const handleSave = () => {
 		const file = document.querySelector("#file");
 		actions.updateProData(store.proInfoCollected, file.files[0]);
+		setedit(!edit);
 	};
 	console.log(store.proInfoCollected, "proinfocolec");
 	return (
@@ -139,16 +140,16 @@ export const PerfilPro = () => {
 						/>
 					)}
 				</div>
-				<div className="buttons">
+				<div className="buttons ">
 					{edit == true ? (
-						<Fragment>
-							<button onClick={handleSave} className="btn btn-primary btn-save-cancele">
-								Guardar
-							</button>
-							<button onClick={handleEdit} className="btn btn-primary btn-cancele">
-								Cancelar
-							</button>
-						</Fragment>
+						<button onClick={handleSave} className="btn btn-primary btn-save-cancele">
+							Guardar
+						</button>
+					) : null}
+					{edit == true ? (
+						<button onClick={handleEdit} className="btn btn-primary btn-cancele">
+							Cancelar
+						</button>
 					) : null}
 				</div>
 			</div>

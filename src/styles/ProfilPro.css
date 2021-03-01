@@ -28,5 +28,10 @@
     cursor: pointer;
 }
 .buttons{
+    width: 100%;
     text-align: center;
+}
+.btn-save-cancele{
+    width: 50%;
+    margin: 10px;
 }
