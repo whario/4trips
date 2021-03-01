@@ -67,6 +67,13 @@
     left: 8%;
     color: red;
 }
-.hide{
-    display: none;
+.btn-register-pro{
+    display: block;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.myForm-pro{
+    padding: 20px;
+
 }

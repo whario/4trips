@@ -2,21 +2,7 @@
     margin-top: 10%;
 }
 .sendoffer{
-    background-color: hsl(204, 71%, 38%);
-}
-.attachment{
-	height:60px;
-	width:60px;
-	margin:10px auto;
-	border:1px solid white;
-	border-radius:60px;
-	overflow:hidden;
-	position:relative;
-}
-.seleccionar{
-    display: block;
-    padding: 60px;
-    background-color: white;
+    background-color: hsl(204, 30%, 52%);
 }
 .detalleoferta{
     margin: 3%;
@@ -45,7 +31,10 @@
     border-radius: 15px;
 }
 .sendcomment{
-    background-color: hsl(204, 28%, 57%);
+    background-color: rgb(236, 236, 236);
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 15px;
+    margin: 2%;
 }
 .inputfile{
     display: none;
@@ -54,5 +43,10 @@
     cursor: pointer;
 }
 .postcomment{
-    margin: 0 4%; 
+    margin: 0 4%;
+    width: 100%; 
+}
+.avatarcomment{
+    border-radius: 50%;
+    width: 100px;
 }

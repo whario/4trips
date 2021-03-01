@@ -47,25 +47,29 @@ export const AddComment = props => {
 		hiddenFileInput.current.click();
 	};
 	return (
-		<div className="card my-1 sendcomment col-9 offset-2">
+		<div className="card my-1 sendcomment col-10 offset-2">
 			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
-				<input
-					type="text"
-					name="text"
-					className="col-6"
-					placeholder="Escribe tu comentario"
-					src={inputs.offer}
-				/>
-				{submit && !inputs.text ? (
-					<span className="alert alert-danger">Tienes que escribir un comentario</span>
-				) : null}
-				<p className="postcomment" onClick={handleClick}>
+				<div className="col-7">
+					<input
+						type="text"
+						name="text"
+						placeholder="Escribe tu comentario..."
+						src={inputs.offer}
+						className="postcomment"
+					/>
+					{submit && !inputs.text ? (
+						<span className="alert alert-danger">Tienes que escribir un comentario</span>
+					) : null}
+				</div>
+				<div className="col-1 postcomment" onClick={handleClick}>
 					<i className="fas fa-camera" />
-				</p>
-				<input type="file" name="attached" ref={hiddenFileInput} className="col-4 inputfile" id="file" />
-				<button className="btn btn-outline-secondary col-2" type="submit" id="button-addon1">
-					Enviar
-				</button>
+				</div>
+				<div className="col-2">
+					<input type="file" name="attached" ref={hiddenFileInput} className="col-4 inputfile" id="file" />
+					<button className="btn btn-outline-secondary" type="submit" id="button-addon1">
+						Enviar
+					</button>
+				</div>
 			</form>
 		</div>
 	);
