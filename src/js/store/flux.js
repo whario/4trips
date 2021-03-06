@@ -1,4 +1,4 @@
-const URL = "https://fortrips.herokuapp.com/";
+const URL = "https://fortrips.herokuapp.com";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
