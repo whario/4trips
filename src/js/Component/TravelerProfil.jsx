@@ -2,6 +2,7 @@ import React, { useContext, useState, Fragment } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
 import "../../styles/TravelerProfil.css";
+import { TripCard } from "./TripCard.jsx";
 
 export const TravelerProfil = () => {
 	const { store, actions } = useContext(Context); //
@@ -76,7 +77,7 @@ export const TravelerProfil = () => {
 
 	return (
 		<div className="container">
-			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2  ">
+			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2">
 				<div className="card row icon">
 					{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
 					<div className="img-place">{showItems()}</div>
@@ -121,6 +122,16 @@ export const TravelerProfil = () => {
 						) : null}
 					</div>
 				</div>
+			</div>
+			<div className="row">
+				{store.tripList.length > 0 && store.tripList.id_traveler == store.travelerInfoCollected.id
+					? store.tripList.map((trip, index) => {
+							console.log(store.tripList, "store.TripList");
+							console.log(store.travelerInfoCollected, "InfoCollected");
+							console.log(trip, "trip/////");
+							return <TripCard key={index} trip={trip} />;
+					  })
+					: "cargando viajes..."}
 			</div>
 		</div>
 	);
