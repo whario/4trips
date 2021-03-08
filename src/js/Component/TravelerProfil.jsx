@@ -72,7 +72,9 @@ export const TravelerProfil = () => {
 	};
 	useEffect(() => {
 		//para poder obtener el perfil
+		console.log("en use efect@@@@@");
 		actions.profilTraveler();
+		actions.list_user_trips();
 	}, []);
 
 	return (
@@ -124,10 +126,9 @@ export const TravelerProfil = () => {
 				</div>
 			</div>
 			<div className="row">
-				{store.tripList.length > 0 && store.tripList.id_traveler == store.travelerInfoCollected.id
-					? store.tripList.map((trip, index) => {
-							console.log(store.tripList, "store.TripList");
-							console.log(store.travelerInfoCollected, "InfoCollected");
+				{store.userTrips.length > 0
+					? store.userTrips.map((trip, index) => {
+							console.log(store.userTrips, "store.userTrips");
 							console.log(trip, "trip/////");
 							return <TripCard key={index} trip={trip} />;
 					  })

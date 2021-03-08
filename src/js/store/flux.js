@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rol: "",
 			offerSubmited: {},
 			detailOffer: {},
-			page: 1
+			page: 1,
+			userTrips: []
 		},
 
 		actions: {
@@ -259,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			profilTraveler: traveler => {
+			profilTraveler: () => {
 				const token = localStorage.getItem("token");
 				fetch(URL + "traveler", {
 					method: "GET",
@@ -272,6 +273,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ travelerInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			}, /////////////////////////////////
+			list_user_trips: () => {
+				const token = localStorage.getItem("token");
+				console.log("en funcion flux");
+				fetch(URL + "usertrips", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore({ userTrips: data }))
+					.catch(err => console.log(err, "err"));
+			},
 			logout: () => {
 				localStorage.removeItem("token");
 				localStorage.removeItem("rol");

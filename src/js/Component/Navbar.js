@@ -1,10 +1,18 @@
-import React, { useEffect, Fragment, useContext } from "react";
+import React, { useEffect, Fragment, useContext, useState } from "react";
 import "../../styles/Navbar.css";
 import logotipo from "../../img/logo_4Trips_navbar.png";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
+
 const Navbar = props => {
 	const { store, actions } = useContext(Context);
+	const [path, setPath] = useState({
+		rol: ""
+	});
+	useEffect(() => {
+		setPath({ rol: localStorage.getItem("rol") });
+	}, []);
 
 	const redirect = () => {
 		if (store.isLogin == false) {
@@ -20,11 +28,24 @@ const Navbar = props => {
 					</Link>
 				</Fragment>
 			);
-		} else {
-			const path = store.rol == "Traveler" ? "/perfil/Traveler" : "/perfil/pro";
+		} else if (path.rol == "Traveler") {
+			const url = "/perfil/Traveler";
 			return (
 				<Fragment>
-					<Link to={path} className="btn  my-2 my-sm-0 btnRegistroLogin">
+					<Link to={url} className="btn  my-2 my-sm-0 btnRegistroLogin">
+						Mi perfil
+					</Link>
+					<Link to="/login" onClick={e => actions.logout()} className="btn  my-2 my-sm-0 btnRegistroLogin">
+						{" "}
+						Salir
+					</Link>
+				</Fragment>
+			);
+		} else if (path.rol == "Profesional") {
+			const url = "/perfil/pro";
+			return (
+				<Fragment>
+					<Link to={url} className="btn  my-2 my-sm-0 btnRegistroLogin">
 						Mi perfil
 					</Link>
 					<Link to="/login" onClick={e => actions.logout()} className="btn  my-2 my-sm-0 btnRegistroLogin">
@@ -60,3 +81,7 @@ const Navbar = props => {
 	);
 };
 export default Navbar;
+
+Navbar.PropTypes = {
+	history: PropTypes.object
+};
