@@ -363,6 +363,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
+			},
+			editTrip: () => {
+				console.log();
+				const store = getStore();
+				let tripToEdit = store.userTrips;
+				tripToEdit[description] = value;
+				tripToEdit[destination] = value;
+				console.log(tripToEdit[description], "descripcion del viaje");
+				setStore({ userTrips: tripToEdit });
 			}
 		}
 	};

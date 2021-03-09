@@ -41,6 +41,12 @@ export const TripDetail = () => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
+	//Para la edición de los viajes:
+	const [edit, setEdit] = useState(false);
+	const handelChange = e => {
+		actions.editTrip(e.target.name, e.target.value);
+	};
+
 	console.log(store.detailTrip.offers, "OFFERS");
 	return (
 		<div className="container">
