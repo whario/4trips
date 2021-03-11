@@ -120,7 +120,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + token
 					}
 				})
-					.then(res => res.json())
+					.then(res => {
+						if (res.status == 403) {
+							props.history.push("login");
+						}
+						return res.json();
+					})
 					.then(data => setStore({ proInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			},
@@ -260,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			profilTraveler: () => {
+			profilTraveler: props => {
 				const token = localStorage.getItem("token");
 				fetch(URL + "traveler", {
 					method: "GET",
@@ -269,8 +274,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + token
 					}
 				})
-					.then(res => res.json())
-					.then(data => setStore({ travelerInfoCollected: data }))
+					.then(res => {
+						if (res.status == 403) {
+							props.history.push("login");
+						} else return res.json();
+					})
+					.then(data => {
+						setStore({ travelerInfoCollected: data });
+					})
 					.catch(err => console.log(err, "err"));
 			}, /////////////////////////////////
 			list_user_trips: () => {
@@ -364,14 +375,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
 			},
-			editTrip: () => {
+			editTrip: (name, value) => {
 				console.log();
 				const store = getStore();
 				let tripToEdit = store.userTrips;
-				tripToEdit[description] = value;
-				tripToEdit[destination] = value;
-				console.log(tripToEdit[description], "descripcion del viaje");
+				tripToEdit[name] = value;
+				console.log(tripToEdit[name], "descripcion del viaje");
 				setStore({ userTrips: tripToEdit });
+			},
+			updateTrip: trip => {
+				console.log(trip);
+				const token = localStorage.getItem("token");
+				const formdata = new FormData();
+				formdata.append("description", trip.description);
+				formdata.append("email", trip.destination);
+				console.log(file, "form data");
+				fetch(URL + "", {
+					method: "PUT",
+					body: formdata,
+					headers: {
+						formdata,
+						Authorization: "Bearer " + token
+					}
+				});
 			}
 		}
 	};

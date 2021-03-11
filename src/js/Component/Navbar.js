@@ -29,7 +29,7 @@ const Navbar = props => {
 				</Fragment>
 			);
 		} else if (path.rol == "Traveler") {
-			const url = "/perfil/Traveler";
+			const url = "/perfilTraveler";
 			return (
 				<Fragment>
 					<Link to={url} className="btn  my-2 my-sm-0 btnRegistroLogin">
@@ -42,7 +42,7 @@ const Navbar = props => {
 				</Fragment>
 			);
 		} else if (path.rol == "Profesional") {
-			const url = "/perfil/pro";
+			const url = "/perfilpro";
 			return (
 				<Fragment>
 					<Link to={url} className="btn  my-2 my-sm-0 btnRegistroLogin">

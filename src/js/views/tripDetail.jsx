@@ -10,8 +10,10 @@ import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "../Component/AddOffer.jsx";
 import { OfferCard } from "../Component/OfferCard.jsx";
+import PropTypes from "prop-types";
+import { EditTrip } from "../views/Edittrip.jsx";
 
-export const TripDetail = () => {
+export const TripDetail = props => {
 	const { store, actions } = useContext(Context);
 	const [showOffers, setShowOffers] = useState(false);
 	const logos = {
@@ -41,11 +43,6 @@ export const TripDetail = () => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
-	//Para la edición de los viajes:
-	const [edit, setEdit] = useState(false);
-	const handelChange = e => {
-		actions.editTrip(e.target.name, e.target.value);
-	};
 
 	console.log(store.detailTrip.offers, "OFFERS");
 	return (
@@ -55,6 +52,11 @@ export const TripDetail = () => {
 					<div className="espaciador" />
 					<div className="card">
 						<div className="card-header row bg-white">
+							<div className="card row icon">
+								<i className="fas fa-pencil-alt edit-icon">
+									<Link to={EditTrip} />
+								</i>
+							</div>
 							<div className="col-4">
 								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
 							</div>
@@ -115,4 +117,8 @@ export const TripDetail = () => {
 			</div>
 		</div>
 	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props) Al componente Offers paso offers que está almacenado en el store
+};
+
+TripDetail.propTypes = {
+	history: PropTypes.object
 };

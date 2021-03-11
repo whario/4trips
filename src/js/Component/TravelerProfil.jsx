@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import "../../styles/TravelerProfil.css";
 import { TripCard } from "./TripCard.jsx";
 
-export const TravelerProfil = () => {
+export const TravelerProfil = props => {
+	console.log(props, "PROPSSS");
 	const { store, actions } = useContext(Context); //
 	const [foto, setFoto] = useState({
 		travelerAvatar: ""
@@ -73,7 +74,7 @@ export const TravelerProfil = () => {
 	useEffect(() => {
 		//para poder obtener el perfil
 		console.log("en use efect@@@@@");
-		actions.profilTraveler();
+		actions.profilTraveler(props);
 		actions.list_user_trips();
 	}, []);
 
