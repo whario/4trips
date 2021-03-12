@@ -10,10 +10,21 @@ import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export const EditTrip = () => {
-    const { store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	const handelChange = e => {
 		actions.editTrip(e.target.name, e.target.value);
 	};
+	const [submited, setSubmited] = useState(false); //para evitar mandar formularios vacíos
+	const [valied, setValied] = useState(true); //para mostrar mensajes de error en campos vacíos
+	const [succesfull, setSuccesfull] = useState(true); //para mostrar mensaje de éxito al enviar
+	console.log(store.detailTrip, "DETAIL TRIP");
+	const formatDay = day => {
+		let newFormatDay = new Date(day);
+		return (
+			newFormatDay.getUTCFullYear() + "-" + ("0" + (newFormatDay.getMonth() + 1)) + "-" + newFormatDay.getDate()
+		);
+	};
+	console.log(formatDay(store.detailTrip.last_day));
 	return (
 		<div className="container">
 			<div className="row">
@@ -34,60 +45,51 @@ export const EditTrip = () => {
 								<div className="form-check form-check-inline m-0">
 									<img src={logoAloj} title="alojamiento" />
 									<input
-										defaultValue="sleep"
+										defaultValue={store.detailTrip.needs_trip[0]}
 										type="checkbox"
-										value={store.detailTrip.needs_trip[0]}
 										className="form-check-input"
 										name="sleep"
-										onChange={handelChange}
 									/>
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoComida} title="comer" />
 									<input
-										defaultValue="eat"
+										defaultValue={store.detailTrip.needs_trip[1]}
 										type="checkbox"
 										value={store.detailTrip.needs_trip[1]}
 										className="form-check-input"
 										name="eat"
-										onChange={handelChange}
 									/>
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoBbq} title="jardín/barbacoa" />
 									<input
-										defaultValue="bbq"
+										defaultValue={store.detailTrip.needs_trip[2]}
 										type="checkbox"
-										value={store.detailTrip.needs_trip[2]}
 										className="form-check-input"
 										name="bbq"
-										onChange={handelChange}
 									/>
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoMultia} title="multiaventura" />
 									<input
-										defaultValue="adventure"
+										defaultValue={store.detailTrip.needs_trip[3]}
 										type="checkbox"
-										value={store.detailTrip.needs_trip[3]}
 										className="form-check-input"
 										name="adventure"
-										onChange={handelChange}
 									/>
 									<label className="form-check-label" />
 								</div>
 								<div className="form-check form-check-inline m-0">
 									<img src={logoPiscina} title="piscina/jacuzzi" />
 									<input
-										defaultValue="relax"
+										defaultValue={store.detailTrip.needs_trip[4]}
 										type="checkbox"
-										value={store.detailTrip.needs_trip[4]}
 										className="form-check-input"
 										name="relax"
-										onChange={handelChange}
 									/>
 									<label className="form-check-label" />
 								</div>
@@ -100,13 +102,11 @@ export const EditTrip = () => {
 							<div className="form-group m-3">
 								<label>Destino/s</label>
 								<input
-									defaultValue={trip.destination}
+									defaultValue={store.detailTrip.destination}
 									type="text"
 									className="form-control"
 									placeholder="Destino/s"
 									name="destination"
-									value={store.detailTrip.destination}
-									onChange={handelChange}
 								/>
 								{valied == false && !trip.destination ? (
 									<span className="error">Escribe al menos un destino</span>
@@ -115,13 +115,11 @@ export const EditTrip = () => {
 							<div className="form-group m-3">
 								<label>Fecha de entrada</label>
 								<input
-									defaultValue={trip.first_day}
+									defaultValue={formatDay(store.detailTrip.last_day)}
 									type="date"
 									className="form-control"
 									placeholder="Fecha de entrada"
 									name="first_day"
-									value={store.detailTrip.first_day}
-									onChange={handelChange}
 								/>
 								{valied == false && !trip.first_day ? (
 									<span className="error">Escribe una fecha de entrada</span>
@@ -130,13 +128,11 @@ export const EditTrip = () => {
 							<div className="form-group m-3">
 								<label>Fecha de salida</label>
 								<input
-									defaultValue={trip.last_day}
+									defaultValue={formatDay(store.detailTrip.last_day)}
 									type="date"
 									className="form-control"
 									placeholder="Fecha de salida"
 									name="last_day"
-									value={store.detailTrip.last_day}
-									onChange={handelChange}
 								/>
 								{valied == false && !trip.last_day ? (
 									<span className="error">Escribe una fecha de salida</span>
@@ -145,12 +141,11 @@ export const EditTrip = () => {
 							<div className="form-group m-3">
 								<label>Descripción</label>
 								<textarea
-									defaultValue={trip.description}
 									type="text"
 									className="form-control"
 									placeholder="Describe tu viaje. ¿Qué quieres hacer, cuántas personas...?"
 									name="description"
-									value={store.detailTrip.description}
+									defaultValue={store.detailTrip.description}
 									onChange={handelChange}
 								/>
 								{valied == false && !trip.description ? (

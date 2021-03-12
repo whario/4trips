@@ -53,9 +53,9 @@ export const TripDetail = props => {
 					<div className="card">
 						<div className="card-header row bg-white">
 							<div className="card row icon">
-								<i className="fas fa-pencil-alt edit-icon">
-									<Link to={EditTrip} />
-								</i>
+								<Link to="/editTrip">
+									<i className="fas fa-pencil-alt edit-icon" />
+								</Link>
 							</div>
 							<div className="col-4">
 								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
