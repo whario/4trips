@@ -1,4 +1,4 @@
-const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
+const URL = "https://3000-olive-goldfish-eq865y5c.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -383,6 +383,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "PUT",
 					body: JSON.stringify(tripEdited),
 					headers: {
+						"Content-Type": "application/json",
 						Authorization: "Bearer " + token
 					}
 				})
