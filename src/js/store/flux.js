@@ -375,13 +375,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
 			},
-			editTrip: (name, value) => {
-				console.log();
+			editTrip: tripEdited => {
+				console.log(tripEdited, "@@@TRIP TO EDIT@@");
+				const token = localStorage.getItem("token");
 				const store = getStore();
-				let tripToEdit = store.userTrips;
-				tripToEdit[name] = value;
-				console.log(tripToEdit[name], "descripcion del viaje");
-				setStore({ userTrips: tripToEdit });
+				fetch(URL + "edittrips", {
+					method: "PUT",
+					body: JSON.stringify(tripEdited),
+					headers: {
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore(tripEdited))
+					.catch(err => console.log(err));
 			},
 			updateTrip: trip => {
 				console.log(trip);
