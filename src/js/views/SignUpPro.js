@@ -22,6 +22,10 @@ const SignUpPro = props => {
 
 	const [submited, setSubmited] = useState(false);
 	const [valied, setValied] = useState({ status: false, msg: "" });
+	const [exist, setExist] = useState({
+		status: false,
+		msg: ""
+	});
 
 	const handleChange = e => {
 		if (e.target.name == "avatar") {
@@ -46,11 +50,11 @@ const SignUpPro = props => {
 			datos.user_name != "" &&
 			datos.email != "" &&
 			datos.password.length > 6 &&
-			datos.password == datos.repeatPassword
+			datos.password == datos.repeatPassword &&
+			exist.status == false
 		) {
 			const file = document.querySelector("#file");
-			console.log(datos, "datos");
-			actions.registerPro(datos, props, file.files[0], setValied);
+			actions.registerPro(datos, props, file.files[0], setValied, setExist);
 		}
 	};
 
@@ -218,6 +222,16 @@ const SignUpPro = props => {
 							Registrar
 						</button>
 					</form>
+					{exist.status == true ? (
+						<div className="alert alert-danger" role="alert">
+							{exist.msg}
+						</div>
+					) : null}
+					{valied.status == true ? (
+						<div className="alert alert-danger" role="alert">
+							{valied.msg}
+						</div>
+					) : null}
 				</div>
 			</div>
 		</div>

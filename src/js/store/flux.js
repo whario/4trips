@@ -1,4 +1,4 @@
-const URL = "https://3000-lime-raven-6ti90zfz.ws-eu03.gitpod.io/";
+const URL = "https://3000-olive-goldfish-eq865y5c.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(err => console.log(err, "error login "));
 			},
-			registerPro: (pro, props, file, setValied) => {
+			registerPro: (pro, props, file, setValied, setExist) => {
 				const store = getStore();
 				const {
 					user_name,
@@ -100,10 +100,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						} else if (res.status == 404) {
 							setValied({
 								status: true,
-								msg: "introduce todos los campos"
+								msg: "introduce todos los campos obligartorios "
 							});
-							return;
 							res.json();
+							return;
+						} else if (res.status == 409) {
+							setExist({
+								status: true,
+								msg: "Correo o nombre de usuario existe "
+							});
+							res.json();
+							return;
 						}
 					})
 					.then(data => {
