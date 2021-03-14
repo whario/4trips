@@ -1,4 +1,4 @@
-const URL = "https://3000-olive-goldfish-eq865y5c.ws-eu03.gitpod.io/";
+const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -393,7 +393,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			updateTrip: trip => {
 				console.log(trip);
-				const token = localStorage.getItem("token");
+				const token = localStorage.getItem("token"); //ESTA FUNCION ESTA MAL Y NO LA ESTAMOS USANDO
 				const formdata = new FormData();
 				formdata.append("description", trip.description);
 				formdata.append("email", trip.destination);
@@ -403,6 +403,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: formdata,
 					headers: {
 						formdata,
+						Authorization: "Bearer " + token
+					}
+				});
+			},
+			sendReviews: (value, id_pro) => {
+				const token = localStorage.getItem("token");
+				console.log(id_pro, "ID PROOOO");
+				fetch(URL + "reviews", {
+					method: "POST",
+					body: JSON.stringify({ id: id_pro, value: value }),
+					headers: {
+						"Content-Type": "application/json",
 						Authorization: "Bearer " + token
 					}
 				});
