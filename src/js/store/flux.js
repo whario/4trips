@@ -97,6 +97,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => {
 						if (res.status == 200) {
 							setValied({ status: true, msg: "Registro completado con éxito" });
+							setTimeout(() => {
+								props.history.push("/login");
+							}, 1000);
 						} else if (res.status == 404) {
 							setValied({
 								status: true,
@@ -109,15 +112,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 								status: true,
 								msg: "Correo o nombre de usuario existe "
 							});
-							res.json();
-							return;
 						}
 					})
 					.then(data => {
 						setStore({ proInfoCollected: data });
-						setTimeout(() => {
-							props.history.push("/login");
-						}, 1000);
 					})
 					.catch(err => {
 						console.log(err);
