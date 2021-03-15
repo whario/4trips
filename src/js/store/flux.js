@@ -55,6 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						localStorage.setItem("token", data.access_token);
 						localStorage.setItem("rol", data.rol);
+						localStorage.setItem("id", data.id);
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol, tripList: [] });
 						getActions().loadingTrips(1);
@@ -285,8 +286,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => console.log(err, "err"));
 			}, /////////////////////////////////
 			list_user_trips: () => {
-				const token = localStorage.getItem("token");
-				console.log("en funcion flux");
+				const token = localStorage.getItem("token", "id");
+				console.log(token, "token en funcion flux");
 				fetch(URL + "usertrips", {
 					method: "GET",
 					headers: {

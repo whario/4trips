@@ -82,6 +82,6 @@ const Navbar = props => {
 };
 export default Navbar;
 
-Navbar.PropTypes = {
+Navbar.propTypes = {
 	history: PropTypes.object
 };

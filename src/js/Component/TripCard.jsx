@@ -9,6 +9,7 @@ import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import defaultAvatar from "../../img/default_avatar.png";
 import "../../styles/trips.scss";
+import { useEffect } from "react";
 
 export const TripCard = props => {
 	const { store, actions } = useContext(Context);
@@ -24,7 +25,7 @@ export const TripCard = props => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
-	console.log(props.trip.needs_trip, "neeeeeeeeds triiiiip en prop");
+
 	return (
 		<div className="col-md-4 col-sm-1">
 			<div className="card h-100">

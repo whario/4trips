@@ -5,7 +5,6 @@ import "../../styles/TravelerProfil.css";
 import { TripCard } from "./TripCard.jsx";
 
 export const TravelerProfil = props => {
-	console.log(props, "PROPSSS");
 	const { store, actions } = useContext(Context); //
 	const [foto, setFoto] = useState({
 		travelerAvatar: ""
@@ -48,7 +47,6 @@ export const TravelerProfil = props => {
 	const handleClick = () => {
 		//
 		const file = document.querySelector("#file");
-		console.log(file, "estoy en handleClick");
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]); // aqui la actualicacion del perfil en el backend
 		setedit(!edit);
 	};
@@ -73,7 +71,6 @@ export const TravelerProfil = props => {
 	};
 	useEffect(() => {
 		//para poder obtener el perfil
-		console.log("en use efect@@@@@");
 		actions.profilTraveler(props);
 		actions.list_user_trips();
 	}, []);
@@ -129,8 +126,6 @@ export const TravelerProfil = props => {
 			<div className="row">
 				{store.userTrips.length > 0
 					? store.userTrips.map((trip, index) => {
-							console.log(store.userTrips, "store.userTrips");
-							console.log(trip, "trip/////");
 							return <TripCard key={index} trip={trip} />;
 					  })
 					: "cargando viajes..."}

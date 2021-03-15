@@ -11,7 +11,6 @@ import "../../styles/trips.scss";
 import { AddOffer } from "../Component/AddOffer.jsx";
 import { OfferCard } from "../Component/OfferCard.jsx";
 import PropTypes from "prop-types";
-import { EditTrip } from "../views/Edittrip.jsx";
 
 export const TripDetail = props => {
 	const { store, actions } = useContext(Context);
@@ -45,18 +44,30 @@ export const TripDetail = props => {
 	};
 
 	console.log(store.detailTrip.offers, "OFFERS");
+
+	//Para sacar button edicion viajes
+	const [button, setButton] = useState({
+		id_traveler: "",
+		status: false
+	});
+	useEffect(() => {
+		setButton({ id_traveler: localStorage.getItem("id") });
+		console.log(setButton.id_traveler, "id traveler en localStorage");
+	}, []);
+	console.log(button, "BUTTTTTTON");
+	console.log(store.detailTrip, "userTRipssss");
 	return (
 		<div className="container">
 			<div className="row">
 				<div className="col-12 col-lg-8 offset-lg-2 col-md-6 offset-md-3">
 					<div className="espaciador" />
 					<div className="card">
+						{store.detailTrip.id_traveler == button.id_traveler ? (
+							<Link to="/editTrip">
+								<i className="fas fa-pencil-alt edit-icon" />
+							</Link>
+						) : null}
 						<div className="card-header row bg-white">
-							<div className="card row icon">
-								<Link to="/editTrip">
-									<i className="fas fa-pencil-alt edit-icon" />
-								</Link>
-							</div>
 							<div className="col-4">
 								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
 							</div>
