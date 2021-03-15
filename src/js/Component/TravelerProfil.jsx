@@ -2,8 +2,9 @@ import React, { useContext, useState, Fragment } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
 import "../../styles/TravelerProfil.css";
+import { TripCard } from "./TripCard.jsx";
 
-export const TravelerProfil = () => {
+export const TravelerProfil = props => {
 	const { store, actions } = useContext(Context); //
 	const [foto, setFoto] = useState({
 		travelerAvatar: ""
@@ -46,7 +47,6 @@ export const TravelerProfil = () => {
 	const handleClick = () => {
 		//
 		const file = document.querySelector("#file");
-		console.log(file, "estoy en handleClick");
 		actions.updateTravelerData(store.travelerInfoCollected, file.files[0]); // aqui la actualicacion del perfil en el backend
 		setedit(!edit);
 	};
@@ -71,12 +71,13 @@ export const TravelerProfil = () => {
 	};
 	useEffect(() => {
 		//para poder obtener el perfil
-		actions.profilTraveler();
+		actions.profilTraveler(props);
+		actions.list_user_trips();
 	}, []);
 
 	return (
 		<div className="container">
-			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2  ">
+			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2">
 				<div className="card row icon">
 					{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
 					<div className="img-place">{showItems()}</div>
@@ -121,6 +122,13 @@ export const TravelerProfil = () => {
 						) : null}
 					</div>
 				</div>
+			</div>
+			<div className="row">
+				{store.userTrips.length > 0
+					? store.userTrips.map((trip, index) => {
+							return <TripCard key={index} trip={trip} />;
+					  })
+					: "cargando viajes..."}
 			</div>
 		</div>
 	);

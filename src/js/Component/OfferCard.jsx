@@ -10,7 +10,8 @@ import "../../styles/Offers.scss";
 export const OfferCard = props => {
 	const { store, actions } = useContext(Context);
 	const [showComments, setShowComments] = useState(false);
-
+	const reviews = [1, 2, 3, 4, 5];
+	console.log(props, "PROPS@@@@@");
 	return (
 		<div className="card detalleoferta">
 			<div className="row">
@@ -21,6 +22,19 @@ export const OfferCard = props => {
 						<img src={defaultAvatarPro} className="rounded-circle" />
 					)}
 					<h5 className="card-title">{props.offer.userpro.user_name}</h5>
+					<div className="row">
+						{reviews.map(item => {
+							return (
+								<i
+									className="fas fa-star"
+									key={item}
+									onClick={() => {
+										actions.sendReviews(item, props.offer.id_pro);
+									}}
+								/>
+							);
+						})}
+					</div>
 				</div>
 				<div className="col-8 textoffer">{props.offer.text}</div>
 			</div>

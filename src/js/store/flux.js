@@ -1,4 +1,4 @@
-const URL = "https://fortrips.herokuapp.com/";
+const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rol: "",
 			offerSubmited: {},
 			detailOffer: {},
-			page: 1
+			page: 1,
+			userTrips: []
 		},
 
 		actions: {
@@ -54,6 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						localStorage.setItem("token", data.access_token);
 						localStorage.setItem("rol", data.rol);
+						localStorage.setItem("id", data.id);
 						console.log(data, "data");
 						setStore({ isLogin: true, rol: data.rol, tripList: [] });
 						getActions().loadingTrips(1);
@@ -119,7 +121,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + token
 					}
 				})
-					.then(res => res.json())
+					.then(res => {
+						if (res.status == 403) {
+							props.history.push("login");
+						}
+						return res.json();
+					})
 					.then(data => setStore({ proInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			},
@@ -259,7 +266,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			profilTraveler: traveler => {
+			profilTraveler: props => {
 				const token = localStorage.getItem("token");
 				fetch(URL + "traveler", {
 					method: "GET",
@@ -268,10 +275,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + token
 					}
 				})
-					.then(res => res.json())
-					.then(data => setStore({ travelerInfoCollected: data }))
+					.then(res => {
+						if (res.status == 403) {
+							props.history.push("login");
+						} else return res.json();
+					})
+					.then(data => {
+						setStore({ travelerInfoCollected: data });
+					})
 					.catch(err => console.log(err, "err"));
 			}, /////////////////////////////////
+			list_user_trips: () => {
+				const token = localStorage.getItem("token", "id");
+				console.log(token, "token en funcion flux");
+				fetch(URL + "usertrips", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore({ userTrips: data }))
+					.catch(err => console.log(err, "err"));
+			},
 			logout: () => {
 				localStorage.removeItem("token");
 				localStorage.removeItem("rol");
@@ -348,6 +375,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
+			},
+			editTrip: tripEdited => {
+				console.log(tripEdited, "@@@TRIP TO EDIT@@");
+				const token = localStorage.getItem("token");
+				const store = getStore();
+				fetch(URL + "edittrips", {
+					method: "PUT",
+					body: JSON.stringify(tripEdited),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore(tripEdited))
+					.catch(err => console.log(err));
+			},
+			updateTrip: trip => {
+				console.log(trip);
+				const token = localStorage.getItem("token"); //ESTA FUNCION ESTA MAL Y NO LA ESTAMOS USANDO
+				const formdata = new FormData();
+				formdata.append("description", trip.description);
+				formdata.append("email", trip.destination);
+				console.log(file, "form data");
+				fetch(URL + "", {
+					method: "PUT",
+					body: formdata,
+					headers: {
+						formdata,
+						Authorization: "Bearer " + token
+					}
+				});
+			},
+			sendReviews: (value, id_pro) => {
+				const token = localStorage.getItem("token");
+				console.log(id_pro, "ID PROOOO");
+				fetch(URL + "reviews", {
+					method: "POST",
+					body: JSON.stringify({ id: id_pro, value: value }),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				});
 			}
 		}
 	};
