@@ -10,7 +10,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			detailTrip: {},
 			isLogin: false,
 			rol: "",
-			offerSubmited: {}
+			offerSubmited: {},
+			detailOffer: {},
+			page: 1,
+			userTrips: []
 		},
 
 		actions: {
@@ -52,8 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						localStorage.setItem("token", data.access_token);
 						localStorage.setItem("rol", data.rol);
+						localStorage.setItem("id", data.id);
 						console.log(data, "data");
-						setStore({ isLogin: true, rol: data.rol });
+						setStore({ isLogin: true, rol: data.rol, tripList: [] });
+						getActions().loadingTrips(1);
 						setLoading(false);
 						history.push("/");
 					})
@@ -95,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(res => {
-						if (res.status == 200) {
+						if (res.status == 201) {
 							setValied({ status: true, msg: "Registro completado con éxito" });
 							setTimeout(() => {
 								props.history.push("/login");
@@ -132,7 +137,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + token
 					}
 				})
-					.then(res => res.json())
+					.then(res => {
+						if (res.status == 403) {
+							props.history.push("login");
+						}
+						return res.json();
+					})
 					.then(data => setStore({ proInfoCollected: data }))
 					.catch(err => console.log(err, "err"));
 			},
@@ -185,17 +195,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				});
-				if (response.status == 200) return true;
-				else return false;
+				if (response.status == 200) {
+					setStore({ page: 1, tripList: [] });
+					getActions().loadingTrips(1);
+					return true;
+				} else return false;
 			},
 			loadingTrips: page => {
 				const store = getStore();
-				fetch(URL + "viajes" + "/" + page)
+				fetch(URL + "viajes/" + page)
 					.then(res => res.json())
-					.then(data => setStore({ tripList: [...store.tripList, ...data.data] }))
+					.then(data => {
+						const list = page != 1 ? [...store.tripList, ...data.data] : data.data;
+						setStore({ tripList: list, page: store.page + 1 });
+					})
 					.catch(error => console.log(error));
 			},
-			registeredTraveler: (traveler, props, file, setValied) => {
+			registeredTraveler: (traveler, props, file, setValied, setExist) => {
 				const store = getStore();
 				const { username, email, password, avatar } = traveler;
 				let formData = new FormData();
@@ -217,28 +233,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => {
 						if (res.status == 200) {
 							setValied({ status: true, msg: "Registro completado con éxito" });
+							setTimeout(() => {
+								props.history.push("/login");
+							}, 1000);
 						} else if (res.status == 404) {
 							setNoValied({
 								status: true,
 								msg: "introduce todos los campos"
 							});
-							return;
-							res.json();
+						}
+						if (res.status == 409) {
+							setExist({ status: true, msg: "Correo o nombre de usuario ya existe " });
 						}
 					})
 					.then(data => {
 						console.log(data);
 						setStore({ travelerInfoCollected: data });
-						props.history.push("login");
 					})
 					.catch(err => {
 						console.log(err);
 					});
 			},
-			getTrip: trip => {
+			getTrip: data => {
+				let trip = data ? data : JSON.parse(sessionStorage.getItem("detailTrip"));
 				console.log(trip, "@@@@@@@@@@@");
 				setStore({ detailTrip: trip });
+			},
+			saveTrip: trip => {
+				console.log(trip, "trip en saveTrip");
 				sessionStorage.setItem("detailTrip", JSON.stringify(trip)); //almaceno trip como string en session storage en la posicion de tripDetail
+				setStore({ detailTrip: trip });
 			},
 			// la perfil traverler con su funconalidades
 			editTravelerProfil: (name, value) => {
@@ -270,7 +294,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			profilTraveler: traveler => {
+			profilTraveler: props => {
 				const token = localStorage.getItem("token");
 				fetch(URL + "traveler", {
 					method: "GET",
@@ -279,19 +303,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + token
 					}
 				})
-					.then(res => res.json())
-					.then(data => setStore({ travelerInfoCollected: data }))
+					.then(res => {
+						if (res.status == 403) {
+							props.history.push("login");
+						} else return res.json();
+					})
+					.then(data => {
+						setStore({ travelerInfoCollected: data });
+					})
 					.catch(err => console.log(err, "err"));
 			}, /////////////////////////////////
+			list_user_trips: () => {
+				const token = localStorage.getItem("token", "id");
+				console.log(token, "token en funcion flux");
+				fetch(URL + "usertrips", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore({ userTrips: data }))
+					.catch(err => console.log(err, "err"));
+			},
 			logout: () => {
 				localStorage.removeItem("token");
+				localStorage.removeItem("rol");
 				setStore({ isLogin: false });
 			},
 			sendOffer: async (oferta, props, file) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
 				console.log(store.detailTrip, "DETAIL TRIP");
-				const { text, attached, id_trip } = oferta;
+				const { text, attached, id_trip, id_offer } = oferta;
 				let formData = new FormData();
 				formData.append("oferta", text);
 				formData.append("email", store.detailTrip.traveler.email);
@@ -319,8 +364,89 @@ const getState = ({ getStore, getActions, setStore }) => {
 					getActions().getTrip(data);
 				}
 			},
+			getOffer: offer => {
+				console.log(offer, "@@@@@@@@@@@");
+				setStore({ detailOffer: offer });
+				sessionStorage.setItem("detailOffer", JSON.stringify(offer)); //almaceno offer en session storage
+			},
+			sendComment: async (comentario, props, file) => {
+				const store = getStore();
+				const token = localStorage.getItem("token");
+				console.log(store.detailTrip, "DETAIL TRIP");
+				console.log(store.detailOffer, "DETAIL OFFER");
+				const { text, attached, id_trip, id_offer } = comentario;
+				let formData = new FormData();
+				formData.append("comment", text);
+				if (attached != "" && attached != null && file != undefined) {
+					formData.append("attached", file, file.name);
+				}
+				formData.append("id_offer", id_offer);
+				const res = await fetch(URL + "publishcomment", {
+					method: "POST",
+					body: formData,
+					headers: {
+						Authorization: "Bearer " + token
+					}
+				});
+
+				if (res.ok) {
+					//Así me devuelve ok si la respuesta es correcta
+					const response = await fetch(URL + "viaje/" + id_trip, {
+						headers: {
+							Authorization: "Bearer " + token
+						}
+					});
+					const data = await response.json();
+					console.log(data);
+					getActions().getTrip(data);
+				}
+			},
 			isLoginVerified: () => {
 				setStore({ isLogin: true });
+			},
+			editTrip: tripEdited => {
+				console.log(tripEdited, "@@@TRIP TO EDIT@@");
+				const token = localStorage.getItem("token");
+				const store = getStore();
+				fetch(URL + "edittrips", {
+					method: "PUT",
+					body: JSON.stringify(tripEdited),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				})
+					.then(res => res.json())
+					.then(data => setStore(tripEdited))
+					.catch(err => console.log(err));
+			},
+			updateTrip: trip => {
+				console.log(trip);
+				const token = localStorage.getItem("token"); //ESTA FUNCION ESTA MAL Y NO LA ESTAMOS USANDO
+				const formdata = new FormData();
+				formdata.append("description", trip.description);
+				formdata.append("email", trip.destination);
+				console.log(file, "form data");
+				fetch(URL + "", {
+					method: "PUT",
+					body: formdata,
+					headers: {
+						formdata,
+						Authorization: "Bearer " + token
+					}
+				});
+			},
+			sendReviews: (value, id_pro) => {
+				const token = localStorage.getItem("token");
+				console.log(id_pro, "ID PROOOO");
+				fetch(URL + "reviews", {
+					method: "POST",
+					body: JSON.stringify({ id: id_pro, value: value }),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				});
 			}
 		}
 	};

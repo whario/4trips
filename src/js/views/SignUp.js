@@ -26,6 +26,10 @@ const SignUp = props => {
 		msg: ""
 	});
 
+	const [exist, setExist] = useState({
+		status: false,
+		msg: ""
+	});
 	const handleChange = e => {
 		if (e.target.name == "avatar") {
 			// verficamos el nombre del input con el nombre "avatar"
@@ -55,7 +59,7 @@ const SignUp = props => {
 		if (datos.username != "" && datos.email != "" && datos.repeatPassword == datos.password) {
 			//esto es para obtener la imagen en crudo y pasarla al back
 			const file = document.querySelector("#file");
-			actions.registeredTraveler(datos, props, file.files[0], setNoValied, setValied);
+			actions.registeredTraveler(datos, props, file.files[0], setNoValied, setValied, setExist);
 			setSubmited(true);
 		}
 	};
@@ -71,14 +75,19 @@ const SignUp = props => {
 								<p className="P">{valied.msg}</p>
 							</div>
 						) : null}
+						{exist.status == true ? (
+							<div className="alert alert-danger" role="alert">
+								{exist.msg}
+							</div>
+						) : null}
 						<br />
-						<div className="avatar-container-register">
+						<div className="avatar-container-signup">
 							{datos.avatar ? (
-								<img className="avatar-traveler-register" src={datos.avatar} />
+								<img className="avatar-traveler-signup" src={datos.avatar} />
 							) : (
 								<img
 									src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
-									className="avatar-register-traveler"
+									className="avatar-traveler-signup"
 								/>
 							)}
 

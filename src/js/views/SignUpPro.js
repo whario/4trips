@@ -62,8 +62,8 @@ const SignUpPro = props => {
 		<div className="container myContainer">
 			<div className="row  justify-content-center">
 				<div className="col-sm-12 col-md-10 col-la-8 ">
-					<form className="myForm m-5" onChange={handleChange} onSubmit={handleSubmit}>
-						{valied.status == true ? (
+					<form className="myForm-pro m-5" onChange={handleChange} onSubmit={handleSubmit}>
+						{submited && valied ? (
 							<div className="alert alert-success" role="alert">
 								{valied.msg}
 							</div>
@@ -203,7 +203,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.vat_number}
 								/>
-
+								<br />
 								<label className="label-pro" value="validationServer01">
 									Razón social (opcional)
 								</label>
@@ -218,7 +218,7 @@ const SignUpPro = props => {
 							</div>
 						</div>
 						<br />
-						<button className="btn btn-primary btn-block " type="submit" value="sign up">
+						<button className="btn btn-primary btn-block btn-register-pro " type="submit" value="sign up">
 							Registrar
 						</button>
 					</form>

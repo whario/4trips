@@ -9,6 +9,7 @@ import logoComida from "../../img/comidaicon.png";
 import logoPiscina from "../../img/piscinaicon.png";
 import defaultAvatar from "../../img/default_avatar.png";
 import "../../styles/trips.scss";
+import { useEffect } from "react";
 
 export const TripCard = props => {
 	const { store, actions } = useContext(Context);
@@ -24,47 +25,53 @@ export const TripCard = props => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
+
 	return (
 		<div className="col-md-4 col-sm-1">
 			<div className="card h-100">
 				<div className="row">
 					<div className="col-4">
-						{props.trip.traveler.avatar != null ? (
+						{props.trip.traveler != null && props.trip.traveler.avatar != null ? (
 							<img src={props.trip.traveler.avatar} className="rounded-circle" />
 						) : (
-							<div>
-								<img src={defaultAvatar} className="rounded-circle" />
-							</div>
+							<img src={defaultAvatar} className="rounded-circle" />
 						)}
 					</div>
 					<div className="col-8">
 						<h5 className="card-title">{props.trip.traveler.username}</h5>
 					</div>
 				</div>
-				<div className="card-body">
+				<div className="card-body p-0">
 					<ul className="list-group list-group-flush">
 						<li className="list-group-item">
 							<div className="row">
 								Destino:
-								<div className="props">{props.trip.destination}</div>
+								<div className="props destino">{props.trip.destination}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
 							<div className="row">
 								Desde:
-								<div className="props">{formatDay(props.trip.first_day)}</div>
+								<div className="props day1">{formatDay(props.trip.first_day)}</div>
 							</div>
 							<div className="row">
 								Hasta:
-								<div className="props">{formatDay(props.trip.last_day)}</div>
+								<div className="props day2">{formatDay(props.trip.last_day)}</div>
 							</div>
 						</li>
 						<li className="list-group-item">
 							<div className="row">Descripción del viaje:</div>
 							<div className="row">
 								<Link to={"/trip/" + props.trip.id}>
-									<div className="props description" onClick={() => actions.getTrip(props.trip)}>
-										{props.trip.description.substring(0, 20)}
+									<div className="props description" onClick={() => actions.saveTrip(props.trip)}>
+										{props.trip.description.substring(0, 25)}
+										<p>...</p>
+									</div>
+								</Link>
+								<Link to={"/trip/" + props.trip.id}>
+									<div className="leermas" onClick={() => actions.saveTrip(props.trip)}>
+										<span />
+										<p>leer más</p>
 									</div>
 								</Link>
 							</div>
@@ -77,6 +84,7 @@ export const TripCard = props => {
 				</div>
 				<div className="card-footer">
 					{props.trip.needs_trip.map((need, index) => {
+						console.log(need, "neeeeeeeed");
 						return <img src={logos[need]} key={index} />;
 					})}
 				</div>
