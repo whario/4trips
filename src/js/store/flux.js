@@ -1,4 +1,4 @@
-const URL = "https://3000-olive-goldfish-eq865y5c.ws-eu03.gitpod.io/";
+const URL = "https://3000-aqua-cod-vq5vkxbu.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
