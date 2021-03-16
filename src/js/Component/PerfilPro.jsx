@@ -50,7 +50,7 @@ export const PerfilPro = props => {
 	console.log(store.proInfoCollected, "proinfocolec");
 	return (
 		<div className="container">
-			<div className="card">
+			<div className="card card-edit-pro">
 				{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon-pro" /> : null}
 				{edit == false ? (
 					<img className="card-img-top traveler-img" src={store.proInfoCollected.avatar} alt="avatar" />

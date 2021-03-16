@@ -61,18 +61,20 @@ export const TripDetail = props => {
 			<div className="row">
 				<div className="col-12 col-lg-8 offset-lg-2 col-md-6 offset-md-3">
 					<div className="espaciador" />
-					<div className="card">
+					<div className="card-trip-detail-edit">
 						{store.detailTrip.id_traveler == button.id_traveler ? (
 							<Link to="/editTrip">
 								<i className="fas fa-pencil-alt edit-icon" />
 							</Link>
 						) : null}
-						<div className="card-header row bg-white">
-							<div className="col-4">
-								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
+						<div className="card-header-foto row ">
+							<div className="offset-sm-2 col-sm-8 offset-sm-2  offset-md-2 col-md-8 offset-md-2 ">
+								<img src={store.detailTrip.traveler.avatar} className="rounded-circle-big" />
 							</div>
-							<div className="col-8">
-								<h5 className="card-title">{store.detailTrip.traveler.username}</h5>
+						</div>
+						<div className="user-name-tripdetail">
+							<div className=" offset-sm-2 col-sm-8 offset-sm-2  offset-md-2 col-md-8 offset-md-2 user-size-name ">
+								<h5 className="card-title-detail">{store.detailTrip.traveler.username}</h5>
 							</div>
 						</div>
 						<div className="card-body p-0">

@@ -78,7 +78,7 @@ export const TravelerProfil = props => {
 	return (
 		<div className="container">
 			<div className="col-sm-10 offset-md-2  col-md-8 offset-md-2 offset-la-2  col-la-8 offset-la-2  offset-xl-2  col-xl-8 offset-xl-2">
-				<div className="card row icon">
+				<div className="card card-edit row icon">
 					{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon" /> : null}
 					<div className="img-place">{showItems()}</div>
 					<ul className="list-group list-group-flush data-list">

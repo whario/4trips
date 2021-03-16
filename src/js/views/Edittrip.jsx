@@ -169,16 +169,18 @@ export const EditTrip = () => {
 							<div className="row">
 								<div className="obligatorios">Todos los campos son obligatorios</div>
 							</div>
-							<button type="submit" className="btn btn-primary center publicar">
-								guardar
-								<span> </span>
-								<div className="oculto" id="loading" />
-							</button>
-							<button type="submit" className="btn btn-primary publicar">
-								cerrar
-								<span> </span>
-								<div className="oculto" id="loading" />
-							</button>
+							<div className="row buttons-save-canc ">
+								<Link to="/" type="submit" className="btn btn-primary center publicar col-md-4">
+									guardar
+									<span> </span>
+									<div className="oculto" id="loading" />
+								</Link>
+								<Link to="/" type="submit" className="btn btn-primary center cerrar col-md-4 ">
+									cerrar
+									<span> </span>
+									<div className="oculto" id="loading" />
+								</Link>
+							</div>
 						</form>
 					</div>
 				</div>

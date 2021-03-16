@@ -13,6 +13,14 @@ box-shadow: 0px 0px 10px 0px black;
     margin: auto;
     display: block;
 }
+.cerrar{
+    background-color: #1C6EA4;
+    border-color: #1C6EA4;
+    position: relative;
+    margin: auto;
+    display: block;
+    width: 87px;
+}
 .servicios{
     margin-left: 6%;
     margin-bottom: 2%;
@@ -28,4 +36,7 @@ box-shadow: 0px 0px 10px 0px black;
 }
 .error{
     color: red;
+}
+.buttons-save-canc{
+    justify-content: space-between;
 }

@@ -28,7 +28,7 @@ export const TripCard = props => {
 
 	return (
 		<div className="col-md-4 col-sm-1">
-			<div className="card h-100">
+			<div className="card h-100 home-card">
 				<div className="row">
 					<div className="col-4">
 						{props.trip.traveler != null && props.trip.traveler.avatar != null ? (
@@ -38,7 +38,7 @@ export const TripCard = props => {
 						)}
 					</div>
 					<div className="col-8">
-						<h5 className="card-title">{props.trip.traveler.username}</h5>
+						<h5 className="card-title-home">{props.trip.traveler.username}</h5>
 					</div>
 				</div>
 				<div className="card-body p-0">
@@ -64,7 +64,7 @@ export const TripCard = props => {
 							<div className="row">
 								<Link to={"/trip/" + props.trip.id}>
 									<div className="props description" onClick={() => actions.saveTrip(props.trip)}>
-										{props.trip.description.substring(0, 25)}
+										{props.trip.description.substring(0, 27)}
 										<p>...</p>
 									</div>
 								</Link>
