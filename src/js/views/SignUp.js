@@ -71,7 +71,7 @@ const SignUp = props => {
 				<div className="col-sm-12 col-md-10 col-la-8">
 					<form className="myForm m-5 " onChange={handleChange} onSubmit={handleSubmit}>
 						{valied.status == true ? (
-							<div className="alert alert-success" role="alert">
+							<div className=" alert alert-danger" role="alert">
 								<p className="P">{valied.msg}</p>
 							</div>
 						) : null}
@@ -159,12 +159,12 @@ const SignUp = props => {
 						</button>
 					</form>
 					{noValied.status == true ? (
-						<div className="alert alert-danger" role="alert">
+						<div className="alert alert-success" role="alert">
 							{noValied.msg}
 						</div>
 					) : null}
 					{exist.status == true ? (
-						<div className="alert alert-danger" role="alert">
+						<div className="alert alert-success" role="alert">
 							{exist.msg}
 						</div>
 					) : null}
