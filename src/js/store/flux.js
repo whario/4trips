@@ -31,21 +31,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (res.status == 401) {
 							setErrFetch({
 								status: true,
-								msg: "usuario o contraseña incorrectos"
+								msg: "Usuario o contraseña incorrectos"
 							});
 							setLoading(false);
 							return;
 						} else if (res.status == 404) {
 							setErrFetch({
 								status: true,
-								msg: "usuario no existe"
+								msg: "Usuario no existe"
 							});
 							setLoading(false);
 							return;
 						} else if (res.status == 500) {
 							setErrFetch({
 								status: true,
-								msg: "error interno"
+								msg: "Error interno"
 							});
 							setLoading(false);
 							return;
