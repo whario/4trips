@@ -19,6 +19,7 @@
 .comentarios{
     margin:1%;
     padding: 2%;
+    width: 100%;
 }
 .detallecomentarios{
     background-color: rgb(228, 228, 228);
@@ -31,6 +32,7 @@
     border: 1px solid rgb(170, 170, 170);
     border-radius: 15px;
     margin: 2%;
+    padding: 2%;
 }
 .inputfile{
     display: none;
@@ -69,4 +71,17 @@ padding: 10px;
 }
 .show-comments{
     margin-bottom: 10px;
+}
+.camara-comment-traveler{
+    font-size: 35px;
+}
+.img-offer{
+    width: 30%;
+    img{
+        width: 100%;
+    }
+}
+
+.text-offer{
+    width: 70%;
 }

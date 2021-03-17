@@ -63,7 +63,7 @@ export const AddComment = props => {
 					) : null}
 				</div>
 				<div className="col-1 postcomment" onClick={handleClick}>
-					<i className="fas fa-camera" />
+					<i className="fas fa-camera camara-comment-traveler" />
 				</div>
 				<div className="col-2">
 					<input type="file" name="attached" ref={hiddenFileInput} className="col-4 inputfile" id="file" />

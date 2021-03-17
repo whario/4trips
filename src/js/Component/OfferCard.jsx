@@ -41,9 +41,12 @@ export const OfferCard = props => {
 						})}
 					</div>
 				</div>
-				<div className="col-md-8 col-sm-6 textoffer">
-					{props.offer.text}
-					{props.offer.attached}{" "}
+				<div className="col-md-8 col-sm-6 textoffer row">
+					<div className="text-offer">{props.offer.text}</div>
+					<div className="img-offer">
+						{" "}
+						<img src={props.offer.attached} />
+					</div>
 				</div>
 			</div>
 			<div className="row comments-button">

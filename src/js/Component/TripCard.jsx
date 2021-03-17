@@ -27,7 +27,7 @@ export const TripCard = props => {
 	};
 
 	return (
-		<div className="col-md-4 col-sm-1">
+		<div className="col-md-4 col-sm-1 card-padding">
 			<div className="card h-100 home-card">
 				<div className="row">
 					<div className="col-4">
