@@ -37,6 +37,7 @@ export const AddOffer = props => {
 			const file = document.querySelector("#file");
 			console.log(file, "FILE");
 			actions.sendOffer(inputs, props, file.files[0]);
+			event.target.reset();
 		} else {
 			setValied(true);
 			setSubmit(false);
@@ -48,7 +49,7 @@ export const AddOffer = props => {
 		hiddenFileInput.current.click();
 	};
 	return (
-		<div className="card my-2 sendoffer">
+		<div className="my-2 sendoffer">
 			<form className="row public-offer" onChange={handelChange} onSubmit={handelSubmit}>
 				<input
 					type="text"
