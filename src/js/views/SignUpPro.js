@@ -26,6 +26,10 @@ const SignUpPro = props => {
 		status: false,
 		msg: ""
 	});
+	const [noValied, setNoValied] = useState({
+		status: false,
+		msg: ""
+	});
 
 	const handleChange = e => {
 		if (e.target.name == "avatar") {
@@ -54,7 +58,7 @@ const SignUpPro = props => {
 			exist.status == false
 		) {
 			const file = document.querySelector("#file");
-			actions.registerPro(datos, props, file.files[0], setValied, setExist);
+			actions.registerPro(datos, props, file.files[0], setValied, setExist, setNoValied);
 		}
 	};
 
@@ -63,9 +67,19 @@ const SignUpPro = props => {
 			<div className="row  justify-content-center">
 				<div className="col-sm-12 col-md-10 col-la-8 ">
 					<form className="myForm-pro m-5" onChange={handleChange} onSubmit={handleSubmit}>
-						{submited && valied ? (
+						{valied.status == true ? (
 							<div className="alert alert-success" role="alert">
 								{valied.msg}
+							</div>
+						) : null}
+						{noValied.status == true ? (
+							<div className="alert alert-danger" role="alert">
+								{noValied.msg}
+							</div>
+						) : null}
+						{exist.status == true ? (
+							<div className="alert alert-danger" role="alert">
+								{exist.msg}
 							</div>
 						) : null}
 						<div className="avatar-pro-container">
@@ -77,10 +91,9 @@ const SignUpPro = props => {
 									className="avatar-pro"
 								/>
 							)}
-
 							<div className="overlay">Sube una foto de perfil</div>
 						</div>
-						<input type="file" name="avatar" className="hidenButton" id="file" />
+						<input type="file" name="avatar" className="hiden-Button" id="file" />
 						<div className="row">
 							<div className="col-12">
 								<label className="label-pro" value="validationServer01">
@@ -222,16 +235,6 @@ const SignUpPro = props => {
 							Registrar
 						</button>
 					</form>
-					{exist.status == true ? (
-						<div className="alert alert-danger" role="alert">
-							{exist.msg}
-						</div>
-					) : null}
-					{valied.status == true ? (
-						<div className="alert alert-danger" role="alert">
-							{valied.msg}
-						</div>
-					) : null}
 				</div>
 			</div>
 		</div>

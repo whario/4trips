@@ -75,11 +75,7 @@ const SignUp = props => {
 								<p className="P">{valied.msg}</p>
 							</div>
 						) : null}
-						{exist.status == true ? (
-							<div className="alert alert-danger" role="alert">
-								{exist.msg}
-							</div>
-						) : null}
+
 						<br />
 						<div className="avatar-container-signup">
 							{datos.avatar ? (
@@ -165,6 +161,11 @@ const SignUp = props => {
 					{noValied.status == true ? (
 						<div className="alert alert-danger" role="alert">
 							{noValied.msg}
+						</div>
+					) : null}
+					{exist.status == true ? (
+						<div className="alert alert-danger" role="alert">
+							{exist.msg}
 						</div>
 					) : null}
 				</div>

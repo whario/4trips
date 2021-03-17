@@ -64,7 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(err => console.log(err, "error login "));
 			},
-			registerPro: (pro, props, file, setValied, setExist) => {
+			registerPro: (pro, props, file, setValied, setExist, setNoValied) => {
 				const store = getStore();
 				const {
 					user_name,
@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								props.history.push("/login");
 							}, 1000);
 						} else if (res.status == 404) {
-							setValied({
+							setNoValied({
 								status: true,
 								msg: "introduce todos los campos obligartorios "
 							});
