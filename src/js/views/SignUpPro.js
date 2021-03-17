@@ -19,38 +19,47 @@ const SignUpPro = props => {
 		social_reason: "",
 		avatar: ""
 	});
+
+	const [submited, setSubmited] = useState(false);
+	const [valied, setValied] = useState({ status: false, msg: "" });
+	const [exist, setExist] = useState({
+		status: false,
+		msg: ""
+	});
+	const [noValied, setNoValied] = useState({
+		status: false,
+		msg: ""
+	});
+
 	const handleChange = e => {
-		console.log("handels=ch");
 		if (e.target.name == "avatar") {
-			console.log("entrando avatar");
 			const reader = new FileReader();
 			reader.onload = event => {
-				console.log(reader.readyState);
 				if (reader.readyState === 2) {
-					console.log(reader.result);
 					setDatos({ ...datos, avatar: reader.result });
 				}
 			};
 			if (e.target.files[0] != undefined) {
 				reader.readAsDataURL(e.target.files[0]);
 			}
-			console.log(e.target.files[0]);
 		} else {
 			setDatos({ ...datos, [e.target.name]: e.target.value });
 		}
 	};
-	const [submited, setSubmited] = useState(false);
-	const [valied, setValied] = useState(false);
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.user_name && datos.email && datos.password == datos.repeatPassword) {
-			setValied(true);
-		}
 		setSubmited(true);
-		const file = document.querySelector("#file");
-		console.log(datos, "datos");
-		actions.registerPro(datos, props, file.files[0]);
+		if (
+			datos.user_name != "" &&
+			datos.email != "" &&
+			datos.password.length > 6 &&
+			datos.password == datos.repeatPassword &&
+			exist.status == false
+		) {
+			const file = document.querySelector("#file");
+			actions.registerPro(datos, props, file.files[0], setValied, setExist, setNoValied);
+		}
 	};
 
 	return (
@@ -58,9 +67,19 @@ const SignUpPro = props => {
 			<div className="row  justify-content-center">
 				<div className="col-sm-12 col-md-10 col-la-8 ">
 					<form className="myForm-pro m-5" onChange={handleChange} onSubmit={handleSubmit}>
-						{submited && valied ? (
+						{valied.status == true ? (
 							<div className="alert alert-success" role="alert">
-								Registro completado con éxito!
+								{valied.msg}
+							</div>
+						) : null}
+						{noValied.status == true ? (
+							<div className="alert alert-danger" role="alert">
+								{noValied.msg}
+							</div>
+						) : null}
+						{exist.status == true ? (
+							<div className="alert alert-danger" role="alert">
+								{exist.msg}
 							</div>
 						) : null}
 						<div className="avatar-pro-container">
@@ -72,10 +91,9 @@ const SignUpPro = props => {
 									className="avatar-pro"
 								/>
 							)}
-
 							<div className="overlay">Sube una foto de perfil</div>
 						</div>
-						<input type="file" name="avatar" className="hidenButton" id="file" />
+						<input type="file" name="avatar" className="hiden-Button" id="file" />
 						<div className="row">
 							<div className="col-12">
 								<label className="label-pro" value="validationServer01">
@@ -117,8 +135,8 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.password}
 								/>
-								{submited && !datos.password ? (
-									<span className="error-msg-pro">Introduce una contraseña</span>
+								{submited && datos.password.length < 6 ? (
+									<span className="error-msg-pro">Introduce 6 caracteres por lo menos</span>
 								) : null}
 								<br />
 								<label className="label-pro" value="validationServer01">
@@ -131,7 +149,7 @@ const SignUpPro = props => {
 									className="form-control"
 									value={datos.repeatPassword}
 								/>
-								{submited && datos.repeatPassword != datos.password ? (
+								{submited == true && datos.repeatPassword != datos.password ? (
 									<span className="error-msg-pro">La contraseña no coincide</span>
 								) : null}
 								<br />

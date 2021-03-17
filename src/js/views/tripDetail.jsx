@@ -43,7 +43,7 @@ export const TripDetail = props => {
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
 
-	console.log(store.detailTrip.offers, "OFFERS");
+	console.log(store.detailTrip);
 
 	//Para sacar button edicion viajes
 	const [button, setButton] = useState({
@@ -54,8 +54,16 @@ export const TripDetail = props => {
 		setButton({ id_traveler: localStorage.getItem("id") });
 		console.log(setButton.id_traveler, "id traveler en localStorage");
 	}, []);
-	console.log(button, "BUTTTTTTON");
-	console.log(store.detailTrip, "userTRipssss");
+
+	const [sendOffer, setSendOffer] = useState({
+		user_rol: "",
+		status: false
+	});
+
+	useEffect(() => {
+		setSendOffer({ user_rol: localStorage.getItem("rol") });
+	}, []);
+
 	return (
 		<div className="container">
 			<div className="row">
@@ -117,8 +125,10 @@ export const TripDetail = props => {
 							})}
 						</div>
 					</div>
-					<AddOffer id_trip={store.detailTrip.id} />
-
+					{sendOffer.user_rol == "Profesional" ||
+					(store.detailTrip.rol == "Traveler" && store.detailTrip.id_traveler == button.id_traveler) ? (
+						<AddOffer id_trip={store.detailTrip.id} />
+					) : null}
 					{showOffers && store.detailTrip.offers.length > 0
 						? store.detailTrip.offers.map((offer, index) => {
 								return <OfferCard offer={offer} key={index} />;

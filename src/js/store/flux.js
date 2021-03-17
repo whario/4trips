@@ -1,4 +1,4 @@
-const URL = "https://3000-orange-egret-6bph6z4j.ws-eu03.gitpod.io/";
+const URL = "https://3000-aqua-cod-vq5vkxbu.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -64,7 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(err => console.log(err, "error login "));
 			},
-			registerPro: (pro, props, file) => {
+			registerPro: (pro, props, file, setValied, setExist, setNoValied) => {
 				const store = getStore();
 				const {
 					user_name,
@@ -99,12 +99,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//"Content-Type": "application/json"
 					}
 				})
-					.then(res => res.json())
+					.then(res => {
+						if (res.status == 201) {
+							setValied({ status: true, msg: "Registro completado con éxito" });
+							setTimeout(() => {
+								props.history.push("/login");
+							}, 1000);
+						} else if (res.status == 404) {
+							setNoValied({
+								status: true,
+								msg: "introduce todos los campos obligartorios "
+							});
+							res.json();
+							return;
+						} else if (res.status == 409) {
+							setExist({
+								status: true,
+								msg: "Correo o nombre de usuario existe "
+							});
+						}
+					})
 					.then(data => {
 						setStore({ proInfoCollected: data });
-						setTimeout(() => {
-							props.history.push("/login");
-						}, 1000);
 					})
 					.catch(err => {
 						console.log(err);
@@ -195,7 +211,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log(error));
 			},
-			registeredTraveler: (traveler, props, file) => {
+			registeredTraveler: (traveler, props, file, setValied, setExist) => {
 				const store = getStore();
 				const { username, email, password, avatar } = traveler;
 				let formData = new FormData();
@@ -214,13 +230,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//"Content-Type": "application/json"
 					}
 				})
-					.then(res => res.json())
+					.then(res => {
+						if (res.status == 200) {
+							setValied({ status: true, msg: "Registro completado con éxito" });
+							setTimeout(() => {
+								props.history.push("/login");
+							}, 1000);
+						} else if (res.status == 404) {
+							setNoValied({
+								status: true,
+								msg: "introduce todos los campos"
+							});
+						}
+						if (res.status == 409) {
+							setExist({ status: true, msg: "Correo o nombre de usuario ya existe " });
+						}
+					})
 					.then(data => {
 						console.log(data);
 						setStore({ travelerInfoCollected: data });
-						setTimeout(() => {
-							props.history.push("login");
-						}, 1000);
 					})
 					.catch(err => {
 						console.log(err);

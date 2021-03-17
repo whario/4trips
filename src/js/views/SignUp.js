@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/SignUp.css";
 import bootstrap from "react-bootstrap";
+import PropTypes from "prop-types";
 import context from "react-bootstrap/esm/AccordionContext";
 
 ///Componentes
@@ -18,10 +19,17 @@ const SignUp = props => {
 
 	const [submited, setSubmited] = useState(false);
 
-	const [valied, setValied] = useState(false);
+	const [valied, setValied] = useState({ status: false, msg: "" });
 
-	const [view, setView] = useState("");
+	const [noValied, setNoValied] = useState({
+		status: false,
+		msg: ""
+	});
 
+	const [exist, setExist] = useState({
+		status: false,
+		msg: ""
+	});
 	const handleChange = e => {
 		if (e.target.name == "avatar") {
 			// verficamos el nombre del input con el nombre "avatar"
@@ -48,13 +56,12 @@ const SignUp = props => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		if (datos.username && datos.email && datos.password == datos.repeatPassword) {
-			setValied(true);
+		if (datos.username != "" && datos.email != "" && datos.repeatPassword == datos.password) {
+			//esto es para obtener la imagen en crudo y pasarla al back
+			const file = document.querySelector("#file");
+			actions.registeredTraveler(datos, props, file.files[0], setNoValied, setValied, setExist);
+			setSubmited(true);
 		}
-		setSubmited(true);
-		//esto es para obtener la imagen en crudo y pasarla al back
-		const file = document.querySelector("#file");
-		actions.registeredTraveler(datos, props, file.files[0]);
 	};
 	console.log(datos);
 	return (
@@ -63,11 +70,12 @@ const SignUp = props => {
 				<br />
 				<div className="col-sm-12 col-md-10 col-la-8">
 					<form className="myForm m-5 " onChange={handleChange} onSubmit={handleSubmit}>
-						{submited && valied && datos.password == datos.repeatPassword ? (
+						{valied.status == true ? (
 							<div className="alert alert-success" role="alert">
-								<p className="P">Registro completado con éxito</p>
+								<p className="P">{valied.msg}</p>
 							</div>
 						) : null}
+
 						<br />
 						<div className="avatar-container-signup">
 							{datos.avatar ? (
@@ -126,7 +134,7 @@ const SignUp = props => {
 									value={datos.password}
 								/>
 								{submited && !datos.password ? (
-									<span className="errormsg">Intorduce una contraseña</span>
+									<span className="errormsg">Por lo menos escribe 6 caracteres </span>
 								) : null}
 								<br />
 								<label className="label" value="validationServer01">
@@ -150,9 +158,22 @@ const SignUp = props => {
 							Registrar
 						</button>
 					</form>
+					{noValied.status == true ? (
+						<div className="alert alert-danger" role="alert">
+							{noValied.msg}
+						</div>
+					) : null}
+					{exist.status == true ? (
+						<div className="alert alert-danger" role="alert">
+							{exist.msg}
+						</div>
+					) : null}
 				</div>
 			</div>
 		</div>
 	);
+};
+SignUp.propTypes = {
+	history: PropTypes.object
 };
 export default SignUp;
