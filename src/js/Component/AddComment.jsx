@@ -40,6 +40,7 @@ export const AddComment = props => {
 		const file = document.querySelector("#file");
 		console.log(file, "FILE");
 		actions.sendComment(inputs, props, file.files[0]);
+		event.target.reset();
 	};
 
 	const hiddenFileInput = React.useRef(null);

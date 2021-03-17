@@ -37,6 +37,7 @@ export const AddOffer = props => {
 			const file = document.querySelector("#file");
 			console.log(file, "FILE");
 			actions.sendOffer(inputs, props, file.files[0]);
+			event.target.reset();
 		} else {
 			setValied(true);
 			setSubmit(false);
@@ -48,12 +49,18 @@ export const AddOffer = props => {
 		hiddenFileInput.current.click();
 	};
 	return (
-		<div className="card my-2 sendoffer">
-			<form className="row" onChange={handelChange} onSubmit={handelSubmit}>
-				<input type="text" name="text" className="col-6" placeholder="Describe tu oferta" src={inputs.offer} />
+		<div className="my-2 sendoffer">
+			<form className="row public-offer" onChange={handelChange} onSubmit={handelSubmit}>
+				<input
+					type="text"
+					name="text"
+					className="col-6 write-offer"
+					placeholder="Describe tu oferta"
+					src={inputs.offer}
+				/>
 				{valied ? <span className="alert alert-danger">Describe tu oferta</span> : null}
 				<div className="col-1 postcommen" onClick={handleClick}>
-					<i className="fas fa-camera" />
+					<i className="fas fa-camera camara-icon" />
 				</div>
 				<div className="col-1">
 					<input type="file" name="attached" ref={hiddenFileInput} className="inputfile" id="file" />
