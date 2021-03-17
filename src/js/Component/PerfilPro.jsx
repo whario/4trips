@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import SignUpPro from "../views/SignUpPro.js";
 import "../../styles/ProfilPro.css";
+import Reviews from "../Component/review.jsx";
 
-export const PerfilPro = () => {
+export const PerfilPro = props => {
 	const { store, actions } = useContext(Context);
 	const [foto, setFoto] = useState({
 		proAvatar: ""
@@ -49,7 +50,7 @@ export const PerfilPro = () => {
 	console.log(store.proInfoCollected, "proinfocolec");
 	return (
 		<div className="container">
-			<div className="card">
+			<div className="card card-edit-pro">
 				{edit == false ? <i onClick={handleEdit} className="fas fa-pencil-alt edit-icon-pro" /> : null}
 				{edit == false ? (
 					<img className="card-img-top traveler-img" src={store.proInfoCollected.avatar} alt="avatar" />
@@ -61,6 +62,7 @@ export const PerfilPro = () => {
 				)}
 
 				<div className="">
+					<Reviews />
 					{edit == false ? (
 						<p className="list-group-item">
 							<strong>{store.proInfoCollected.user_name}</strong>

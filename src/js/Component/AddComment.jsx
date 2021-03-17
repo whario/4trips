@@ -40,6 +40,7 @@ export const AddComment = props => {
 		const file = document.querySelector("#file");
 		console.log(file, "FILE");
 		actions.sendComment(inputs, props, file.files[0]);
+		event.target.reset();
 	};
 
 	const hiddenFileInput = React.useRef(null);
@@ -62,7 +63,7 @@ export const AddComment = props => {
 					) : null}
 				</div>
 				<div className="col-1 postcomment" onClick={handleClick}>
-					<i className="fas fa-camera" />
+					<i className="fas fa-camera camara-comment-traveler" />
 				</div>
 				<div className="col-2">
 					<input type="file" name="attached" ref={hiddenFileInput} className="col-4 inputfile" id="file" />

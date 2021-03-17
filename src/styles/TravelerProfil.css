@@ -7,8 +7,9 @@
     position: relative;
     bottom: 15px;
 }
-.card{
+.card-edit{
     padding: 20px;
+    margin: 20px;
  }
 .card-title{
     margin: auto;

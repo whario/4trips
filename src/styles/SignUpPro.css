@@ -46,15 +46,15 @@
     width: 200px;
     height: 200px;
 }
-.hidenButton{
+.hiden-Button{
     position: relative;
     bottom: 50px;
-    left: 133px;
+    right: 150px;
     opacity: 0;
     z-index: 10;
 }
 
-.hidenButton:hover .overlay {
+.hiden-Button:hover .overlay {
   opacity: 1;
 }
 

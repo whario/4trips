@@ -14,6 +14,7 @@ import { TripDetail } from "./views/tripDetail.jsx";
 import { TravelerProfil } from "./Component/TravelerProfil.jsx";
 import { PerfilPro } from "./Component/PerfilPro.jsx";
 import { AddOffer } from "./Component/AddOffer.jsx";
+import { EditTrip } from "./views/Edittrip.jsx";
 //create your first component
 const Layout = () => {
 	const { store, actions } = useContext(Context);
@@ -35,8 +36,9 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/perfil/pro" component={PerfilPro} />
-					<Route exact path="/perfil/Traveler" component={TravelerProfil} />
+					<Route exact path="/editTrip" component={EditTrip} />
+					<Route exact path="/perfilpro" component={PerfilPro} />
+					<Route exact path="/perfilTraveler" component={TravelerProfil} />
 					<Route exact path="/registroviajero" component={SignUp} />
 					<Route exact path="/registroPro" component={SignUpPro} />
 					<Route exact path="/addTrip" component={AddTrip} />

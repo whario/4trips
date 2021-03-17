@@ -10,8 +10,9 @@ import logoPiscina from "../../img/piscinaicon.png";
 import "../../styles/trips.scss";
 import { AddOffer } from "../Component/AddOffer.jsx";
 import { OfferCard } from "../Component/OfferCard.jsx";
+import PropTypes from "prop-types";
 
-export const TripDetail = () => {
+export const TripDetail = props => {
 	const { store, actions } = useContext(Context);
 	const [showOffers, setShowOffers] = useState(false);
 	const logos = {
@@ -41,19 +42,47 @@ export const TripDetail = () => {
 		let newFormatDay = new Date(day);
 		return newFormatDay.getDate() + "/" + (newFormatDay.getMonth() + 1) + "/" + newFormatDay.getUTCFullYear();
 	};
-	console.log(store.detailTrip.offers, "OFFERS");
+
+	console.log(store.detailTrip);
+
+	//Para sacar button edicion viajes
+	const [button, setButton] = useState({
+		id_traveler: "",
+		status: false
+	});
+	useEffect(() => {
+		setButton({ id_traveler: localStorage.getItem("id") });
+		console.log(setButton.id_traveler, "id traveler en localStorage");
+	}, []);
+
+	const [sendOffer, setSendOffer] = useState({
+		user_rol: "",
+		status: false
+	});
+
+	useEffect(() => {
+		setSendOffer({ user_rol: localStorage.getItem("rol") });
+	}, []);
+
 	return (
 		<div className="container">
 			<div className="row">
 				<div className="col-12 col-lg-8 offset-lg-2 col-md-6 offset-md-3">
 					<div className="espaciador" />
-					<div className="card">
-						<div className="card-header row bg-white">
-							<div className="col-4">
-								<img src={store.detailTrip.traveler.avatar} className="rounded-circle big" />
+					<div className="card-trip-detail-edit">
+						{store.detailTrip.id_traveler == button.id_traveler ? (
+							<Link to="/editTrip">
+								<i className="fas fa-pencil-alt edit-icon" />
+							</Link>
+						) : null}
+						<div className="card-header-foto row ">
+							<div className="offset-sm-2 col-sm-8 offset-sm-2  offset-md-2 col-md-8 offset-md-2 ">
+								<img src={store.detailTrip.traveler.avatar} className="rounded-circle-big" />
 							</div>
-							<div className="col-8">
-								<h5 className="card-title">{store.detailTrip.traveler.username}</h5>
+						</div>
+						<div className="user-name-tripdetail">
+							<div className=" offset-sm-2 col-sm-8 offset-sm-2  offset-md-2 col-md-8 offset-md-2 user-size-name ">
+								<h5 className="card-title-detail">{store.detailTrip.traveler.username}</h5>
 							</div>
 						</div>
 						<div className="card-body p-0">
@@ -98,8 +127,10 @@ export const TripDetail = () => {
 							})}
 						</div>
 					</div>
-					<AddOffer id_trip={store.detailTrip.id} />
-
+					{sendOffer.user_rol == "Profesional" ||
+					(store.detailTrip.rol == "Traveler" && store.detailTrip.id_traveler == button.id_traveler) ? (
+						<AddOffer id_trip={store.detailTrip.id} />
+					) : null}
 					{showOffers && store.detailTrip.offers.length > 0
 						? store.detailTrip.offers.map((offer, index) => {
 								return <OfferCard offer={offer} key={index} />;
@@ -109,4 +140,8 @@ export const TripDetail = () => {
 			</div>
 		</div>
 	); //id_trip es la propiedad y detailTrip.id es el valor de esa propiedad que paso a AddOffer(por props) Al componente Offers paso offers que está almacenado en el store
+};
+
+TripDetail.propTypes = {
+	history: PropTypes.object
 };
