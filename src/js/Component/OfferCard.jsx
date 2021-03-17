@@ -6,6 +6,7 @@ import defaultAvatarPro from "../../img/default_avatar_pro.png";
 import { CommentCard } from "./CommentCard.jsx";
 import { AddComment } from "./AddComment.jsx";
 import "../../styles/Offers.scss";
+import { Link } from "react-router-dom";
 
 export const OfferCard = props => {
 	const { store, actions } = useContext(Context);
@@ -16,12 +17,15 @@ export const OfferCard = props => {
 		<div className="card detalleoferta">
 			<div className="row">
 				<div className="col-3">
-					{props.offer.userpro.avatar != null ? (
-						<img src={props.offer.userpro.avatar} className="rounded-circle" />
-					) : (
-						<img src={defaultAvatarPro} className="rounded-circle" />
-					)}
+					<Link to="/perfilpro">
+						{props.offer.userpro.avatar != null ? (
+							<img src={props.offer.userpro.avatar} className="rounded-circle" />
+						) : (
+							<img src={defaultAvatarPro} className="rounded-circle" />
+						)}
+					</Link>
 					<h5 className="card-title">{props.offer.userpro.user_name}</h5>
+
 					<div className="row">
 						{reviews.map(item => {
 							return (

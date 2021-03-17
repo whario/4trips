@@ -307,8 +307,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			sendOffer: async (oferta, props, file) => {
 				const store = getStore();
 				const token = localStorage.getItem("token");
-				console.log(store.detailTrip, "DETAIL TRIP");
+				console.log(oferta);
 				const { text, attached, id_trip, id_offer } = oferta;
+				console.log(oferta, "despues oferta");
 				let formData = new FormData();
 				formData.append("oferta", text);
 				formData.append("email", store.detailTrip.traveler.email);
