@@ -57,6 +57,8 @@ const Navbar = props => {
 		}
 	};
 
+	const [searchInput, setSearchInput] = useState("");
+
 	return (
 		<div>
 			{" "}
@@ -71,9 +73,11 @@ const Navbar = props => {
 							type="search"
 							placeholder="Buscar viajes"
 							aria-label="Search"
+							onChange={e => setSearchInput(e.target.value)}
 						/>
 						{redirect()}
 					</form>
+					<button className="btn btn-primary" onClick={() => actions.search(searchInput)} />
 				</nav>
 			</div>
 			<div className="white" />
