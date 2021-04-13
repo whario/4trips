@@ -1,4 +1,4 @@
-const URL = "https://3000-chocolate-termite-7aqiydd9.ws-eu03.gitpod.io/";
+const URL = "https://3000-orange-rabbit-hq7eqoew.ws-eu03.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			offerSubmited: {},
 			detailOffer: {},
 			page: 1,
-			userTrips: []
+			userTrips: [],
+			resultSearchTrips: []
 		},
 
 		actions: {
@@ -441,7 +442,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => response.json())
-					.then(result => setStore({ tripList: result }))
+					.then(result => setStore({ resultSearchTrips: result }))
 					.catch(error => console.log("error", error));
 			}
 		}
