@@ -13,10 +13,6 @@ export const Home = () => {
 	return (
 		<div>
 			<Trips />
-			{store.resultSearchTrips.map((index, key) => {
-				return;
-				<TripCard key={key} index={index} />;
-			})}
 		</div>
 	);
 };

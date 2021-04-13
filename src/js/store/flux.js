@@ -13,8 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			offerSubmited: {},
 			detailOffer: {},
 			page: 1,
-			userTrips: [],
-			resultSearchTrips: []
+			userTrips: []
 		},
 
 		actions: {
@@ -442,7 +441,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => response.json())
-					.then(result => setStore({ resultSearchTrips: result }))
+					.then(result => setStore({ tripList: result }))
 					.catch(error => console.log("error", error));
 			}
 		}
