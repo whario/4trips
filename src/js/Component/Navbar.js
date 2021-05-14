@@ -4,8 +4,10 @@ import logotipo from "../../img/logo_4Trips_navbar.png";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
-const Navbar = props => {
+const Navbar = () => {
+	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	const [path, setPath] = useState({
 		rol: ""
@@ -57,6 +59,8 @@ const Navbar = props => {
 		}
 	};
 
+	const [searchInput, setSearchInput] = useState("");
+
 	return (
 		<div>
 			{" "}
@@ -71,9 +75,11 @@ const Navbar = props => {
 							type="search"
 							placeholder="Buscar viajes"
 							aria-label="Search"
+							onChange={e => setSearchInput(e.target.value)}
 						/>
 						{redirect()}
 					</form>
+					<button className="btn btn-primary" onClick={() => actions.search(searchInput, history)} />
 				</nav>
 			</div>
 			<div className="white" />
@@ -81,7 +87,3 @@ const Navbar = props => {
 	);
 };
 export default Navbar;
-
-Navbar.propTypes = {
-	history: PropTypes.object
-};

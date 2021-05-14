@@ -28,14 +28,13 @@ export const AddTrip = props => {
 		if (trip.needs_trip.length == 0) {
 			setTrip({ ...trip, needs_trip: [...trip.needs_trip, event.target.value] });
 		} else {
-			for (let i = 0; i < trip.needs_trip.length; i++) {
-				if (event.target.value != trip.needs_trip[i]) {
-					setTrip({ ...trip, needs_trip: [...trip.needs_trip, event.target.value] });
-				} else {
-					let newNeeds = [...trip.needs_trip];
-					newNeeds.splice(i, 1);
-					setTrip({ ...trip, needs_trip: newNeeds });
-				}
+			let index = trip.needs_trip.findIndex(element => element == event.target.value); //si encuentra el elemento index es la posicion. Si no lo ecnuentra devuelve -1
+			if (index == -1) {
+				setTrip({ ...trip, needs_trip: [...trip.needs_trip, event.target.value] });
+			} else {
+				let newNeeds = [...trip.needs_trip];
+				newNeeds.splice(index, 1);
+				setTrip({ ...trip, needs_trip: newNeeds });
 			}
 		}
 	};

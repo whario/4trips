@@ -88,6 +88,8 @@ export const EditTrip = () => {
 		});
 	};
 	const handelSubmit = e => {
+		console.log("estoy en subimt edit");
+
 		e.preventDefault();
 		actions.editTrip(triptoEdit);
 	};
@@ -96,7 +98,7 @@ export const EditTrip = () => {
 			<div className="row">
 				<div className="col-md-6 offset-md-3">
 					<div className="addTrip">
-						<form onChange={handelChange} onSubmit={handelSubmit}>
+						<form onChange={handelChange} onSubmit={e => handelSubmit(e)}>
 							{succesfull == false ? (
 								<div className="alert alert-danger" role="alert">
 									<p className="P">El viaje no se ha podido publicar</p>
@@ -170,11 +172,11 @@ export const EditTrip = () => {
 								<div className="obligatorios">Todos los campos son obligatorios</div>
 							</div>
 							<div className="row buttons-save-canc ">
-								<Link to="/" type="submit" className="btn btn-primary center publicar col-md-4">
+								<button to="/" type="submit" className="btn btn-primary center publicar col-md-4">
 									guardar
 									<span> </span>
 									<div className="oculto" id="loading" />
-								</Link>
+								</button>
 								<Link to="/" type="submit" className="btn btn-primary center cerrar col-md-4 ">
 									cerrar
 									<span> </span>
