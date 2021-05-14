@@ -1,4 +1,4 @@
-const URL = "https://3000-lavender-dog-o07z495f.ws-eu03.gitpod.io/";
+const URL = "https://3000-lavender-dog-o07z495f.ws-eu04.gitpod.io/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			offerSubmited: {},
 			detailOffer: {},
 			page: 1,
-			userTrips: []
+			userTrips: [],
+			resultSearchTrips: []
 		},
 
 		actions: {
@@ -432,7 +433,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			search: searchInput => {
+			search: (searchInput, history) => {
 				fetch(URL + "search", {
 					method: "POST",
 					body: JSON.stringify({ destination: searchInput }),
@@ -440,8 +441,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(response => response.json())
-					.then(result => setStore({ tripList: result }))
+					.then(response => {
+						if (response.status == 200) {
+							console.log(response, "antes de push");
+						}
+						return response.json();
+					})
+					.then(result => {
+						setStore({ resultSearchTrips: result });
+						history.push("/search");
+						console.log(result, "RESULTTT");
+					})
 					.catch(error => console.log("error", error));
 			}
 		}

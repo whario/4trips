@@ -15,6 +15,7 @@ import { TravelerProfil } from "./Component/TravelerProfil.jsx";
 import { PerfilPro } from "./Component/PerfilPro.jsx";
 import { AddOffer } from "./Component/AddOffer.jsx";
 import { EditTrip } from "./views/Edittrip.jsx";
+import { Search } from "./Component/search.jsx";
 //create your first component
 const Layout = () => {
 	const { store, actions } = useContext(Context);
@@ -45,6 +46,7 @@ const Layout = () => {
 					<Route exact path="/elige/tipo/deusuario" component={ChoseUser} />
 					<Route exact path="/login" component={LogIn} />
 					<Route exact path="/trip/:id" component={TripDetail} />
+					<Route exact path="/search" component={Search} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
